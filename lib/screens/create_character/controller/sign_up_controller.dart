@@ -3,6 +3,7 @@ import 'package:card_tikimon_collection/locator.dart';
 import 'package:card_tikimon_collection/models/user_model.dart';
 import 'package:card_tikimon_collection/routes.dart';
 import 'package:card_tikimon_collection/storage/app_preference.dart';
+import 'package:card_tikimon_collection/widgets/hub_global_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +15,7 @@ class SignUpController extends GetxController {
     required String name,
   }) async {
     try {
+      HudGlobalManager.showHud();
       final userModel = UserModel(
         avatar: url,
         id: '000001',
@@ -29,6 +31,8 @@ class SignUpController extends GetxController {
       Get.offAllNamed(AppRoute.homeScreen);
     } catch (e) {
       debugPrint('Sign up error: $e');
+    } finally {
+      HudGlobalManager.dismissHud();
     }
   }
 }
