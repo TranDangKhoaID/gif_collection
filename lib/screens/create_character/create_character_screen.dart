@@ -16,17 +16,18 @@ class CreateCharacterScreen extends StatefulWidget {
 }
 
 class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
+  String url = 'Vãi cc';
   //delcaring controller
   final _controller = PageController();
   //name text controller
-  final TextEditingController _txName = TextEditingController();
+  final TextEditingController _txtName = TextEditingController();
   //controller
   final signUpController = Get.put(SignUpController());
 
   @override
   void dispose() {
     super.dispose();
-    _txName.dispose();
+    _txtName.dispose();
     _controller.dispose();
   }
 
@@ -66,13 +67,8 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
                     child: PageView.builder(
                       itemCount: characters.length,
                       controller: _controller,
-                      onPageChanged: (value) {
-                        if (characters[value].url.toString().isEmpty) {
-                          return;
-                        }
-                        ShareObs.urlCharacter.value = characters[value].url!;
-                      },
-                      itemBuilder: (_, index) {
+                      itemBuilder: (context, index) {
+                        url = characters[index].url.toString();
                         return CharacterWidget(character: characters[index]);
                       },
                     ),
@@ -94,7 +90,7 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: TextFormField(
-                      controller: _txName,
+                      controller: _txtName,
                       decoration: InputDecoration(
                         focusedBorder: ShareStyles.defaultOutlineBorder,
                         border: ShareStyles.defaultOutlineBorder,
@@ -112,7 +108,10 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
                   //button
                   TextButton(
                     onPressed: () {
-                      signUpController.signUp();
+                      signUpController.signUp(
+                        name: _txtName.text,
+                        url: url,
+                      );
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white, // Màu chữ

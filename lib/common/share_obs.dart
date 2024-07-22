@@ -11,14 +11,14 @@ class ShareObs {
   static final RxBool isEnablePushNotify = true.obs;
   static RxBool isShowHUDGlobal = false.obs;
   static RxBool isEnableGesture = true.obs;
-  static Rx<UserModel?> customerInfo = Rx<UserModel?>(null);
+  static Rx<UserModel?> user = Rx<UserModel?>(null);
 
   /// Logout
   static void logout() async {
     ShareObs.isLoggedIn.value = false;
     ShareObs.isFBconnected.value = false;
     ShareObs.myVoucher.value = 0;
-    ShareObs.customerInfo.value = null;
+    ShareObs.user.value = null;
     ShareObs.notify.value = 0;
     ShareObs.urlCharacter.value = '';
     ShareObs.wishes.value = 0;

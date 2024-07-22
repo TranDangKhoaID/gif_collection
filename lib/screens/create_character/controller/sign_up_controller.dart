@@ -10,11 +10,11 @@ class SignUpController extends GetxController {
   final appPrefs = locator<AppPreference>();
 
   Future<void> signUp({
-    String? url,
-    String? name,
+    required String url,
+    required String name,
   }) async {
     try {
-      final user = UserModel(
+      final userModel = UserModel(
         avatar: url,
         id: '000001',
         cash: 0,
@@ -22,7 +22,9 @@ class SignUpController extends GetxController {
         name: name,
         treeCashLevel: 10000,
       );
-      await appPrefs.saveUser(userModel: user);
+      await appPrefs.saveUser(userModel: userModel);
+      final user = await appPrefs.getUser();
+      ShareObs.user.value = user;
       ShareObs.isLoggedIn.value = true;
       Get.offAllNamed(AppRoute.homeScreen);
     } catch (e) {
