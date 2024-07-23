@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ShareColors {
   static Color kPrimaryColor = const Color(0xffd67d2f);
   static Color kColorRuby = Colors.red;
-  static Color kColorCash = Colors.green;
+  static Color kColorCoin = Colors.yellow;
   static const Color kSecondColor = Color(0xffe68c78);
   static const Color kBackgroundFB = Color(0xff3876ea);
   static const Color kCard1 = Color(0xffee9d67);

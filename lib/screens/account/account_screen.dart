@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_tikimon_collection/common/share_colors.dart';
 import 'package:card_tikimon_collection/common/share_obs.dart';
 import 'package:card_tikimon_collection/screens/account/controller/account_controller.dart';
+import 'package:card_tikimon_collection/screens/account/widgets/item_value_account_widget.dart';
 import 'package:card_tikimon_collection/widgets/money_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,15 +20,39 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ShareColors.kPrimaryColor,
       appBar: _buildAppBar(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text('Đây là account screen'),
-          Text(ShareObs.user.value?.name ?? ''),
-          Container(
-            height: 300,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ItemValueAccountWidget(
+                assets: 'assets/images/icons/ruby.png',
+                name: 'Ruby',
+                value: ShareObs.ruby.value,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ItemValueAccountWidget(
+                assets: 'assets/images/icons/coin.png',
+                name: 'Vàng',
+                value: ShareObs.coin.value,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ItemValueAccountWidget(
+                assets: 'assets/images/icons/monster.png',
+                name: 'Quái sỡ hữu',
+                value: ShareObs.coin.value,
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 200,
             child: CachedNetworkImage(
               fit: BoxFit.cover,
               imageUrl: ShareObs.user.value!.avatar!,
@@ -35,13 +60,12 @@ class _AccountScreenState extends State<AccountScreen> {
               errorWidget: (context, url, error) => Icon(Icons.error),
             ),
           ),
-          Center(
-            child: TextButton(
-              onPressed: () {
-                _controller.logout();
-              },
-              child: Text('Log Out'),
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.free_breakfast),
+              Icon(Icons.free_breakfast),
+            ],
           ),
         ],
       ),
@@ -50,6 +74,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
   AppBar _buildAppBar() {
     return AppBar(
+      backgroundColor: ShareColors.kSecondColor,
       title: Row(
         children: [
           SizedBox(
@@ -67,9 +92,9 @@ class _AccountScreenState extends State<AccountScreen> {
           ),
           Expanded(
             child: MoneyAppBarWidget(
-              icon: Icons.money,
-              money: ShareObs.cash.value,
-              color: ShareColors.kColorCash,
+              icon: Icons.monetization_on,
+              money: ShareObs.coin.value,
+              color: ShareColors.kColorCoin,
             ),
           ),
           SizedBox(
