@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:card_tikimon_collection/common/share_colors.dart';
 import 'package:card_tikimon_collection/common/share_obs.dart';
 import 'package:card_tikimon_collection/screens/account/controller/account_controller.dart';
-import 'package:card_tikimon_collection/widgets/app_bar_global.dart';
+import 'package:card_tikimon_collection/widgets/money_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +19,8 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarGlobal(),
+      backgroundColor: ShareColors.kPrimaryColor,
+      appBar: _buildAppBar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -43,6 +45,39 @@ class _AccountScreenState extends State<AccountScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      title: Row(
+        children: [
+          SizedBox(
+            width: 10,
+          ),
+          Expanded(
+            child: MoneyAppBarWidget(
+              icon: Icons.diamond,
+              money: ShareObs.ruby.value,
+              color: ShareColors.kColorRuby,
+            ),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Expanded(
+            child: MoneyAppBarWidget(
+              icon: Icons.money,
+              money: ShareObs.cash.value,
+              color: ShareColors.kColorCash,
+            ),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+        ],
+      ),
+      centerTitle: true,
     );
   }
 }
