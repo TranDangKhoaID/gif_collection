@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 class ShareObs {
   static final RxString urlCharacter = ''.obs;
-  static final RxInt wishes = 0.obs;
-  static final RxInt notify = 0.obs;
+  static final RxInt ruby = 100.obs;
+  static final RxInt cash = 10000.obs;
   static final RxInt myVoucher = 0.obs;
   static final RxBool isLoggedIn = false.obs;
   static final RxBool isFBconnected = false.obs;
@@ -19,8 +19,8 @@ class ShareObs {
     ShareObs.isFBconnected.value = false;
     ShareObs.myVoucher.value = 0;
     ShareObs.user.value = null;
-    ShareObs.notify.value = 0;
+    ShareObs.ruby.value = 0;
     ShareObs.urlCharacter.value = '';
-    ShareObs.wishes.value = 0;
+    ShareObs.cash.value = 0;
   }
 }

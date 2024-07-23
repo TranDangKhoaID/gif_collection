@@ -18,7 +18,7 @@ class SplashController extends GetxController {
     if (isLoggedIn) {
       final user = await prefs.getUser();
       ShareObs.user.value = user;
-      Get.offAllNamed(AppRoute.homeScreen);
+      Get.offAllNamed(AppRoute.accountScreen);
     } else {
       Get.offAllNamed(AppRoute.createCharacterScreen);
     }

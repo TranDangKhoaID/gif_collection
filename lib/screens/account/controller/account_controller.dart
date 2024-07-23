@@ -9,7 +9,7 @@ import 'package:card_tikimon_collection/widgets/hub_global_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
+class AccountController extends GetxController {
   /// MARK: - Initials;
   final appPrefs = locator<AppPreference>();
   //UserModel user = UserModel();
