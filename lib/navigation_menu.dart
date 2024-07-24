@@ -1,5 +1,5 @@
-import 'package:card_tikimon_collection/screens/account/account_screen.dart';
-import 'package:card_tikimon_collection/screens/home/home_screen.dart';
+import 'package:tikimon_collection/screens/account/account_screen.dart';
+import 'package:tikimon_collection/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,4 +1,4 @@
-package com.example.card_tikimon_collection
+package com.example.tikimon_collection
 
 import io.flutter.embedding.android.FlutterActivity
 

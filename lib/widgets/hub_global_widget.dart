@@ -1,5 +1,5 @@
-import 'package:card_tikimon_collection/common/share_colors.dart';
-import 'package:card_tikimon_collection/common/share_obs.dart';
+import 'package:tikimon_collection/common/share_colors.dart';
+import 'package:tikimon_collection/common/share_obs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';

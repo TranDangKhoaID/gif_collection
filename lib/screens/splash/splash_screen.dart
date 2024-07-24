@@ -1,4 +1,4 @@
-import 'package:card_tikimon_collection/screens/splash/cubit/splash_controller.dart';
+import 'package:tikimon_collection/screens/splash/cubit/splash_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

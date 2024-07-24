@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:card_tikimon_collection/common/share_colors.dart';
-import 'package:card_tikimon_collection/common/share_obs.dart';
-import 'package:card_tikimon_collection/screens/account/controller/account_controller.dart';
-import 'package:card_tikimon_collection/screens/account/widgets/item_value_account_widget.dart';
-import 'package:card_tikimon_collection/widgets/money_app_bar_widget.dart';
+import 'package:tikimon_collection/common/share_colors.dart';
+import 'package:tikimon_collection/common/share_obs.dart';
+import 'package:tikimon_collection/screens/account/controller/account_controller.dart';
+import 'package:tikimon_collection/screens/account/widgets/item_value_account_widget.dart';
+import 'package:tikimon_collection/widgets/money_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

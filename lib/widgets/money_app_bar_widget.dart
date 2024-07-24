@@ -1,4 +1,4 @@
-import 'package:card_tikimon_collection/common/share_colors.dart';
+import 'package:tikimon_collection/common/share_colors.dart';
 import 'package:flutter/material.dart';
 
 class MoneyAppBarWidget extends StatelessWidget {

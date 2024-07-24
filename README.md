@@ -1,4 +1,4 @@
-# card_tikimon_collection
+# tikimon_collection
 
 A new Flutter project.
 

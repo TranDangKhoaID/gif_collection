@@ -1,4 +1,4 @@
-import 'package:card_tikimon_collection/common/share_obs.dart';
+import 'package:tikimon_collection/common/share_obs.dart';
 import 'package:flutter/material.dart';
 
 class ItemValueAccountWidget extends StatelessWidget {

@@ -1,9 +1,9 @@
-import 'package:card_tikimon_collection/common/share_colors.dart';
-import 'package:card_tikimon_collection/common/share_obs.dart';
-import 'package:card_tikimon_collection/common/share_styles.dart';
-import 'package:card_tikimon_collection/models/character_model.dart';
-import 'package:card_tikimon_collection/screens/create_character/controller/sign_up_controller.dart';
-import 'package:card_tikimon_collection/screens/create_character/widgets/character_widget.dart';
+import 'package:tikimon_collection/common/share_colors.dart';
+import 'package:tikimon_collection/common/share_obs.dart';
+import 'package:tikimon_collection/common/share_styles.dart';
+import 'package:tikimon_collection/models/character_model.dart';
+import 'package:tikimon_collection/screens/create_character/controller/sign_up_controller.dart';
+import 'package:tikimon_collection/screens/create_character/widgets/character_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
