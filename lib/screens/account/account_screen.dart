@@ -20,70 +20,78 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ItemValueAccountWidget(
-                assets: 'assets/images/icons/ruby.png',
-                name: 'Ruby',
-                value: ShareObs.ruby.value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ItemValueAccountWidget(
-                assets: 'assets/images/icons/coin.png',
-                name: 'Vàng',
-                value: ShareObs.coin.value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ItemValueAccountWidget(
-                assets: 'assets/images/icons/monster.png',
-                name: 'Quái sỡ hữu',
-                value: ShareObs.coin.value,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 200,
-            child: CachedNetworkImage(
-              fit: BoxFit.cover,
-              imageUrl: ShareObs.user.value!.avatar!,
-              placeholder: (context, url) => CircularProgressIndicator(),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+      //appBar: _buildAppBar(),
+      //endDrawer: _buildDrawer(),
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildHeaderCurrency(),
+            Container(
+              child: Icon(Icons.settings),
             ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.free_breakfast),
-              Icon(Icons.free_breakfast),
-            ],
-          ),
-          TextButton(
-            onPressed: _controller.logout,
-            child: Text('haha'),
-          ),
-        ],
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ItemValueAccountWidget(
+                        assets: 'assets/images/icons/ruby.png',
+                        name: 'Ruby',
+                        value: ShareObs.ruby.value,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      ItemValueAccountWidget(
+                        assets: 'assets/images/icons/coin.png',
+                        name: 'Vàng',
+                        value: ShareObs.coin.value,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      ItemValueAccountWidget(
+                        assets: 'assets/images/icons/monster.png',
+                        name: 'Quái sỡ hữu',
+                        value: ShareObs.coin.value,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 200,
+                    child: CachedNetworkImage(
+                      fit: BoxFit.cover,
+                      imageUrl: ShareObs.user.value!.avatar!,
+                      placeholder: (context, url) =>
+                          CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.free_breakfast),
+                      Icon(Icons.free_breakfast),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: ShareColors.kSecondColor,
-      title: Row(
+  Widget _buildHeaderCurrency() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 15, left: 15, top: 30),
+      child: Row(
         children: [
-          SizedBox(
-            width: 10,
-          ),
           Expanded(
             child: MoneyAppBarWidget(
               icon: Icons.diamond,
@@ -101,12 +109,30 @@ class _AccountScreenState extends State<AccountScreen> {
               color: ShareColors.kColorCoin,
             ),
           ),
-          SizedBox(
-            width: 10,
+        ],
+      ),
+    );
+  }
+
+  Drawer _buildDrawer() {
+    return Drawer(
+      child: ListView(
+        children: [
+          Text('Hồ Sơ'),
+          ListTile(
+            title: Text('Item 1'),
+            onTap: () {},
+          ),
+          ListTile(
+            title: Text('Item 2'),
+            onTap: () {},
+          ),
+          ListTile(
+            title: Text('Item 3'),
+            onTap: () {},
           ),
         ],
       ),
-      centerTitle: true,
     );
   }
 }
