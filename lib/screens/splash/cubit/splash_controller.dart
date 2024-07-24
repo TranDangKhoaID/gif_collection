@@ -14,6 +14,8 @@ class SplashController extends GetxController {
 
   Future<void> checkLogged() async {
     final isLoggedIn = await prefs.isLoggedIn();
+    ShareObs.ruby.value = await prefs.getRuby();
+    ShareObs.coin.value = await prefs.getCoin();
     ShareObs.isLoggedIn.value = isLoggedIn;
     if (isLoggedIn) {
       final user = await prefs.getUser();

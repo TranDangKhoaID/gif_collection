@@ -9,17 +9,17 @@ class UserModel {
   String? id;
   String? name;
   String? avatar;
-  int? ruby;
-  int? cash;
-  int? treeCashLevel;
+  // int? ruby;
+  // int? cash;
+  //int? treeCashLevel;
 
   UserModel({
     this.id,
     this.name,
     this.avatar,
-    this.ruby,
-    this.cash,
-    this.treeCashLevel,
+    // this.ruby,
+    // this.cash,
+    //this.treeCashLevel,
   });
 
   factory UserModel.fromRawJson(String str) =>

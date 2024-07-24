@@ -22,6 +22,31 @@ class AppPreference {
     return UserModel.fromRawJson(jsonStr);
   }
 
+  //ruby and coin
+  Future<void> saveRuby({
+    required int ruby,
+  }) async {
+    final pref = await SharedPreferences.getInstance();
+    pref.setInt(AppPreferenceKey.kRuby, ruby);
+  }
+
+  Future<int> getRuby() async {
+    final pref = await SharedPreferences.getInstance();
+    return pref.getInt(AppPreferenceKey.kRuby) ?? 0;
+  }
+
+  Future<void> saveCoin({
+    required int coin,
+  }) async {
+    final pref = await SharedPreferences.getInstance();
+    pref.setInt(AppPreferenceKey.kCoin, coin);
+  }
+
+  Future<int> getCoin() async {
+    final pref = await SharedPreferences.getInstance();
+    return pref.getInt(AppPreferenceKey.kCoin) ?? 0;
+  }
+
   /// Check is logged in
   Future<bool> isLoggedIn() async {
     final user = await getUser();
@@ -32,12 +57,15 @@ class AppPreference {
   Future<void> logOut() async {
     final pref = await SharedPreferences.getInstance();
     pref.remove(AppPreferenceKey.kUser);
+    pref.remove(AppPreferenceKey.kRuby);
+    pref.remove(AppPreferenceKey.kCoin);
   }
 }
 
 class AppPreferenceKey {
-  static const String kConfigs = 'configs';
   static const String kUser = 'user';
+  static const String kRuby = 'ruby';
+  static const String kCoin = 'coin';
   static const String kFirstRun = 'first_run';
   static const String kDomain = 'domain';
   static const String kCustomerInfo = 'customer_info';

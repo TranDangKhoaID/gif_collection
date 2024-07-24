@@ -19,13 +19,12 @@ class SignUpController extends GetxController {
       final userModel = UserModel(
         avatar: url,
         id: '000001',
-        cash: 0,
-        ruby: 0,
         name: name,
-        treeCashLevel: 10000,
       );
       await appPrefs.saveUser(userModel: userModel);
       final user = await appPrefs.getUser();
+      ShareObs.ruby.value = await appPrefs.getRuby();
+      ShareObs.coin.value = await appPrefs.getCoin();
       ShareObs.user.value = user;
       ShareObs.isLoggedIn.value = true;
       Get.offAllNamed(AppRoute.navigationMenu);

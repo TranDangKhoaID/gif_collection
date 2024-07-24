@@ -21,45 +21,44 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       //appBar: _buildAppBar(),
-      //endDrawer: _buildDrawer(),
+      endDrawer: _buildDrawer(),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildHeaderCurrency(),
-            Container(
-              child: Icon(Icons.settings),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Obx(
+                  () => _buildHeaderCurrency(),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Builder(
+                  builder: (context) => GestureDetector(
+                    onTap: () {
+                      Scaffold.of(context).openEndDrawer();
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.amber,
+                        shape: BoxShape.circle,
+                      ),
+                      padding: EdgeInsets.all(10),
+                      margin: EdgeInsets.only(right: 15),
+                      child: Icon(Icons.settings),
+                    ),
+                  ),
+                ),
+              ],
             ),
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ItemValueAccountWidget(
-                        assets: 'assets/images/icons/ruby.png',
-                        name: 'Ruby',
-                        value: ShareObs.ruby.value,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      ItemValueAccountWidget(
-                        assets: 'assets/images/icons/coin.png',
-                        name: 'Vàng',
-                        value: ShareObs.coin.value,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      ItemValueAccountWidget(
-                        assets: 'assets/images/icons/monster.png',
-                        name: 'Quái sỡ hữu',
-                        value: ShareObs.coin.value,
-                      ),
-                    ],
+                  Obx(
+                    () => _buildBodyValues(),
                   ),
                   SizedBox(
                     height: 200,
@@ -84,6 +83,36 @@ class _AccountScreenState extends State<AccountScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Column _buildBodyValues() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ItemValueAccountWidget(
+          assets: 'assets/images/icons/ruby.png',
+          name: 'Ruby',
+          value: ShareObs.ruby.value,
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        ItemValueAccountWidget(
+          assets: 'assets/images/icons/coin.png',
+          name: 'Vàng',
+          value: ShareObs.coin.value,
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        ItemValueAccountWidget(
+          assets: 'assets/images/icons/monster.png',
+          name: 'Quái sỡ hữu',
+          value: ShareObs.coin.value,
+        ),
+      ],
     );
   }
 
@@ -119,13 +148,18 @@ class _AccountScreenState extends State<AccountScreen> {
       child: ListView(
         children: [
           Text('Hồ Sơ'),
+          Text(ShareObs.user.value!.name ?? "Name"),
           ListTile(
-            title: Text('Item 1'),
-            onTap: () {},
+            title: Text('Xóa tài khoản'),
+            onTap: () {
+              _controller.logout();
+            },
           ),
           ListTile(
-            title: Text('Item 2'),
-            onTap: () {},
+            title: Text('Làm tí ruby'),
+            onTap: () {
+              _controller.addRuby();
+            },
           ),
           ListTile(
             title: Text('Item 3'),

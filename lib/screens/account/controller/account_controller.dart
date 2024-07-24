@@ -28,4 +28,9 @@ class AccountController extends GetxController {
       HudGlobalManager.dismissHud();
     }
   }
+
+  Future<void> addRuby() async {
+    ShareObs.ruby.value += 100;
+    await appPrefs.saveRuby(ruby: ShareObs.ruby.value);
+  }
 }
