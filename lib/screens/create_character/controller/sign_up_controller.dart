@@ -28,7 +28,7 @@ class SignUpController extends GetxController {
       final user = await appPrefs.getUser();
       ShareObs.user.value = user;
       ShareObs.isLoggedIn.value = true;
-      Get.offAllNamed(AppRoute.accountScreen);
+      Get.offAllNamed(AppRoute.navigationMenu);
     } catch (e) {
       debugPrint('Sign up error: $e');
     } finally {

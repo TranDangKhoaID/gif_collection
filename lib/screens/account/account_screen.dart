@@ -67,6 +67,10 @@ class _AccountScreenState extends State<AccountScreen> {
               Icon(Icons.free_breakfast),
             ],
           ),
+          TextButton(
+            onPressed: _controller.logout,
+            child: Text('haha'),
+          ),
         ],
       ),
     );

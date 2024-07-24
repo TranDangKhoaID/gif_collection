@@ -1,6 +1,5 @@
-import 'package:card_tikimon_collection/screens/account/account_screen.dart';
+import 'package:card_tikimon_collection/navigation_menu.dart';
 import 'package:card_tikimon_collection/screens/create_character/create_character_screen.dart';
-import 'package:card_tikimon_collection/screens/home/home_screen.dart';
 import 'package:card_tikimon_collection/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +7,7 @@ class AppRoute {
   /// MARK: - Initials;
   static const String splashScreen = '/splash-screen';
   static const String createCharacterScreen = '/create-character-screen';
-  static const String homeScreen = '/home-screen';
-  static const String accountScreen = '/account-screen';
+  static const String navigationMenu = '/navigation-menu';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -23,14 +21,9 @@ class AppRoute {
           builder: (_) => const CreateCharacterScreen(),
           settings: settings,
         );
-      case homeScreen:
+      case navigationMenu:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
-          settings: settings,
-        );
-      case accountScreen:
-        return MaterialPageRoute(
-          builder: (_) => const AccountScreen(),
+          builder: (_) => const NavigationMenu(),
           settings: settings,
         );
       default:

@@ -23,14 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Text(ShareObs.user.value?.name ?? ''),
           Text(ShareObs.user.value?.avatar ?? 'Null ?'),
-          Center(
-            child: TextButton(
-              onPressed: () {
-                controller.logout();
-              },
-              child: Text('Log Out'),
-            ),
-          ),
         ],
       ),
     );
