@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tikimon_collection/common/share_colors.dart';
 import 'package:tikimon_collection/common/share_obs.dart';
 import 'package:tikimon_collection/screens/account/controller/account_controller.dart';
@@ -65,17 +66,15 @@ class _AccountScreenState extends State<AccountScreen> {
                     child: CachedNetworkImage(
                       fit: BoxFit.cover,
                       imageUrl: ShareObs.user.value!.avatar!,
-                      placeholder: (context, url) =>
-                          CircularProgressIndicator(),
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: Colors.grey[400]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(
+                          color: Colors.grey,
+                        ),
+                      ),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.free_breakfast),
-                      Icon(Icons.free_breakfast),
-                    ],
                   ),
                 ],
               ),
@@ -110,7 +109,7 @@ class _AccountScreenState extends State<AccountScreen> {
         ItemValueAccountWidget(
           assets: 'assets/images/icons/monster.png',
           name: 'Quái sỡ hữu',
-          value: ShareObs.coin.value,
+          value: 0,
         ),
       ],
     );
@@ -148,22 +147,52 @@ class _AccountScreenState extends State<AccountScreen> {
       child: ListView(
         children: [
           Text('Hồ Sơ'),
-          Text(ShareObs.user.value!.name ?? "Name"),
           ListTile(
-            title: Text('Xóa tài khoản'),
+            title: Text(ShareObs.user.value!.name ?? "Name"),
+            trailing: Icon(Icons.edit),
+          ),
+          Card(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: Colors.black, width: 1.0),
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+            child: ListTile(
+              leading: const Icon(
+                Icons.diamond,
+                color: Colors.red,
+              ),
+              title: Text('Làm tí ruby'),
+              onTap: () {
+                _controller.addRuby();
+              },
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Card(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: Colors.black, width: 1.0),
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+            child: ListTile(
+              leading: const Icon(
+                Icons.monetization_on,
+                color: Colors.yellow,
+              ),
+              title: Text('Làm tí vàng'),
+              onTap: () {
+                _controller.addCoin();
+              },
+            ),
+          ),
+          ListTile(
+            title: Text('Đặt lại tài khoản'),
             onTap: () {
               _controller.logout();
             },
-          ),
-          ListTile(
-            title: Text('Làm tí ruby'),
-            onTap: () {
-              _controller.addRuby();
-            },
-          ),
-          ListTile(
-            title: Text('Item 3'),
-            onTap: () {},
           ),
         ],
       ),

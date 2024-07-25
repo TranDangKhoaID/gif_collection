@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tikimon_collection/models/character_model.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,13 @@ class CharacterWidget extends StatelessWidget {
             child: CachedNetworkImage(
               fit: BoxFit.cover,
               imageUrl: character.url.toString(),
-              placeholder: (context, url) => CircularProgressIndicator(),
+              placeholder: (context, url) => Shimmer.fromColors(
+                baseColor: Colors.grey[400]!,
+                highlightColor: Colors.grey[100]!,
+                child: Container(
+                  color: Colors.grey,
+                ),
+              ),
               errorWidget: (context, url, error) => Icon(Icons.error),
             ),
           ),

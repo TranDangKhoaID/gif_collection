@@ -33,4 +33,9 @@ class AccountController extends GetxController {
     ShareObs.ruby.value += 100;
     await appPrefs.saveRuby(ruby: ShareObs.ruby.value);
   }
+
+  Future<void> addCoin() async {
+    ShareObs.coin.value += 100000;
+    await appPrefs.saveCoin(coin: ShareObs.coin.value);
+  }
 }
