@@ -38,7 +38,7 @@ class MoneyAppBarWidget extends StatelessWidget {
               child: Text(
                 money.toString(),
                 style: TextStyle(
-                  fontSize: 15,
+                  //fontSize: 15,
                   fontWeight: FontWeight.bold,
                   color: color,
                 ),

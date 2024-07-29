@@ -21,7 +21,6 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: _buildAppBar(),
       endDrawer: _buildDrawer(),
       body: SafeArea(
         child: Column(

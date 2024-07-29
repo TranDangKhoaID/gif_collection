@@ -14,18 +14,8 @@ class HomeController extends GetxController {
   final appPrefs = locator<AppPreference>();
   //UserModel user = UserModel();
 
-  /// Logout
-  Future<void> logout() async {
-    try {
-      HudGlobalManager.showHud();
-      Get.back();
-      ShareObs.logout();
-      await appPrefs.logOut();
-      Get.offAllNamed(AppRoute.createCharacterScreen);
-    } catch (e) {
-      debugPrint('Logout error: $e');
-    } finally {
-      HudGlobalManager.dismissHud();
-    }
+  Future<void> addCoin() async {
+    ShareObs.coin.value += ShareObs.moneyCoin.value;
+    await appPrefs.saveCoin(coin: ShareObs.coin.value);
   }
 }
