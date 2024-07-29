@@ -17,6 +17,7 @@ class MoneyAppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: Colors.white,
         border: Border.all(
           color: color,
           width: 2,

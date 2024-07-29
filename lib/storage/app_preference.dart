@@ -47,6 +47,19 @@ class AppPreference {
     return pref.getInt(AppPreferenceKey.kCoin) ?? 0;
   }
 
+  //money three
+  Future<void> saveMoneyCoin({
+    required int mCoin,
+  }) async {
+    final pref = await SharedPreferences.getInstance();
+    pref.setInt(AppPreferenceKey.kMoneyCoin, mCoin);
+  }
+
+  Future<int> getMoneyCoin() async {
+    final pref = await SharedPreferences.getInstance();
+    return pref.getInt(AppPreferenceKey.kMoneyCoin) ?? 0;
+  }
+
   /// Check is logged in
   Future<bool> isLoggedIn() async {
     final user = await getUser();
@@ -66,6 +79,7 @@ class AppPreferenceKey {
   static const String kUser = 'user';
   static const String kRuby = 'ruby';
   static const String kCoin = 'coin';
+  static const String kMoneyCoin = 'money_coin';
   static const String kFirstRun = 'first_run';
   static const String kDomain = 'domain';
   static const String kCustomerInfo = 'customer_info';

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:get/get_rx/get_rx.dart';
 import 'package:tikimon_collection/common/share_obs.dart';
 import 'package:tikimon_collection/locator.dart';
 import 'package:tikimon_collection/models/user_model.dart';
@@ -12,10 +13,23 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   /// MARK: - Initials;
   final appPrefs = locator<AppPreference>();
-  //UserModel user = UserModel();
+  RxInt coin = ShareObs.coin;
+  RxInt ruby = ShareObs.ruby;
+  RxInt moneyCoin = ShareObs.moneyCoin;
 
   Future<void> addCoin() async {
-    ShareObs.coin.value += ShareObs.moneyCoin.value;
-    await appPrefs.saveCoin(coin: ShareObs.coin.value);
+    coin.value += moneyCoin.value;
+    await appPrefs.saveCoin(coin: coin.value);
+  }
+
+  Future<void> upgradeMoneyCoin() async {
+    if (ruby.value < 3) {
+      print('Ko du ruby');
+      return;
+    }
+    moneyCoin.value += 2610;
+    ruby.value = ruby.value - 3;
+    await appPrefs.saveRuby(ruby: ruby.value);
+    await appPrefs.saveMoneyCoin(mCoin: moneyCoin.value);
   }
 }
