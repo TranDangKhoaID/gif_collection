@@ -90,66 +90,68 @@ class _HomeScreenState extends State<HomeScreen> {
               left: 0,
               right: 0,
               bottom: 0,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          _controller.upgradeMoneyCoin();
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: ShareColors.kPrimaryColor,
-                          ),
-                          child: Column(
-                            children: [
-                              Text('Nâng cấp'),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.diamond,
-                                    color: Colors.red,
-                                  ),
-                                  Text('3'),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Column(
-                        children: [
-                          Text('Chạm vào cây để hái vàng'),
-                          Text('Giá trị mỗi lần hái'),
-                          Obx(
-                            () => Text(
-                              ShareObs.moneyCoin.value.toString(),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            _controller.upgradeMoneyCoin();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: ShareColors.kPrimaryColor,
+                            ),
+                            child: Column(
+                              children: [
+                                Text('Nâng cấp'),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.diamond,
+                                      color: Colors.red,
+                                    ),
+                                    Text('3'),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  InkWell(
-                    onTap: () {
-                      _controller.addCoin();
-                    },
-                    child: Image.asset(
-                      width: 200,
-                      'assets/images/money_three.png',
-                      fit: BoxFit.cover,
+                        ),
+                        const SizedBox(width: 20),
+                        Column(
+                          children: [
+                            Text('Chạm vào cây để hái vàng'),
+                            Text('Giá trị mỗi lần hái'),
+                            Obx(
+                              () => Text(
+                                ShareObs.moneyCoin.value.toString(),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    GestureDetector(
+                      onTap: () {
+                        _controller.addCoin();
+                      },
+                      child: Image.asset(
+                        width: 200,
+                        'assets/images/money_three.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
           ],

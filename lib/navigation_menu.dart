@@ -2,6 +2,8 @@ import 'package:tikimon_collection/screens/account/account_screen.dart';
 import 'package:tikimon_collection/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tikimon_collection/screens/store/gacha_screen.dart';
+import 'package:tikimon_collection/screens/trade/trade_screen.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
@@ -43,8 +45,8 @@ class NavigationMenu extends StatelessWidget {
 class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 2.obs;
   final screens = [
-    Container(color: Colors.red),
-    Container(color: Colors.green),
+    const TradeScreen(),
+    const GachaScreen(),
     const HomeScreen(),
     Container(color: Colors.yellow),
     const AccountScreen(),
