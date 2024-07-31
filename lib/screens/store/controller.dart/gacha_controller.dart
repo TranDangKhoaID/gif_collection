@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -6,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tikimon_collection/common/dialog_helper.dart';
 import 'package:tikimon_collection/models/tag_model.dart';
+import 'package:tikimon_collection/widgets/shimmer_image.dart';
 
 class GachaController extends GetxController {
-  Future<void> getTag(BuildContext context) async {
+  void getTag(BuildContext context) {
     TagModel tagModel = getRandomTag(tags);
     DialogHelper.showWidgetOkDialog(
       body: Column(
@@ -21,6 +21,8 @@ class GachaController extends GetxController {
             child: CachedNetworkImage(
               imageUrl: tagModel.gif.toString(),
               fit: BoxFit.cover,
+              placeholder: (context, url) => const ShimmerImage(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
             ),
           ),
         ],

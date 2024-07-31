@@ -7,6 +7,7 @@ import 'package:tikimon_collection/screens/account/widgets/item_value_account_wi
 import 'package:tikimon_collection/widgets/money_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tikimon_collection/widgets/shimmer_image.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -65,13 +66,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     child: CachedNetworkImage(
                       fit: BoxFit.cover,
                       imageUrl: ShareObs.user.value!.avatar!,
-                      placeholder: (context, url) => Shimmer.fromColors(
-                        baseColor: Colors.grey[400]!,
-                        highlightColor: Colors.grey[100]!,
-                        child: Container(
-                          color: Colors.grey,
-                        ),
-                      ),
+                      placeholder: (context, url) => const ShimmerImage(),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
                   ),
