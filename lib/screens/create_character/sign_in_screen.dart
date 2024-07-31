@@ -1,33 +1,33 @@
-import 'package:tikimon_collection/common/share_colors.dart';
-import 'package:tikimon_collection/common/share_obs.dart';
-import 'package:tikimon_collection/common/share_styles.dart';
-import 'package:tikimon_collection/models/character_model.dart';
-import 'package:tikimon_collection/screens/create_character/controller/auth_controller.dart';
-import 'package:tikimon_collection/screens/create_character/widgets/character_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:tikimon_collection/common/share_colors.dart';
+import 'package:tikimon_collection/models/character_model.dart';
+import 'package:tikimon_collection/screens/create_character/widgets/character_widget.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 
-class CreateCharacterScreen extends StatefulWidget {
-  const CreateCharacterScreen({super.key});
+import 'controller/auth_controller.dart';
+
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<CreateCharacterScreen> createState() => _CreateCharacterScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
+class _SignInScreenState extends State<SignInScreen> {
   String url = '';
   //delcaring controller
   final _controller = PageController();
   //name text controller
-  final TextEditingController _txtName = TextEditingController();
+  //final TextEditingController _txtName = TextEditingController();
   //controller
-  final authController = Get.put(AuthController());
+  final _authController = Get.put(AuthController());
 
   @override
   void dispose() {
     super.dispose();
-    _txtName.dispose();
+    //_txtName.dispose();
     _controller.dispose();
   }
 
@@ -89,36 +89,13 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16),
-                    child: TextFormField(
-                      controller: _txtName,
-                      decoration: InputDecoration(
-                        focusedBorder: ShareStyles.defaultOutlineBorder,
-                        border: ShareStyles.defaultOutlineBorder,
-                        enabledBorder: ShareStyles.defaultOutlineBorder,
-                        disabledBorder: ShareStyles.defaultOutlineBorder,
-                        errorBorder: ShareStyles.defaultOutlineBorder,
-                        prefixIcon: const Icon(Icons.abc_outlined),
-                        hintText: 'Tên nhân vật của bạn',
-                        hintStyle:
-                            ShareStyles.boldStyle.copyWith(color: Colors.white),
-                        isDense: true,
-                      ),
+                    child: SignInButton(
+                      Buttons.google,
+                      text: "Đăng nhập với Google",
+                      onPressed: () => _authController.signInWithGoogle(),
                     ),
                   ),
                   //button
-                  TextButton(
-                    onPressed: () {
-                      authController.signUp(
-                        name: _txtName.text,
-                        url: url,
-                      );
-                    },
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white, // Màu chữ
-                      backgroundColor: ShareColors.kPrimaryColor, // Màu nền
-                    ),
-                    child: const Text('Tạo'),
-                  ),
                 ],
               ),
             ),

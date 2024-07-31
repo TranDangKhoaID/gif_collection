@@ -70,8 +70,14 @@ class AppPreference {
   Future<void> logOut() async {
     final pref = await SharedPreferences.getInstance();
     pref.remove(AppPreferenceKey.kUser);
-    pref.remove(AppPreferenceKey.kRuby);
+  }
+
+  Future<void> resetAccount() async {
+    final pref = await SharedPreferences.getInstance();
+    pref.remove(AppPreferenceKey.kUser);
     pref.remove(AppPreferenceKey.kCoin);
+    pref.remove(AppPreferenceKey.kRuby);
+    pref.remove(AppPreferenceKey.kMoneyCoin);
   }
 }
 

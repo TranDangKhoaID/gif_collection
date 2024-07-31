@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tikimon_collection/common/share_obs.dart';
 import 'package:tikimon_collection/locator.dart';
 import 'package:tikimon_collection/models/user_model.dart';
@@ -19,13 +22,28 @@ class AccountController extends GetxController {
     try {
       HudGlobalManager.showHud();
       Get.back();
+      await FirebaseAuth.instance.signOut();
+      await GoogleSignIn().signOut();
       ShareObs.logout();
       await appPrefs.logOut();
-      Get.offAllNamed(AppRoute.createCharacterScreen);
+      Get.offAllNamed(AppRoute.signInScreen);
     } catch (e) {
       debugPrint('Logout error: $e');
     } finally {
       HudGlobalManager.dismissHud();
+    }
+  }
+
+  Future<void> resetAccount() async {
+    try {
+      Get.back();
+      await FirebaseAuth.instance.signOut();
+      await GoogleSignIn().signOut();
+      ShareObs.logout();
+      await appPrefs.resetAccount();
+      Get.offAllNamed(AppRoute.signInScreen);
+    } catch (e) {
+      debugPrint('Logout error: $e');
     }
   }
 

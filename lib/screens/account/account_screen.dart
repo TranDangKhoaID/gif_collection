@@ -142,8 +142,8 @@ class _AccountScreenState extends State<AccountScreen> {
         children: [
           Text('Hồ Sơ'),
           ListTile(
-            title: Text(ShareObs.user.value!.name ?? "Name"),
-            trailing: Icon(Icons.edit),
+            title: Text(ShareObs.user.value!.name ?? ""),
+            subtitle: Text(ShareObs.user.value!.email ?? ""),
           ),
           Card(
             margin: EdgeInsets.symmetric(horizontal: 20),
@@ -183,9 +183,15 @@ class _AccountScreenState extends State<AccountScreen> {
             ),
           ),
           ListTile(
-            title: Text('Đặt lại tài khoản'),
+            title: Text('Đăng xuất'),
             onTap: () {
               _controller.logout();
+            },
+          ),
+          ListTile(
+            title: Text('Đặt lại tài khoản'),
+            onTap: () {
+              _controller.resetAccount();
             },
           ),
         ],

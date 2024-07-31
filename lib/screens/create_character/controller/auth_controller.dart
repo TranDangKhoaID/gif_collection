@@ -1,0 +1,75 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:tikimon_collection/common/share_obs.dart';
+import 'package:tikimon_collection/locator.dart';
+import 'package:tikimon_collection/models/user_model.dart';
+import 'package:tikimon_collection/routes.dart';
+import 'package:tikimon_collection/storage/app_preference.dart';
+import 'package:tikimon_collection/widgets/hub_global_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class AuthController extends GetxController {
+  final appPrefs = locator<AppPreference>();
+
+  final googleSignIn = GoogleSignIn();
+  //GoogleSignInAccount? _user;
+  //GoogleSignInAccount get user => _user!;
+
+  Future<void> signUp({
+    required String url,
+    required String name,
+  }) async {
+    try {
+      HudGlobalManager.showHud();
+      final userModel = UserModel(
+        avatar: url,
+        id: '000001',
+        name: name,
+      );
+      await appPrefs.saveUser(userModel: userModel);
+      final user = await appPrefs.getUser();
+      ShareObs.ruby.value = await appPrefs.getRuby();
+      ShareObs.coin.value = await appPrefs.getCoin();
+      ShareObs.user.value = user;
+      ShareObs.isLoggedIn.value = true;
+      Get.offAllNamed(AppRoute.navigationMenu);
+    } catch (e) {
+      debugPrint('Sign up error: $e');
+    } finally {
+      HudGlobalManager.dismissHud();
+    }
+  }
+
+  //google sign in
+  Future<void> signInWithGoogle() async {
+    try {
+      final googleUser = await googleSignIn.signIn();
+      if (googleUser == null) {
+        return;
+      }
+
+      final googleAuth = await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      //
+      final userModel = UserModel(
+        avatar: googleUser.photoUrl,
+        id: googleUser.id,
+        name: googleUser.displayName,
+        email: googleUser.email,
+      );
+      await appPrefs.saveUser(userModel: userModel);
+      final user = await appPrefs.getUser();
+      ShareObs.user.value = user;
+      ShareObs.isLoggedIn.value = true;
+      Get.offAllNamed(AppRoute.navigationMenu);
+    } catch (e) {
+      debugPrint('Sign up error: $e');
+    }
+  }
+}

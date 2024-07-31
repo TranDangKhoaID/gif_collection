@@ -23,7 +23,7 @@ class SplashController extends GetxController {
       ShareObs.user.value = user;
       Get.offAllNamed(AppRoute.navigationMenu);
     } else {
-      Get.offAllNamed(AppRoute.createCharacterScreen);
+      Get.offAllNamed(AppRoute.signInScreen);
     }
   }
 }

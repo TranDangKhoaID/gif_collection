@@ -1,5 +1,6 @@
 import 'package:tikimon_collection/navigation_menu.dart';
 import 'package:tikimon_collection/screens/create_character/create_character_screen.dart';
+import 'package:tikimon_collection/screens/create_character/sign_in_screen.dart';
 import 'package:tikimon_collection/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ class AppRoute {
   static const String splashScreen = '/splash-screen';
   static const String createCharacterScreen = '/create-character-screen';
   static const String navigationMenu = '/navigation-menu';
+  static const String signInScreen = '/sign-in-screen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -24,6 +26,11 @@ class AppRoute {
       case navigationMenu:
         return MaterialPageRoute(
           builder: (_) => const NavigationMenu(),
+          settings: settings,
+        );
+      case signInScreen:
+        return MaterialPageRoute(
+          builder: (_) => const SignInScreen(),
           settings: settings,
         );
       default:

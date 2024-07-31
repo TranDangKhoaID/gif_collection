@@ -7,6 +7,7 @@ part 'user_model.g.dart';
 @JsonSerializable()
 class UserModel {
   String? id;
+  String? email;
   String? name;
   String? avatar;
   // int? ruby;
@@ -17,6 +18,7 @@ class UserModel {
     this.id,
     this.name,
     this.avatar,
+    this.email,
     // this.ruby,
     // this.cash,
     //this.treeCashLevel,

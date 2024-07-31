@@ -14,10 +14,10 @@ class ShareObs {
   /// Logout
   static void logout() async {
     ShareObs.isLoggedIn.value = false;
-    ShareObs.user.value = null;
-    ShareObs.ruby.value = 100;
+    //ShareObs.user.value = null;
+    //ShareObs.ruby.value = 100;
     ShareObs.urlCharacter.value = '';
-    ShareObs.coin.value = 10000;
-    ShareObs.moneyCoin.value = 2610;
+    // ShareObs.coin.value = 10000;
+    // ShareObs.moneyCoin.value = 2610;
   }
 }
