@@ -92,7 +92,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: SignInButton(
                       Buttons.google,
                       text: "Đăng nhập với Google",
-                      onPressed: () => _authController.signInWithGoogle(),
+                      onPressed: () => _authController.signInWithGoogle(url),
                     ),
                   ),
                   //button

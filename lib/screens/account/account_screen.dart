@@ -65,7 +65,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     height: 200,
                     child: CachedNetworkImage(
                       fit: BoxFit.cover,
-                      imageUrl: ShareObs.user.value!.avatar!,
+                      imageUrl: ShareObs.avatarUser.value,
                       placeholder: (context, url) => const ShimmerImage(),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
@@ -140,8 +140,15 @@ class _AccountScreenState extends State<AccountScreen> {
     return Drawer(
       child: ListView(
         children: [
-          Text('Hồ Sơ'),
           ListTile(
+            leading: CircleAvatar(
+              child: CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: ShareObs.user.value!.photoUrl ?? '',
+                placeholder: (context, url) => const ShimmerImage(),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              ),
+            ),
             title: Text(ShareObs.user.value!.name ?? ""),
             subtitle: Text(ShareObs.user.value!.email ?? ""),
           ),
@@ -189,9 +196,9 @@ class _AccountScreenState extends State<AccountScreen> {
             },
           ),
           ListTile(
-            title: Text('Đặt lại tài khoản'),
+            title: Text('Lấy dữ liệu trên đã lưu'),
             onTap: () {
-              _controller.resetAccount();
+              _controller.logout();
             },
           ),
         ],

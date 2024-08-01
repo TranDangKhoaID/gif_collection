@@ -24,7 +24,7 @@ class AuthController extends GetxController {
     try {
       HudGlobalManager.showHud();
       final userModel = UserModel(
-        avatar: url,
+        photoUrl: url,
         id: '000001',
         name: name,
       );
@@ -43,8 +43,9 @@ class AuthController extends GetxController {
   }
 
   //google sign in
-  Future<void> signInWithGoogle() async {
+  Future<void> signInWithGoogle(String url) async {
     try {
+      //google sign in
       final googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
         return;
@@ -56,9 +57,9 @@ class AuthController extends GetxController {
         idToken: googleAuth.idToken,
       );
       await FirebaseAuth.instance.signInWithCredential(credential);
-      //
+      //save local
       final userModel = UserModel(
-        avatar: googleUser.photoUrl,
+        photoUrl: googleUser.photoUrl,
         id: googleUser.id,
         name: googleUser.displayName,
         email: googleUser.email,
@@ -66,6 +67,13 @@ class AuthController extends GetxController {
       await appPrefs.saveUser(userModel: userModel);
       final user = await appPrefs.getUser();
       ShareObs.user.value = user;
+      //avatar user
+      ShareObs.avatarUser.value = url;
+      appPrefs.saveAvatarUser(avatar: url);
+      //
+      appPrefs.saveCoin(coin: ShareObs.coin.value);
+      appPrefs.saveRuby(ruby: ShareObs.ruby.value);
+      appPrefs.saveMoneyCoin(mCoin: ShareObs.moneyCoin.value);
       ShareObs.isLoggedIn.value = true;
       Get.offAllNamed(AppRoute.navigationMenu);
     } catch (e) {

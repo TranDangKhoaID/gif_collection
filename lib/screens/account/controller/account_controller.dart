@@ -22,8 +22,7 @@ class AccountController extends GetxController {
     try {
       HudGlobalManager.showHud();
       Get.back();
-      await FirebaseAuth.instance.signOut();
-      await GoogleSignIn().signOut();
+      authLogout();
       ShareObs.logout();
       await appPrefs.logOut();
       Get.offAllNamed(AppRoute.signInScreen);
@@ -34,17 +33,9 @@ class AccountController extends GetxController {
     }
   }
 
-  Future<void> resetAccount() async {
-    try {
-      Get.back();
-      await FirebaseAuth.instance.signOut();
-      await GoogleSignIn().signOut();
-      ShareObs.logout();
-      await appPrefs.resetAccount();
-      Get.offAllNamed(AppRoute.signInScreen);
-    } catch (e) {
-      debugPrint('Logout error: $e');
-    }
+  Future<void> authLogout() async {
+    await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
   }
 
   Future<void> addRuby() async {

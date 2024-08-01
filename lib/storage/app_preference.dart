@@ -60,6 +60,19 @@ class AppPreference {
     return pref.getInt(AppPreferenceKey.kMoneyCoin) ?? 0;
   }
 
+  //avatar user
+  Future<void> saveAvatarUser({
+    required String avatar,
+  }) async {
+    final pref = await SharedPreferences.getInstance();
+    pref.setString(AppPreferenceKey.kAvatarUser, avatar);
+  }
+
+  Future<String> getAvatarUser() async {
+    final pref = await SharedPreferences.getInstance();
+    return pref.getString(AppPreferenceKey.kAvatarUser) ?? '';
+  }
+
   /// Check is logged in
   Future<bool> isLoggedIn() async {
     final user = await getUser();
@@ -68,11 +81,6 @@ class AppPreference {
 
   /// Logout
   Future<void> logOut() async {
-    final pref = await SharedPreferences.getInstance();
-    pref.remove(AppPreferenceKey.kUser);
-  }
-
-  Future<void> resetAccount() async {
     final pref = await SharedPreferences.getInstance();
     pref.remove(AppPreferenceKey.kUser);
     pref.remove(AppPreferenceKey.kCoin);
@@ -86,12 +94,6 @@ class AppPreferenceKey {
   static const String kRuby = 'ruby';
   static const String kCoin = 'coin';
   static const String kMoneyCoin = 'money_coin';
-  static const String kFirstRun = 'first_run';
-  static const String kDomain = 'domain';
-  static const String kCustomerInfo = 'customer_info';
+  static const String kAvatarUser = 'avatar_user';
   static const String kEnablePushNotify = 'enable_push_notify';
-  static const String kWishProduct = 'wish_product';
-  static const String kCartProduct = 'cart_product';
-  static const String kDiscount = 'discount';
-  static const String kVoucherCode = 'voucher_code';
 }

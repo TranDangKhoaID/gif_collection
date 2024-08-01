@@ -9,7 +9,7 @@ class UserModel {
   String? id;
   String? email;
   String? name;
-  String? avatar;
+  String? photoUrl;
   // int? ruby;
   // int? cash;
   //int? treeCashLevel;
@@ -17,7 +17,7 @@ class UserModel {
   UserModel({
     this.id,
     this.name,
-    this.avatar,
+    this.photoUrl,
     this.email,
     // this.ruby,
     // this.cash,
