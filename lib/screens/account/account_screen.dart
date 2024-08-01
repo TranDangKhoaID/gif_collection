@@ -55,22 +55,22 @@ class _AccountScreenState extends State<AccountScreen> {
               ],
             ),
             Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Obx(
-                    () => _buildBodyValues(),
-                  ),
-                  SizedBox(
-                    height: 200,
-                    child: CachedNetworkImage(
-                      fit: BoxFit.cover,
-                      imageUrl: ShareObs.avatarUser.value,
-                      placeholder: (context, url) => const ShimmerImage(),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
+              child: Obx(
+                () => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildBodyValues(),
+                    SizedBox(
+                      height: 200,
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: ShareObs.avatarUser.value,
+                        placeholder: (context, url) => const ShimmerImage(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
@@ -196,9 +196,15 @@ class _AccountScreenState extends State<AccountScreen> {
             },
           ),
           ListTile(
-            title: Text('Lấy dữ liệu trên đã lưu'),
+            title: Text('Lưu dữ liệu lên đám mây'),
             onTap: () {
-              _controller.logout();
+              _controller.saveUserDetail();
+            },
+          ),
+          ListTile(
+            title: Text('Lấy dữ liệu đã lưu về'),
+            onTap: () {
+              _controller.getUserDetail();
             },
           ),
         ],

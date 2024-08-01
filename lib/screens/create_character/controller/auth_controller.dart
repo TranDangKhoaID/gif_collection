@@ -69,11 +69,10 @@ class AuthController extends GetxController {
       ShareObs.user.value = user;
       //avatar user
       ShareObs.avatarUser.value = url;
-      appPrefs.saveAvatarUser(avatar: url);
-      //
-      appPrefs.saveCoin(coin: ShareObs.coin.value);
-      appPrefs.saveRuby(ruby: ShareObs.ruby.value);
-      appPrefs.saveMoneyCoin(mCoin: ShareObs.moneyCoin.value);
+      await appPrefs.saveAvatarUser(avatar: url);
+      await appPrefs.saveCoin(coin: ShareObs.coin.value);
+      await appPrefs.saveRuby(ruby: ShareObs.ruby.value);
+      await appPrefs.saveMoneyCoin(mCoin: ShareObs.moneyCoin.value);
       ShareObs.isLoggedIn.value = true;
       Get.offAllNamed(AppRoute.navigationMenu);
     } catch (e) {

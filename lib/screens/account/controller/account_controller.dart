@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -46,5 +47,58 @@ class AccountController extends GetxController {
   Future<void> addCoin() async {
     ShareObs.coin.value += 100000;
     await appPrefs.saveCoin(coin: ShareObs.coin.value);
+  }
+
+  //
+  Future<void> saveUserDetail() async {
+    String idUser = ShareObs.user.value!.id!;
+    EasyLoading.show();
+    await FirebaseFirestore.instance.collection('users').doc(idUser).set({
+      'id': idUser,
+      'name': ShareObs.user.value!.name,
+      'email': ShareObs.user.value!.email,
+      'photoUrl': ShareObs.user.value?.photoUrl ?? '',
+      'ruby': ShareObs.ruby.value,
+      'coin': ShareObs.coin.value,
+      'moneyCoin': ShareObs.moneyCoin.value,
+      'avatar': ShareObs.avatarUser.value,
+    }).catchError((e) {
+      EasyLoading.dismiss();
+      EasyLoading.showError(e);
+    });
+    EasyLoading.showSuccess('Thành công');
+    EasyLoading.dismiss();
+  }
+
+  Future<void> getUserDetail() async {
+    try {
+      String idUser = ShareObs.user.value!.id!;
+      DocumentSnapshot doc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(idUser)
+          .get();
+      if (!doc.exists) {
+        EasyLoading.dismiss();
+        EasyLoading.showError('Bạn chưa lưu tài khoản trước đó');
+        return;
+      }
+      final coin = doc['coin'];
+      final ruby = doc['ruby'];
+      final moneyCoin = doc['moneyCoin'];
+      final avatar = doc['avatar'];
+      await appPrefs.saveAvatarUser(avatar: avatar);
+      await appPrefs.saveCoin(coin: coin);
+      await appPrefs.saveRuby(ruby: ruby);
+      await appPrefs.saveMoneyCoin(mCoin: moneyCoin);
+      ShareObs.ruby.value = ruby;
+      ShareObs.coin.value = await coin;
+      ShareObs.moneyCoin.value = await moneyCoin;
+      ShareObs.avatarUser.value = await avatar;
+      EasyLoading.dismiss();
+      EasyLoading.showSuccess('Thành công');
+    } catch (e) {
+      EasyLoading.dismiss();
+      EasyLoading.showError(e.toString());
+    }
   }
 }
