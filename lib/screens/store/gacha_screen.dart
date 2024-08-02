@@ -6,6 +6,7 @@ import 'package:tikimon_collection/common/share_colors.dart';
 import 'package:tikimon_collection/common/share_obs.dart';
 import 'package:tikimon_collection/models/tag_model.dart';
 import 'package:tikimon_collection/screens/store/controller.dart/gacha_controller.dart';
+import 'package:tikimon_collection/widgets/header_currency.dart';
 import 'package:tikimon_collection/widgets/money_app_bar_widget.dart';
 import 'package:tikimon_collection/widgets/shimmer_image.dart';
 
@@ -68,7 +69,7 @@ class _GachaScreenState extends State<GachaScreen> {
   Column tab_1() {
     return Column(
       children: [
-        _buildHeaderCurrency(),
+        const HeaderCurrency(),
         Expanded(
           child: GridView.builder(
             padding: EdgeInsets.all(15),
@@ -160,33 +161,6 @@ class _GachaScreenState extends State<GachaScreen> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildHeaderCurrency() {
-    return Padding(
-      padding: const EdgeInsets.only(right: 15, left: 15, top: 30),
-      child: Row(
-        children: [
-          Expanded(
-            child: MoneyAppBarWidget(
-              icon: Icons.diamond,
-              money: ShareObs.ruby.value,
-              color: ShareColors.kColorRuby,
-            ),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          Expanded(
-            child: MoneyAppBarWidget(
-              icon: Icons.monetization_on,
-              money: ShareObs.coin.value,
-              color: ShareColors.kColorCoin,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

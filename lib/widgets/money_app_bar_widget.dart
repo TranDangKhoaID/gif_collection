@@ -1,5 +1,6 @@
 import 'package:tikimon_collection/common/share_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:tikimon_collection/extensions/string.dart';
 
 class MoneyAppBarWidget extends StatelessWidget {
   final Color color;
@@ -37,9 +38,9 @@ class MoneyAppBarWidget extends StatelessWidget {
           Expanded(
             child: Center(
               child: Text(
-                money.toString(),
+                formattedNumber(money),
                 style: TextStyle(
-                  //fontSize: 15,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                   color: color,
                 ),
@@ -49,13 +50,13 @@ class MoneyAppBarWidget extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(right: 1),
-            padding: EdgeInsets.symmetric(horizontal: 7),
+            margin: const EdgeInsets.only(right: 1),
+            padding: const EdgeInsets.symmetric(horizontal: 7),
             decoration: BoxDecoration(
               color: color,
               shape: BoxShape.circle,
             ),
-            child: Text(
+            child: const Text(
               '+',
               style: TextStyle(
                 color: Colors.white,

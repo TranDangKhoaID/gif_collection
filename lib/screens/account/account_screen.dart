@@ -4,6 +4,7 @@ import 'package:tikimon_collection/common/share_colors.dart';
 import 'package:tikimon_collection/common/share_obs.dart';
 import 'package:tikimon_collection/screens/account/controller/account_controller.dart';
 import 'package:tikimon_collection/screens/account/widgets/item_value_account_widget.dart';
+import 'package:tikimon_collection/widgets/header_currency.dart';
 import 'package:tikimon_collection/widgets/money_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,12 +31,8 @@ class _AccountScreenState extends State<AccountScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Obx(
-                  () => _buildHeaderCurrency(),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                const HeaderCurrency(),
+                const SizedBox(height: 10),
                 Builder(
                   builder: (context) => GestureDetector(
                     onTap: () {
@@ -106,33 +103,6 @@ class _AccountScreenState extends State<AccountScreen> {
           value: 0,
         ),
       ],
-    );
-  }
-
-  Widget _buildHeaderCurrency() {
-    return Padding(
-      padding: const EdgeInsets.only(right: 15, left: 15, top: 30),
-      child: Row(
-        children: [
-          Expanded(
-            child: MoneyAppBarWidget(
-              icon: Icons.diamond,
-              money: ShareObs.ruby.value,
-              color: ShareColors.kColorRuby,
-            ),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          Expanded(
-            child: MoneyAppBarWidget(
-              icon: Icons.monetization_on,
-              money: ShareObs.coin.value,
-              color: ShareColors.kColorCoin,
-            ),
-          ),
-        ],
-      ),
     );
   }
 

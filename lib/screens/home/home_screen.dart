@@ -1,12 +1,10 @@
 import 'package:tikimon_collection/common/share_colors.dart';
 import 'package:tikimon_collection/common/share_obs.dart';
 import 'package:tikimon_collection/extensions/string.dart';
-import 'package:tikimon_collection/models/user_model.dart';
 import 'package:tikimon_collection/screens/home/controller/home_controller.dart';
-import 'package:tikimon_collection/storage/app_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tikimon_collection/widgets/money_app_bar_widget.dart';
+import 'package:tikimon_collection/widgets/header_currency.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -40,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
               top: 0,
               left: 0,
               right: 0,
-              child: Obx(() => _buildHeaderCurrency()),
+              child: HeaderCurrency(),
             ),
             Center(
               child: Container(
@@ -156,33 +154,6 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildHeaderCurrency() {
-    return Padding(
-      padding: const EdgeInsets.only(right: 15, left: 15, top: 30),
-      child: Row(
-        children: [
-          Expanded(
-            child: MoneyAppBarWidget(
-              icon: Icons.diamond,
-              money: ShareObs.ruby.value,
-              color: ShareColors.kColorRuby,
-            ),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          Expanded(
-            child: MoneyAppBarWidget(
-              icon: Icons.monetization_on,
-              money: ShareObs.coin.value,
-              color: ShareColors.kColorCoin,
-            ),
-          ),
-        ],
       ),
     );
   }
