@@ -11,6 +11,8 @@ TagModel _$TagModelFromJson(Map<String, dynamic> json) => TagModel(
       name: json['name'] as String?,
       gif: json['gif'] as String?,
       avatar: json['avatar'] as String?,
+      race: json['race'] as String?,
+      description: json['description'] as String?,
       attack: (json['attack'] as num?)?.toInt(),
       defense: (json['defense'] as num?)?.toInt(),
     );
@@ -20,6 +22,8 @@ Map<String, dynamic> _$TagModelToJson(TagModel instance) => <String, dynamic>{
       'name': instance.name,
       'gif': instance.gif,
       'avatar': instance.avatar,
+      'race': instance.race,
+      'description': instance.description,
       'attack': instance.attack,
       'defense': instance.defense,
     };
