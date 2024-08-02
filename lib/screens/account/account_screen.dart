@@ -86,9 +86,7 @@ class _AccountScreenState extends State<AccountScreen> {
           name: 'Ruby',
           value: ShareObs.ruby.value,
         ),
-        SizedBox(
-          height: 20,
-        ),
+        SizedBox(height: 20),
         ItemValueAccountWidget(
           assets: 'assets/images/icons/coin.png',
           name: 'Vàng',
@@ -139,9 +137,7 @@ class _AccountScreenState extends State<AccountScreen> {
               },
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           Card(
             margin: EdgeInsets.symmetric(horizontal: 20),
             shape: RoundedRectangleBorder(
@@ -170,6 +166,7 @@ class _AccountScreenState extends State<AccountScreen> {
             onTap: () {
               _controller.saveUserDetail();
             },
+            //subtitle: Text(ShareObs.user.value?.updateAt.toString() ?? ''),
           ),
           ListTile(
             title: Text('Lấy dữ liệu đã lưu về'),

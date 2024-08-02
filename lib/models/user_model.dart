@@ -10,7 +10,7 @@ class UserModel {
   String? email;
   String? name;
   String? photoUrl;
-  // int? ruby;
+  DateTime? updateAt;
   // int? cash;
   //int? treeCashLevel;
 
@@ -19,7 +19,7 @@ class UserModel {
     this.name,
     this.photoUrl,
     this.email,
-    // this.ruby,
+    this.updateAt,
     // this.cash,
     //this.treeCashLevel,
   });

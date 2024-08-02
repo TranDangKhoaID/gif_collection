@@ -13,6 +13,16 @@ class NavigationMenu extends StatelessWidget {
     final controller = Get.put(NavigationController());
 
     return Scaffold(
+      // floatingActionButton: FloatingActionButton(
+      //   tooltip: 'Nhiệm vụ',
+      //   elevation: 0,
+      //   backgroundColor: Colors.transparent,
+      //   onPressed: () {},
+      //   child: Image.asset(
+      //     'assets/images/missions.png',
+      //     fit: BoxFit.cover,
+      //   ),
+      // ),
       bottomNavigationBar: Obx(
         () => NavigationBar(
           height: 70,

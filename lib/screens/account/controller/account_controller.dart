@@ -62,6 +62,7 @@ class AccountController extends GetxController {
       'coin': ShareObs.coin.value,
       'moneyCoin': ShareObs.moneyCoin.value,
       'avatar': ShareObs.avatarUser.value,
+      'updateAt': DateTime.now(),
     }).catchError((e) {
       EasyLoading.dismiss();
       EasyLoading.showError(e);

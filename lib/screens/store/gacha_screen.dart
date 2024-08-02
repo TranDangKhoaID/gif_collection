@@ -71,95 +71,116 @@ class _GachaScreenState extends State<GachaScreen> {
       children: [
         const HeaderCurrency(),
         Expanded(
-          child: GridView.builder(
-            padding: EdgeInsets.all(15),
-            itemCount: tags.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              crossAxisCount: 3,
-            ),
-            itemBuilder: (context, index) => GridTile(
-              footer: GridTileBar(
-                leading: GestureDetector(
-                  onTap: () {
-                    DialogHelper.showWidgetDialog(
-                      context: context,
-                      onPressConfirm: () {},
-                      confirmText: 'Mua',
-                      body: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          //mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: CachedNetworkImage(
-                                height: 150,
-                                width: 150,
-                                imageUrl: tags[index].gif ?? '',
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) =>
-                                    const ShimmerImage(),
-                                errorWidget: (context, url, error) => Icon(
-                                  Icons.error,
-                                ),
+          child: FutureBuilder<List<TagModel>>(
+            future: _controller.getTagsDB(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return GridView.builder(
+                  padding: EdgeInsets.all(15),
+                  itemCount: snapshot.data!.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    crossAxisCount: 3,
+                  ),
+                  itemBuilder: (context, index) {
+                    final tag = snapshot.data![index];
+                    return GridTile(
+                      footer: GridTileBar(
+                        leading: GestureDetector(
+                          onTap: () {
+                            DialogHelper.showWidgetDialog(
+                              context: context,
+                              onPressConfirm: () {},
+                              confirmText: 'Mua',
+                              body: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: _builDetailTagDialog(tag),
                               ),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              tags[index].name?.capitalize ?? '',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Chủng tộc: ${tags[index].race?.capitalize}',
-                                  ),
-                                  Text(
-                                    'Tấn công: ??? (Sở hữu để xem)',
-                                  ),
-                                  Text(
-                                    'Phòng thủ: ??? (Sở hữu để xem)',
-                                  ),
-                                  Text(
-                                    tags[index].description ?? 'Không có mô tả',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
+                            );
+                          },
+                          child: Icon(
+                            Icons.error,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: CachedNetworkImage(
+                          imageUrl: tag.gif ?? '',
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => const ShimmerImage(),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                       ),
                     );
                   },
-                  child: Icon(
-                    Icons.error,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: CachedNetworkImage(
-                  imageUrl: tags[index].gif ?? '',
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => const ShimmerImage(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
-              ),
+                );
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text(snapshot.error.toString()),
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Column _builDetailTagDialog(TagModel tag) {
+    return Column(
+      //mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: CachedNetworkImage(
+            height: 150,
+            width: 150,
+            imageUrl: tag.gif ?? '',
+            fit: BoxFit.cover,
+            placeholder: (context, url) => const ShimmerImage(),
+            errorWidget: (context, url, error) => Icon(
+              Icons.error,
             ),
           ),
         ),
+        SizedBox(height: 10),
+        Text(
+          tag.name?.capitalize ?? '',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Chủng tộc: ${tag.race?.capitalize}',
+              ),
+              Text(
+                'Tấn công: ??? (Sở hữu để xem)',
+              ),
+              Text(
+                'Phòng thủ: ??? (Sở hữu để xem)',
+              ),
+              Text(
+                tag.description ?? 'Không có mô tả',
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        )
       ],
     );
   }

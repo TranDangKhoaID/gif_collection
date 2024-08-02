@@ -1,5 +1,6 @@
 import 'package:tikimon_collection/common/share_obs.dart';
 import 'package:flutter/material.dart';
+import 'package:tikimon_collection/extensions/string.dart';
 
 class ItemValueAccountWidget extends StatelessWidget {
   final String assets;
@@ -30,7 +31,7 @@ class ItemValueAccountWidget extends StatelessWidget {
           ],
         ),
         Text(
-          value.toString(),
+          formattedNumber(value),
         ),
       ],
     );
