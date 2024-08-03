@@ -8,6 +8,7 @@ import 'package:tikimon_collection/common/share_obs.dart';
 import 'package:tikimon_collection/locator.dart';
 import 'package:tikimon_collection/models/user_model.dart';
 import 'package:tikimon_collection/routes.dart';
+import 'package:tikimon_collection/service/database/my_tag_db.dart';
 import 'package:tikimon_collection/storage/app_preference.dart';
 import 'package:tikimon_collection/widgets/hub_global_widget.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class AccountController extends GetxController {
   /// MARK: - Initials;
   final appPrefs = locator<AppPreference>();
   //UserModel user = UserModel();
+  final myTagDB = MyTagDB();
 
   /// Logout
   Future<void> logout() async {
@@ -26,6 +28,7 @@ class AccountController extends GetxController {
       authLogout();
       ShareObs.logout();
       await appPrefs.logOut();
+      await deletAllMyTags();
       Get.offAllNamed(AppRoute.signInScreen);
     } catch (e) {
       debugPrint('Logout error: $e');
@@ -47,6 +50,11 @@ class AccountController extends GetxController {
   Future<void> addCoin() async {
     ShareObs.coin.value += 100000;
     await appPrefs.saveCoin(coin: ShareObs.coin.value);
+  }
+
+  //delete all my tags
+  Future<void> deletAllMyTags() async {
+    await myTagDB.deleteAll();
   }
 
   //

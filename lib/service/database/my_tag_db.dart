@@ -17,7 +17,6 @@ class MyTagDB {
       "description" TEXT,
       "attack" INTEGER,
       "defense" INTEGER,
-      "quantity" INTEGER,
       PRIMARY KEY("id" AUTOINCREMENT)
     );
       ''',
@@ -80,7 +79,7 @@ class MyTagDB {
   //   );
   // }
 
-  Future<void> delete(int id) async {
+  Future<void> deleteByID(int id) async {
     final database = await DatabaseService().database;
     await database.rawDelete(
       '''
@@ -88,5 +87,10 @@ class MyTagDB {
       ''',
       [id],
     );
+  }
+
+  Future<void> deleteAll() async {
+    final database = await DatabaseService().database;
+    await database.delete(tableName);
   }
 }

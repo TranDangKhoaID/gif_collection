@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tikimon_collection/common/dialog_helper.dart';
 import 'package:tikimon_collection/common/share_colors.dart';
 import 'package:tikimon_collection/common/share_obs.dart';
@@ -78,7 +79,7 @@ class _GachaScreenState extends State<GachaScreen> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return GridView.builder(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             itemCount: snapshot.data!.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               mainAxisSpacing: 10,
@@ -93,21 +94,8 @@ class _GachaScreenState extends State<GachaScreen> {
                     onTap: () {
                       DialogHelper.showWidgetDialog(
                         context: context,
-                        onPressConfirm: () async {
-                          EasyLoading.show();
-                          final myTags = MyTagModel(
-                            id: tag.id,
-                            name: tag.name,
-                            gif: tag.gif,
-                            avatar: tag.avatar,
-                            race: tag.race,
-                            description: tag.description,
-                            attack: tag.attack,
-                            defense: tag.defense,
-                          );
-                          await myTagDB.create(myTags);
-                          EasyLoading.dismiss();
-                          EasyLoading.showSuccess('ngon');
+                        onPressConfirm: () {
+                          _controller.buyTag(tag);
                         },
                         confirmText: 'Mua',
                         body: Padding(
@@ -139,9 +127,7 @@ class _GachaScreenState extends State<GachaScreen> {
             child: Text(snapshot.error.toString()),
           );
         }
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
+        return const ShimmerGridView();
       },
     );
   }
@@ -158,9 +144,7 @@ class _GachaScreenState extends State<GachaScreen> {
             imageUrl: tag.gif ?? '',
             fit: BoxFit.cover,
             placeholder: (context, url) => const ShimmerImage(),
-            errorWidget: (context, url, error) => Icon(
-              Icons.error,
-            ),
+            errorWidget: (context, url, error) => Icon(Icons.error),
           ),
         ),
         SizedBox(height: 10),

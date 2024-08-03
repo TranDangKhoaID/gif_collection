@@ -76,7 +76,7 @@ class _AccountScreenState extends State<AccountScreen> {
     );
   }
 
-  Column _buildBodyValues() {
+  Widget _buildBodyValues() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,6 +172,12 @@ class _AccountScreenState extends State<AccountScreen> {
             title: Text('Lấy dữ liệu đã lưu về'),
             onTap: () {
               _controller.getUserDetail();
+            },
+          ),
+          ListTile(
+            title: Text('Xóa all'),
+            onTap: () {
+              _controller.deletAllMyTags();
             },
           ),
         ],

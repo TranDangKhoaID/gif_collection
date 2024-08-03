@@ -55,8 +55,10 @@ class _MyBagScreenState extends State<MyBagScreen> {
                                 context: context,
                                 onPressConfirm: () async {
                                   EasyLoading.show();
-                                  await _controller.myTagDB.delete(tag.id!);
-                                  await _controller.myTagDB.fetchAll();
+                                  await _controller.myTagDB.deleteByID(tag.id!);
+                                  setState(() {
+                                    _controller.myTagDB.fetchAll();
+                                  });
                                   EasyLoading.dismiss();
                                   EasyLoading.showSuccess('ngon');
                                   Get.back();
@@ -127,6 +129,9 @@ class _MyBagScreenState extends State<MyBagScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text(
+                'ID: ${tag.id!}',
+              ),
               Text(
                 'Chủng tộc: ${tag.race?.capitalize}',
               ),
