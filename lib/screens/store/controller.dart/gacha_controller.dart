@@ -6,12 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:tikimon_collection/common/dialog_helper.dart';
+import 'package:tikimon_collection/locator.dart';
 import 'package:tikimon_collection/models/tag_model.dart';
+import 'package:tikimon_collection/repositories/data_repository.dart';
 import 'package:tikimon_collection/widgets/shimmer_image.dart';
 
 class GachaController extends GetxController {
+  //
+  final dataRepository = locator<DataRepository>();
+  //
   final supabase = Supabase.instance.client;
-  List<TagModel> tags = [];
+  //List<TagModel> tags = [];
 
   @override
   void onReady() {
@@ -26,7 +31,16 @@ class GachaController extends GetxController {
           .map((json) => TagModel.fromJson(json))
           .toList();
     } catch (e) {
-      print('Lỗi get tags: $e');
+      debugPrint('Get tags error: $e');
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<List<TagModel>> getTags() async {
+    try {
+      return await dataRepository.getTags();
+    } catch (e) {
+      debugPrint('Get tags error: $e');
       throw Exception(e.toString());
     }
   }

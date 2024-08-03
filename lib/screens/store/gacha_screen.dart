@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:tikimon_collection/common/dialog_helper.dart';
 import 'package:tikimon_collection/common/share_colors.dart';
 import 'package:tikimon_collection/common/share_obs.dart';
+import 'package:tikimon_collection/extensions/string.dart';
 import 'package:tikimon_collection/models/tag_model.dart';
 import 'package:tikimon_collection/screens/store/controller.dart/gacha_controller.dart';
 import 'package:tikimon_collection/widgets/header_currency.dart';
@@ -28,11 +29,11 @@ class _GachaScreenState extends State<GachaScreen> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('Cửa Hàng'),
+          title: const HeaderCurrency(),
           bottom: const TabBar(
             tabs: [
               Tab(
-                child: Text('Giới thiệu'),
+                child: Text('Cửa hàng'),
               ),
               Tab(
                 child: Text('Mở hộp'),
@@ -45,91 +46,83 @@ class _GachaScreenState extends State<GachaScreen> {
         ),
         body: TabBarView(
           children: [
-            tab_1(),
-            tab_2(),
-            tab_3(),
+            tabStore(),
+            tabEvent(),
+            tabAvatar(),
           ],
         ),
       ),
     );
   }
 
-  Center tab_3() {
+  Center tabAvatar() {
     return Center(
       child: Text('Nhân vật'),
     );
   }
 
-  Center tab_2() {
+  Center tabEvent() {
     return Center(
-      child: Text('Mở hộp'),
+      child: Text('Sự kiện'),
     );
   }
 
-  Column tab_1() {
-    return Column(
-      children: [
-        const HeaderCurrency(),
-        Expanded(
-          child: FutureBuilder<List<TagModel>>(
-            future: _controller.getTagsDB(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return GridView.builder(
-                  padding: EdgeInsets.all(15),
-                  itemCount: snapshot.data!.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    crossAxisCount: 3,
+  Widget tabStore() {
+    return FutureBuilder<List<TagModel>>(
+      future: _controller.getTags(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return GridView.builder(
+            padding: EdgeInsets.all(15),
+            itemCount: snapshot.data!.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              crossAxisCount: 3,
+            ),
+            itemBuilder: (context, index) {
+              final tag = snapshot.data![index];
+              return GridTile(
+                footer: GridTileBar(
+                  leading: GestureDetector(
+                    onTap: () {
+                      DialogHelper.showWidgetDialog(
+                        context: context,
+                        onPressConfirm: () {},
+                        confirmText: 'Mua',
+                        body: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: _builDetailTagDialog(tag),
+                        ),
+                      );
+                    },
+                    child: Icon(
+                      Icons.error,
+                      color: Colors.black,
+                    ),
                   ),
-                  itemBuilder: (context, index) {
-                    final tag = snapshot.data![index];
-                    return GridTile(
-                      footer: GridTileBar(
-                        leading: GestureDetector(
-                          onTap: () {
-                            DialogHelper.showWidgetDialog(
-                              context: context,
-                              onPressConfirm: () {},
-                              confirmText: 'Mua',
-                              body: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: _builDetailTagDialog(tag),
-                              ),
-                            );
-                          },
-                          child: Icon(
-                            Icons.error,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: CachedNetworkImage(
-                          imageUrl: tag.gif ?? '',
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) => const ShimmerImage(),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
-                        ),
-                      ),
-                    );
-                  },
-                );
-              } else if (snapshot.hasError) {
-                return Center(
-                  child: Text(snapshot.error.toString()),
-                );
-              }
-              return const Center(
-                child: CircularProgressIndicator(),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: CachedNetworkImage(
+                    imageUrl: tag.gif ?? '',
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const ShimmerImage(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                ),
               );
             },
-          ),
-        ),
-      ],
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text(snapshot.error.toString()),
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 
@@ -178,6 +171,43 @@ class _GachaScreenState extends State<GachaScreen> {
                   color: Colors.grey,
                 ),
               ),
+              tag.ruby != null
+                  ? Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(right: 7),
+                          width: 25,
+                          child: Image.asset(
+                            'assets/images/icons/ruby.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Text(
+                          formattedNumber(tag.ruby ?? 999999999),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(right: 7),
+                          width: 25,
+                          child: Image.asset(
+                            'assets/images/icons/coin.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Text(
+                          formattedNumber(tag.coin ?? 999999999),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
             ],
           ),
         )

@@ -12,7 +12,7 @@ class HeaderCurrency extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 15, left: 15, top: 30),
+      padding: const EdgeInsets.only(right: 10, left: 10, top: 10),
       child: Obx(
         () => Row(
           children: [
