@@ -1,12 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:tikimon_collection/common/dialog_helper.dart';
 import 'package:tikimon_collection/common/share_colors.dart';
 import 'package:tikimon_collection/common/share_obs.dart';
 import 'package:tikimon_collection/extensions/string.dart';
+import 'package:tikimon_collection/models/my_tag_model.dart';
 import 'package:tikimon_collection/models/tag_model.dart';
 import 'package:tikimon_collection/screens/store/controller.dart/gacha_controller.dart';
+import 'package:tikimon_collection/service/database/my_tag_db.dart';
 import 'package:tikimon_collection/widgets/header_currency.dart';
 import 'package:tikimon_collection/widgets/money_app_bar_widget.dart';
 import 'package:tikimon_collection/widgets/shimmer_image.dart';
@@ -21,6 +24,8 @@ class GachaScreen extends StatefulWidget {
 class _GachaScreenState extends State<GachaScreen> {
   //controller
   final _controller = Get.put(GachaController());
+  //db
+  final myTagDB = MyTagDB();
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -88,7 +93,22 @@ class _GachaScreenState extends State<GachaScreen> {
                     onTap: () {
                       DialogHelper.showWidgetDialog(
                         context: context,
-                        onPressConfirm: () {},
+                        onPressConfirm: () async {
+                          EasyLoading.show();
+                          final myTags = MyTagModel(
+                            id: tag.id,
+                            name: tag.name,
+                            gif: tag.gif,
+                            avatar: tag.avatar,
+                            race: tag.race,
+                            description: tag.description,
+                            attack: tag.attack,
+                            defense: tag.defense,
+                          );
+                          await myTagDB.create(myTags);
+                          EasyLoading.dismiss();
+                          EasyLoading.showSuccess('ngon');
+                        },
                         confirmText: 'Mua',
                         body: Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -126,7 +146,7 @@ class _GachaScreenState extends State<GachaScreen> {
     );
   }
 
-  Column _builDetailTagDialog(TagModel tag) {
+  Widget _builDetailTagDialog(TagModel tag) {
     return Column(
       //mainAxisAlignment: MainAxisAlignment.center,
       children: [

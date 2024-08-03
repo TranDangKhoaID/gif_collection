@@ -45,29 +45,6 @@ class GachaController extends GetxController {
     }
   }
 
-  void getTag(BuildContext context) {
-    TagModel tagModel = getRandomTag(tags);
-    DialogHelper.showWidgetOkDialog(
-      body: Column(
-        children: [
-          Text('Bạn đã mở được!'),
-          Text(tagModel.name.toString()),
-          SizedBox(
-            height: 150,
-            width: 150,
-            child: CachedNetworkImage(
-              imageUrl: tagModel.gif.toString(),
-              fit: BoxFit.cover,
-              placeholder: (context, url) => const ShimmerImage(),
-              errorWidget: (context, url, error) => Icon(Icons.error),
-            ),
-          ),
-        ],
-      ),
-      context: context,
-    );
-  }
-
   // Hàm lấy đối tượng ngẫu nhiên từ danh sách
   TagModel getRandomTag(List<TagModel> tags) {
     final random = Random();

@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'tag_model.g.dart';
+part 'my_tag_model.g.dart';
 
 @JsonSerializable()
-class TagModel {
+class MyTagModel {
   int? id;
   String? name;
   String? gif;
@@ -12,10 +12,8 @@ class TagModel {
   String? description;
   int? attack;
   int? defense;
-  int? ruby;
-  int? coin;
 
-  TagModel({
+  MyTagModel({
     this.id,
     this.name,
     this.gif,
@@ -24,11 +22,9 @@ class TagModel {
     this.description,
     this.attack,
     this.defense,
-    this.ruby,
-    this.coin,
   });
 
-  factory TagModel.fromJson(Map<String, dynamic> json) =>
-      _$TagModelFromJson(json);
-  Map<String, dynamic> toJson() => _$TagModelToJson(this);
+  factory MyTagModel.fromJson(Map<String, dynamic> json) =>
+      _$MyTagModelFromJson(json);
+  Map<String, dynamic> toJson() => _$MyTagModelToJson(this);
 }
