@@ -1,23 +1,28 @@
-import 'package:tikimon_collection/common/constants.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tikimon_collection/flavors.dart';
 
 class Configs {
-  /// Base URL
-  static String kBaseUrl() {
+  static String baseUrlGif = dotenv.env['BASE_URL_GIF']!;
+  static String baseKeyGif = dotenv.env['BASE_KEY_GIF']!;
+  //
+  static String baseUrlGif18 = dotenv.env['BASE_URL_GIF_18']!;
+  static String baseKeyGif18 = dotenv.env['BASE_KEY_GIF_18']!;
+
+  static String kAPIKey() {
     if (F.appFlavor == Flavor.gif_collection) {
-      return 'https://qksxpfktdruyfndjfcwf.supabase.co';
+      return baseKeyGif;
     } else if (F.appFlavor == Flavor.gif_collection_18) {
-      return 'https://pdztvdfolatzenkqmvrt.supabase.co';
+      return baseKeyGif18;
     }
-    return 'https://qksxpfktdruyfndjfcwf.supabase.co';
+    return baseKeyGif;
   }
 
-  // static String kAPIKey() {
-  //   if (F.appFlavor == Flavor.gif_collection) {
-  //     return Constants.supabaseBaseKeyGif;
-  //   } else if (F.appFlavor == Flavor.gif_collection_18) {
-  //     return Constants.supabaseBaseKeyGif18;
-  //   }
-  //   return Constants.supabaseBaseKeyGif18;
-  // }
+  static String kBaseUrl() {
+    if (F.appFlavor == Flavor.gif_collection) {
+      return baseUrlGif;
+    } else if (F.appFlavor == Flavor.gif_collection_18) {
+      return baseUrlGif18;
+    }
+    return baseUrlGif;
+  }
 }

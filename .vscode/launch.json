@@ -5,21 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "card_tikimon_collection",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "card_tikimon_collection (profile mode)",
+            "name": "gif_collection",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "program": "lib/main_gif_collection.dart",
+            "args": ["--flavor","gif_collection","target","lib/main_gif_collection.dart"]
         },
         {
-            "name": "card_tikimon_collection (release mode)",
+            "name": "gif_collection_18",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
-        }
+            "program": "lib/main_gif_collection_18.dart",
+            "args": ["--flavor","gif_collection_18","target","lib/main_gif_collection_18.dart"]
+        },
     ]
 }

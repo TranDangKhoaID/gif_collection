@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:tikimon_collection/common/constants.dart';
+import 'package:tikimon_collection/common/configs.dart';
 import 'package:tikimon_collection/locator.dart';
 import 'package:tikimon_collection/my_app.dart';
 
@@ -21,8 +21,8 @@ FutureOr<void> main() async {
   await dotenv.load();
 
   await Supabase.initialize(
-    url: Constants.kBaseUrl(),
-    anonKey: Constants.kAPIKey(),
+    url: Configs.kBaseUrl(),
+    anonKey: Configs.kAPIKey(),
   );
 
   configureDependencies();

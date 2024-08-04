@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:tikimon_collection/common/constants.dart';
+import 'package:tikimon_collection/common/configs.dart';
 import 'package:tikimon_collection/common/dialog_helper.dart';
 import 'package:tikimon_collection/common/share_obs.dart';
 import 'package:tikimon_collection/locator.dart';
@@ -51,8 +51,6 @@ class GachaController extends GetxController {
 
   Future<List<TagModel>> getTags() async {
     try {
-      print('url${Constants.kBaseUrl()}');
-      print('key' + Constants.kAPIKey());
       return await dataRepository.getTags();
     } catch (e) {
       debugPrint('Get tags error: $e');

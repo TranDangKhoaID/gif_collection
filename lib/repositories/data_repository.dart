@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tikimon_collection/common/configs.dart';
-import 'package:tikimon_collection/common/constants.dart';
+import 'package:tikimon_collection/common/configs.dart';
 import 'package:tikimon_collection/flavors.dart';
 import 'package:tikimon_collection/locator.dart';
 import 'package:tikimon_collection/models/tag_model.dart';
@@ -44,13 +44,13 @@ class DataRepository implements RestClient {
       InterceptorsWrapper(
         onRequest: (request, handler) async {
           request.headers['Accept'] = 'application/json';
-          request.headers['apiKey'] = Constants.kAPIKey();
+          request.headers['apiKey'] = Configs.kAPIKey();
           handler.next(request);
         },
       ),
     );
 
-    _client = RestClient(dio, baseUrl: Constants.kBaseUrl());
+    _client = RestClient(dio, baseUrl: Configs.kBaseUrl());
   }
 
   @override
