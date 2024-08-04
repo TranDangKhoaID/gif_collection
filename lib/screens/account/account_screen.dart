@@ -175,9 +175,9 @@ class _AccountScreenState extends State<AccountScreen> {
             },
           ),
           ListTile(
-            title: Text('Xóa all'),
+            title: Text('Drop'),
             onTap: () {
-              _controller.deletAllMyTags();
+              _controller.table();
             },
           ),
         ],

@@ -7,7 +7,7 @@ part of 'my_tag_model.dart';
 // **************************************************************************
 
 MyTagModel _$MyTagModelFromJson(Map<String, dynamic> json) => MyTagModel(
-      id: (json['id'] as num?)?.toInt(),
+      id: json['id'] as String?,
       name: json['name'] as String?,
       gif: json['gif'] as String?,
       avatar: json['avatar'] as String?,

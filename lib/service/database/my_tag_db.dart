@@ -5,11 +5,20 @@ import 'package:tikimon_collection/service/database/database_service.dart';
 class MyTagDB {
   final tableName = 'my_tags';
 
+  Future<void> dropTable() async {
+    final database = await DatabaseService().database;
+    await database.execute(
+      '''
+    DROP TABLE IF EXISTS $tableName
+      ''',
+    );
+  }
+
   Future<void> createTable(Database database) async {
     await database.execute(
       '''
     CREATE TABLE IF NOT EXISTS $tableName (
-      "id" INTEGER,
+      "id" TEXT,
       "name" TEXT,
       "gif" TEXT,
       "avatar" TEXT,
@@ -17,7 +26,7 @@ class MyTagDB {
       "description" TEXT,
       "attack" INTEGER,
       "defense" INTEGER,
-      PRIMARY KEY("id" AUTOINCREMENT)
+      PRIMARY KEY("id")
     );
       ''',
     );
@@ -27,10 +36,11 @@ class MyTagDB {
     final database = await DatabaseService().database;
     return await database.rawInsert(
       '''
-    INSERT INTO $tableName(name,gif,avatar,race,description,attack,defense) 
-    VALUES (?,?,?,?,?,?,?)
+    INSERT INTO $tableName(id,name,gif,avatar,race,description,attack,defense) 
+    VALUES (?,?,?,?,?,?,?,?)
       ''',
       [
+        myTagModel.id,
         myTagModel.name,
         myTagModel.gif,
         myTagModel.avatar,
@@ -79,7 +89,7 @@ class MyTagDB {
   //   );
   // }
 
-  Future<void> deleteByID(int id) async {
+  Future<void> deleteByID(String id) async {
     final database = await DatabaseService().database;
     await database.rawDelete(
       '''

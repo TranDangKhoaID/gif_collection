@@ -4,7 +4,7 @@ part 'my_tag_model.g.dart';
 
 @JsonSerializable()
 class MyTagModel {
-  int? id;
+  String? id;
   String? name;
   String? gif;
   String? avatar;

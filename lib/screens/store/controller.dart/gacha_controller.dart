@@ -88,8 +88,9 @@ class GachaController extends GetxController {
         return;
       }
       //final user = ShareObs.user.value;
-
+      final id = uuid.v1();
       final myTags = MyTagModel(
+        id: id,
         name: tag.name,
         gif: tag.gif,
         avatar: tag.avatar,
