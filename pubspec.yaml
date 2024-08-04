@@ -29,7 +29,7 @@ environment:
 # flutter run --flavor gif_collection -t lib/main_gif_collection.dart
 # flutter run --flavor gif_collection_18 -t lib/main_gif_collection_18.dart
 # flutter pub run flutter_flavorizr -p assets:download,assets:extract
-# fvm flutter build apk --flavor di4l_shop -t lib/main_di4l_shop.dart
+# fvm flutter build apk --flavor gif_collection -t lib/main_gif_collection.dart
 dependencies:
   flutter:
     sdk: flutter
@@ -85,7 +85,7 @@ flavorizr:
   flavors:
     gif_collection:
       app:
-        name: "Gif Collection"
+        name: "Gif Pixel Collection"
       android:
         applicationId: "com.trankhoa2610.gifcollection"
         firebase:
@@ -96,7 +96,7 @@ flavorizr:
       #     config: "./lib/firebases_resource/gif/GoogleService-Info.plist"
     gif_collection_18:
       app:
-        name: "Gif Collection 18"
+        name: "Gif Pixel Collection 18"
       android:
         applicationId: "com.trankhoa2610.gifcollection18"
         firebase:
