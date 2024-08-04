@@ -12,6 +12,7 @@ import 'package:tikimon_collection/common/dialog_helper.dart';
 import 'package:tikimon_collection/common/share_obs.dart';
 import 'package:tikimon_collection/locator.dart';
 import 'package:tikimon_collection/models/my_tag_model.dart';
+import 'package:tikimon_collection/models/tag_background_model.dart';
 import 'package:tikimon_collection/models/tag_model.dart';
 import 'package:tikimon_collection/repositories/data_repository.dart';
 import 'package:tikimon_collection/service/database/my_tag_db.dart';
@@ -54,6 +55,15 @@ class GachaController extends GetxController {
       return await dataRepository.getTags();
     } catch (e) {
       debugPrint('Get tags error: $e');
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<List<TagBackgroundModel>> getTagsBackground() async {
+    try {
+      return await dataRepository.getTagsBackground();
+    } catch (e) {
+      debugPrint('Get tags background error: $e');
       throw Exception(e.toString());
     }
   }

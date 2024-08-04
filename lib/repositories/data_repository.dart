@@ -5,6 +5,7 @@ import 'package:tikimon_collection/common/configs.dart';
 import 'package:tikimon_collection/common/configs.dart';
 import 'package:tikimon_collection/flavors.dart';
 import 'package:tikimon_collection/locator.dart';
+import 'package:tikimon_collection/models/tag_background_model.dart';
 import 'package:tikimon_collection/models/tag_model.dart';
 import 'package:tikimon_collection/network/rest_client.dart';
 import 'package:tikimon_collection/storage/app_preference.dart';
@@ -56,5 +57,10 @@ class DataRepository implements RestClient {
   @override
   Future<List<TagModel>> getTags() {
     return _client.getTags();
+  }
+
+  @override
+  Future<List<TagBackgroundModel>> getTagsBackground() {
+    return _client.getTagsBackground();
   }
 }

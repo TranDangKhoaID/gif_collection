@@ -8,6 +8,7 @@ import 'package:tikimon_collection/common/share_colors.dart';
 import 'package:tikimon_collection/common/share_obs.dart';
 import 'package:tikimon_collection/extensions/string.dart';
 import 'package:tikimon_collection/models/my_tag_model.dart';
+import 'package:tikimon_collection/models/tag_background_model.dart';
 import 'package:tikimon_collection/models/tag_model.dart';
 import 'package:tikimon_collection/screens/store/controller.dart/gacha_controller.dart';
 import 'package:tikimon_collection/service/database/my_tag_db.dart';
@@ -39,13 +40,13 @@ class _GachaScreenState extends State<GachaScreen> {
           bottom: const TabBar(
             tabs: [
               Tab(
-                child: Text('Cửa hàng'),
+                child: Text('Nhân vật'),
               ),
               Tab(
-                child: Text('Mở hộp'),
+                child: Text('Sự kiện'),
               ),
               Tab(
-                child: Text('Nhân vật'),
+                child: Text('Hình nền'),
               ),
             ],
           ),
@@ -54,16 +55,46 @@ class _GachaScreenState extends State<GachaScreen> {
           children: [
             tabStore(),
             tabEvent(),
-            tabAvatar(),
+            tabBackground(),
           ],
         ),
       ),
     );
   }
 
-  Center tabAvatar() {
-    return Center(
-      child: Text('Nhân vật'),
+  Widget tabBackground() {
+    return FutureBuilder<List<TagBackgroundModel>>(
+      future: _controller.getTagsBackground(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+            itemCount: snapshot.data!.length,
+            itemBuilder: (context, index) {
+              final tagBg = snapshot.data![index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 10,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: CachedNetworkImage(
+                    imageUrl: tagBg.gif ?? '',
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const ShimmerImage(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                ),
+              );
+            },
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text(snapshot.error.toString()),
+          );
+        }
+        return const ShimmerGridView();
+      },
     );
   }
 

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:tikimon_collection/common/configs.dart';
+import 'package:tikimon_collection/models/tag_background_model.dart';
 import 'package:tikimon_collection/models/tag_model.dart';
 
 part 'rest_client.g.dart';
@@ -12,4 +13,7 @@ abstract class RestClient {
 
   @GET('/rest/v1/tags?select=*')
   Future<List<TagModel>> getTags();
+
+  @GET('/rest/v1/tags_background?select=*')
+  Future<List<TagBackgroundModel>> getTagsBackground();
 }
