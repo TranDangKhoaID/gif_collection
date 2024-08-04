@@ -11,8 +11,8 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'repositories/data_repository.dart' as _i4;
-import 'storage/app_preference.dart' as _i3;
+import 'repositories/data_repository.dart' as _i3;
+import 'storage/app_preference.dart' as _i4;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 _i1.GetIt $initGetIt(
@@ -25,7 +25,7 @@ _i1.GetIt $initGetIt(
     environment,
     environmentFilter,
   );
-  gh.lazySingleton<_i3.AppPreference>(() => _i3.AppPreference());
-  gh.lazySingleton<_i4.DataRepository>(() => _i4.DataRepository());
+  gh.lazySingleton<_i3.DataRepository>(() => _i3.DataRepository());
+  gh.lazySingleton<_i4.AppPreference>(() => _i4.AppPreference());
   return getIt;
 }

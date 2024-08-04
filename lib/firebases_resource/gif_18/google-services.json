@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "808864231999",
+    "project_id": "tdk2610-game-collection-18",
+    "storage_bucket": "tdk2610-game-collection-18.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808864231999:android:38b8d6d30db6a1d7513e8a",
+        "android_client_info": {
+          "package_name": "com.trankhoa2610.gifcollection18"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "808864231999-o95u79vrlg2oag730c6vuqhuc5q0vu39.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.trankhoa2610.gifcollection18",
+            "certificate_hash": "c6c80d1fd7c855e3028f46a6f89da73122b35403"
+          }
+        },
+        {
+          "client_id": "808864231999-05bcjljbvkfdfk9cca8l34kgaho7jabk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWDg66MT4U3TJ3kXxvwdFf91z-K_cUUB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "808864231999-05bcjljbvkfdfk9cca8l34kgaho7jabk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

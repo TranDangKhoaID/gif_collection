@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "203828984200",
+    "project_id": "tdk2610-game-collection",
+    "storage_bucket": "tdk2610-game-collection.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203828984200:android:dbec4e34970fd72ff4e23d",
+        "android_client_info": {
+          "package_name": "com.trankhoa2610.gifcollection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "203828984200-rhd7gvfslnbvqg5ksbl7uangbgi7c5m6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.trankhoa2610.gifcollection",
+            "certificate_hash": "c6c80d1fd7c855e3028f46a6f89da73122b35403"
+          }
+        },
+        {
+          "client_id": "203828984200-i9jimpc52e3pa3etdgtdv0mdu4nkjm9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUneo2pGhUxWYXH-4eYhWLV48cpNBIFr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "203828984200-i9jimpc52e3pa3etdgtdv0mdu4nkjm9l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "203828984200-e145i7hbj89kqjhv932ej398c5u7t6ji.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cardTikimonCollection"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203828984200:android:754e62140b3b0caef4e23d",
+        "android_client_info": {
+          "package_name": "com.trankhoa2610.tikimon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "203828984200-pfn18bldinntpvjmrvbrj9gpleqo6vue.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.trankhoa2610.tikimon",
+            "certificate_hash": "c6c80d1fd7c855e3028f46a6f89da73122b35403"
+          }
+        },
+        {
+          "client_id": "203828984200-i9jimpc52e3pa3etdgtdv0mdu4nkjm9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUneo2pGhUxWYXH-4eYhWLV48cpNBIFr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "203828984200-i9jimpc52e3pa3etdgtdv0mdu4nkjm9l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "203828984200-e145i7hbj89kqjhv932ej398c5u7t6ji.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cardTikimonCollection"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

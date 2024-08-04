@@ -22,11 +22,14 @@ environment:
   sdk: ">=3.4.3 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
-# To automatically upgrade your package dependencies to the latest versions
-# consider running `flutter pub upgrade --major-versions`. Alternatively,
-# dependencies can be manually updated by changing the version numbers below to
-# the latest version available on pub.dev. To see which dependencies have newer
-# versions available, run `flutter pub outdated`.
+
+# Flavor
+# fvm flutter pub run flutter_flavorizr
+# flutter run --flavor <flavorName> -t lib/main_<flavorName>.dart
+# flutter run --flavor gif_collection -t lib/main_gif_collection.dart
+# flutter run --flavor gif_collection_18 -t lib/main_gif_collection_18.dart
+# flutter pub run flutter_flavorizr -p assets:download,assets:extract
+# fvm flutter build apk --flavor di4l_shop -t lib/main_di4l_shop.dart
 dependencies:
   flutter:
     sdk: flutter
@@ -46,6 +49,13 @@ dependencies:
   shared_preferences: ^2.2.3
   intl: ^0.19.0
   supabase_flutter: ^2.5.11
+  flutter_dotenv: ^5.1.0
+  flutter_flavorizr: ^2.2.3
+
+  # Networking
+  dio: ^5.5.0+1
+  retrofit: ^4.1.0
+  retrofit_generator: ^8.1.2
 
   # Supports UI
   cupertino_icons: ^1.0.6
@@ -62,11 +72,6 @@ dependencies:
   cloud_firestore: ^5.2.0
   firebase_core: ^3.3.0
   firebase_auth: ^5.1.3
-  flutter_dotenv: ^5.1.0
-  dio: ^5.5.0+1
-  retrofit: ^4.1.0
-  retrofit_generator: ^8.1.2
-  uuid: ^4.4.2
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +80,31 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   build_runner: ^2.4.11
   json_serializable: ^6.8.0
+
+flavorizr:
+  flavors:
+    gif_collection:
+      app:
+        name: "Gif Collection"
+      android:
+        applicationId: "com.trankhoa2610.gifcollection"
+        firebase:
+          config: "./lib/firebases_resource/gif/google-services.json"
+      # ios:
+      #   bundleId: "com.trankhoa2610.gifcollection"
+      #   firebase:
+      #     config: "./lib/firebases_resource/gif/GoogleService-Info.plist"
+    gif_collection_18:
+      app:
+        name: "Gif Collection 18"
+      android:
+        applicationId: "com.trankhoa2610.gifcollection18"
+        firebase:
+          config: "./lib/firebases_resource/gif_18/google-services.json"
+      # ios:
+      #   bundleId: "com.trankhoa2610.gifcollection18"
+      #   firebase:
+      #     config: "./lib/firebases_resource/gif_18/GoogleService-Info.plist"
 
 flutter:
   uses-material-design: true
