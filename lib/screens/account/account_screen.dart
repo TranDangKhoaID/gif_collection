@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:gif_collection/common/share_colors.dart';
 import 'package:gif_collection/common/share_obs.dart';
@@ -120,47 +121,41 @@ class _AccountScreenState extends State<AccountScreen> {
             title: Text(ShareObs.user.value!.name ?? ""),
             subtitle: Text(ShareObs.user.value!.email ?? ""),
           ),
-          Card(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.black, width: 1.0),
-              borderRadius: BorderRadius.circular(30.0),
+          if (kDebugMode) ...[
+            Column(
+              children: [
+                ListTile(
+                  leading: const Icon(
+                    Icons.diamond,
+                    color: Colors.red,
+                  ),
+                  title: Text('Làm tí ruby'),
+                  onTap: () {
+                    _controller.addRuby();
+                  },
+                ),
+                Divider(),
+                ListTile(
+                  leading: const Icon(
+                    Icons.monetization_on,
+                    color: Colors.yellow,
+                  ),
+                  title: Text('Làm tí vàng'),
+                  onTap: () {
+                    _controller.addCoin();
+                  },
+                ),
+                Divider(),
+                ListTile(
+                  title: Text('Drop Table'),
+                  onTap: () {
+                    _controller.table();
+                  },
+                ),
+              ],
             ),
-            child: ListTile(
-              leading: const Icon(
-                Icons.diamond,
-                color: Colors.red,
-              ),
-              title: Text('Làm tí ruby'),
-              onTap: () {
-                _controller.addRuby();
-              },
-            ),
-          ),
-          SizedBox(height: 10),
-          Card(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.black, width: 1.0),
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            child: ListTile(
-              leading: const Icon(
-                Icons.monetization_on,
-                color: Colors.yellow,
-              ),
-              title: Text('Làm tí vàng'),
-              onTap: () {
-                _controller.addCoin();
-              },
-            ),
-          ),
-          ListTile(
-            title: Text('Đăng xuất'),
-            onTap: () {
-              _controller.logout();
-            },
-          ),
+          ],
+          Divider(),
           ListTile(
             title: Text('Lưu dữ liệu lên đám mây'),
             onTap: () {
@@ -168,18 +163,21 @@ class _AccountScreenState extends State<AccountScreen> {
             },
             //subtitle: Text(ShareObs.user.value?.updateAt.toString() ?? ''),
           ),
+          Divider(),
           ListTile(
             title: Text('Lấy dữ liệu đã lưu về'),
             onTap: () {
               _controller.getUserDetail();
             },
           ),
+          Divider(),
           ListTile(
-            title: Text('Drop'),
+            title: Text('Đăng xuất'),
             onTap: () {
-              _controller.table();
+              _controller.logout();
             },
           ),
+          Divider(),
         ],
       ),
     );
