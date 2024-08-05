@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:tikimon_collection/common/configs.dart';
-import 'package:tikimon_collection/models/tag_background_model.dart';
-import 'package:tikimon_collection/models/tag_model.dart';
+import 'package:gif_collection/common/configs.dart';
+import 'package:gif_collection/models/tag_background_model.dart';
+import 'package:gif_collection/models/tag_model.dart';
 
 part 'rest_client.g.dart';
 

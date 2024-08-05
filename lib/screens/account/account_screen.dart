@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:tikimon_collection/common/share_colors.dart';
-import 'package:tikimon_collection/common/share_obs.dart';
-import 'package:tikimon_collection/screens/account/controller/account_controller.dart';
-import 'package:tikimon_collection/screens/account/widgets/item_value_account_widget.dart';
-import 'package:tikimon_collection/widgets/header_currency.dart';
-import 'package:tikimon_collection/widgets/money_app_bar_widget.dart';
+import 'package:gif_collection/common/share_colors.dart';
+import 'package:gif_collection/common/share_obs.dart';
+import 'package:gif_collection/screens/account/controller/account_controller.dart';
+import 'package:gif_collection/screens/account/widgets/item_value_account_widget.dart';
+import 'package:gif_collection/widgets/header_currency.dart';
+import 'package:gif_collection/widgets/money_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tikimon_collection/widgets/shimmer_image.dart';
+import 'package:gif_collection/widgets/shimmer_image.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});

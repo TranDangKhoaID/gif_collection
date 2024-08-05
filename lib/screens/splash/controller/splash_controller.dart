@@ -1,7 +1,7 @@
-import 'package:tikimon_collection/common/share_obs.dart';
-import 'package:tikimon_collection/locator.dart';
-import 'package:tikimon_collection/routes.dart';
-import 'package:tikimon_collection/storage/app_preference.dart';
+import 'package:gif_collection/common/share_obs.dart';
+import 'package:gif_collection/locator.dart';
+import 'package:gif_collection/routes.dart';
+import 'package:gif_collection/storage/app_preference.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {

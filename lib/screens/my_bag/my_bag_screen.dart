@@ -2,12 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:tikimon_collection/common/dialog_helper.dart';
-import 'package:tikimon_collection/models/my_tag_model.dart';
-import 'package:tikimon_collection/screens/my_bag/controller/my_bag_controller.dart';
-import 'package:tikimon_collection/service/database/my_tag_db.dart';
-import 'package:tikimon_collection/widgets/header_currency.dart';
-import 'package:tikimon_collection/widgets/shimmer_image.dart';
+import 'package:gif_collection/common/dialog_helper.dart';
+import 'package:gif_collection/models/my_tag_model.dart';
+import 'package:gif_collection/screens/my_bag/controller/my_bag_controller.dart';
+import 'package:gif_collection/service/database/my_tag_db.dart';
+import 'package:gif_collection/widgets/header_currency.dart';
+import 'package:gif_collection/widgets/shimmer_image.dart';
 
 class MyBagScreen extends StatefulWidget {
   const MyBagScreen({super.key});

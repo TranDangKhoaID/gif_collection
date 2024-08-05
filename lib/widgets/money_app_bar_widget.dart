@@ -1,6 +1,6 @@
-import 'package:tikimon_collection/common/share_colors.dart';
+import 'package:gif_collection/common/share_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:tikimon_collection/extensions/string.dart';
+import 'package:gif_collection/extensions/string.dart';
 
 class MoneyAppBarWidget extends StatelessWidget {
   final Color color;

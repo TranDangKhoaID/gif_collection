@@ -1,5 +1,5 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:tikimon_collection/routes.dart';
+import 'package:gif_collection/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

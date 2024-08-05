@@ -1,6 +1,6 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:tikimon_collection/service/database/my_tag_db.dart';
+import 'package:gif_collection/service/database/my_tag_db.dart';
 
 class DatabaseService {
   Database? _database;

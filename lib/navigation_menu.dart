@@ -1,10 +1,10 @@
-import 'package:tikimon_collection/screens/account/account_screen.dart';
-import 'package:tikimon_collection/screens/home/home_screen.dart';
+import 'package:gif_collection/screens/account/account_screen.dart';
+import 'package:gif_collection/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tikimon_collection/screens/my_bag/my_bag_screen.dart';
-import 'package:tikimon_collection/screens/store/gacha_screen.dart';
-import 'package:tikimon_collection/screens/trade/trade_screen.dart';
+import 'package:gif_collection/screens/my_bag/my_bag_screen.dart';
+import 'package:gif_collection/screens/store/gacha_screen.dart';
+import 'package:gif_collection/screens/trade/trade_screen.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});

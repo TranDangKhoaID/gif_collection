@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:tikimon_collection/models/my_tag_model.dart';
-import 'package:tikimon_collection/service/database/database_service.dart';
+import 'package:gif_collection/models/my_tag_model.dart';
+import 'package:gif_collection/service/database/database_service.dart';
 
 class MyTagDB {
   final tableName = 'my_tags';

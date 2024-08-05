@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tikimon_collection/common/configs.dart';
-import 'package:tikimon_collection/locator.dart';
-import 'package:tikimon_collection/models/tag_background_model.dart';
-import 'package:tikimon_collection/models/tag_model.dart';
-import 'package:tikimon_collection/network/rest_client.dart';
-import 'package:tikimon_collection/storage/app_preference.dart';
+import 'package:gif_collection/common/configs.dart';
+import 'package:gif_collection/locator.dart';
+import 'package:gif_collection/models/tag_background_model.dart';
+import 'package:gif_collection/models/tag_model.dart';
+import 'package:gif_collection/network/rest_client.dart';
+import 'package:gif_collection/storage/app_preference.dart';
 
 @lazySingleton
 class DataRepository implements RestClient {

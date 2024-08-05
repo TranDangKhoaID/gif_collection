@@ -1,4 +1,4 @@
-# tikimon_collection
+# gif_collection
 
 A new Flutter project.
 

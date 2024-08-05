@@ -1,4 +1,4 @@
-import 'package:tikimon_collection/models/user_model.dart';
+import 'package:gif_collection/models/user_model.dart';
 import 'package:get/get.dart';
 
 class ShareObs {

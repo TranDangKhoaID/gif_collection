@@ -1,5 +1,5 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:tikimon_collection/flavors.dart';
+import 'package:gif_collection/flavors.dart';
 
 class Configs {
   static String baseUrlGif = dotenv.env['BASE_URL_GIF']!;

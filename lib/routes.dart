@@ -1,7 +1,7 @@
-import 'package:tikimon_collection/navigation_menu.dart';
-import 'package:tikimon_collection/screens/create_character/create_character_screen.dart';
-import 'package:tikimon_collection/screens/create_character/sign_in_screen.dart';
-import 'package:tikimon_collection/screens/splash/splash_screen.dart';
+import 'package:gif_collection/navigation_menu.dart';
+import 'package:gif_collection/screens/create_character/create_character_screen.dart';
+import 'package:gif_collection/screens/create_character/sign_in_screen.dart';
+import 'package:gif_collection/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRoute {

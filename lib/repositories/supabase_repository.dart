@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import 'package:injectable/injectable.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:tikimon_collection/common/share_obs.dart';
-import 'package:tikimon_collection/locator.dart';
-import 'package:tikimon_collection/models/my_tag_model.dart';
-import 'package:tikimon_collection/models/tag_model.dart';
-import 'package:tikimon_collection/service/database/my_tag_db.dart';
-import 'package:tikimon_collection/storage/app_preference.dart';
+import 'package:gif_collection/common/share_obs.dart';
+import 'package:gif_collection/locator.dart';
+import 'package:gif_collection/models/my_tag_model.dart';
+import 'package:gif_collection/models/tag_model.dart';
+import 'package:gif_collection/service/database/my_tag_db.dart';
+import 'package:gif_collection/storage/app_preference.dart';
 
 @lazySingleton
 class SupabaseRepository {

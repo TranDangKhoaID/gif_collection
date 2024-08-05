@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tikimon_collection/common/share_colors.dart';
-import 'package:tikimon_collection/common/share_obs.dart';
-import 'package:tikimon_collection/widgets/money_app_bar_widget.dart';
+import 'package:gif_collection/common/share_colors.dart';
+import 'package:gif_collection/common/share_obs.dart';
+import 'package:gif_collection/widgets/money_app_bar_widget.dart';
 
 class HeaderCurrency extends StatelessWidget {
   const HeaderCurrency({

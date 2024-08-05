@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:tikimon_collection/models/my_tag_model.dart';
-import 'package:tikimon_collection/service/database/my_tag_db.dart';
+import 'package:gif_collection/models/my_tag_model.dart';
+import 'package:gif_collection/service/database/my_tag_db.dart';
 
 class MyBagController extends GetxController {
   List<MyTagModel> list = [];

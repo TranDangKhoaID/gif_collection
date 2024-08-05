@@ -5,18 +5,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
-import 'package:tikimon_collection/common/share_obs.dart';
-import 'package:tikimon_collection/extensions/string.dart';
-import 'package:tikimon_collection/locator.dart';
-import 'package:tikimon_collection/models/my_tag_model.dart';
-import 'package:tikimon_collection/models/tag_model.dart';
-import 'package:tikimon_collection/models/user_model.dart';
-import 'package:tikimon_collection/repositories/firebase_repository.dart';
-import 'package:tikimon_collection/routes.dart';
-import 'package:tikimon_collection/service/database/database_service.dart';
-import 'package:tikimon_collection/service/database/my_tag_db.dart';
-import 'package:tikimon_collection/storage/app_preference.dart';
-import 'package:tikimon_collection/widgets/hub_global_widget.dart';
+import 'package:gif_collection/common/share_obs.dart';
+import 'package:gif_collection/extensions/string.dart';
+import 'package:gif_collection/locator.dart';
+import 'package:gif_collection/models/my_tag_model.dart';
+import 'package:gif_collection/models/tag_model.dart';
+import 'package:gif_collection/models/user_model.dart';
+import 'package:gif_collection/repositories/firebase_repository.dart';
+import 'package:gif_collection/routes.dart';
+import 'package:gif_collection/service/database/database_service.dart';
+import 'package:gif_collection/service/database/my_tag_db.dart';
+import 'package:gif_collection/storage/app_preference.dart';
+import 'package:gif_collection/widgets/hub_global_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,6 +33,7 @@ class AccountController extends GetxController {
       HudGlobalManager.showHud();
       myTagDB.deleteAll();
       await firebaseRepository.authLogout();
+      appPrefs.logOut();
       ShareObs.logout();
       Get.offAllNamed(AppRoute.signInScreen);
     } catch (e) {

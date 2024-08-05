@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:tikimon_collection/common/configs.dart';
-import 'package:tikimon_collection/locator.dart';
-import 'package:tikimon_collection/my_app.dart';
+import 'package:gif_collection/common/configs.dart';
+import 'package:gif_collection/locator.dart';
+import 'package:gif_collection/my_app.dart';
 
 FutureOr<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

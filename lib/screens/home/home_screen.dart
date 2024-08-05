@@ -1,10 +1,10 @@
-import 'package:tikimon_collection/common/share_colors.dart';
-import 'package:tikimon_collection/common/share_obs.dart';
-import 'package:tikimon_collection/extensions/string.dart';
-import 'package:tikimon_collection/screens/home/controller/home_controller.dart';
+import 'package:gif_collection/common/share_colors.dart';
+import 'package:gif_collection/common/share_obs.dart';
+import 'package:gif_collection/extensions/string.dart';
+import 'package:gif_collection/screens/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tikimon_collection/widgets/header_currency.dart';
+import 'package:gif_collection/widgets/header_currency.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
