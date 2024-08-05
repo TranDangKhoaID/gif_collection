@@ -17,6 +17,7 @@ TagModel _$TagModelFromJson(Map<String, dynamic> json) => TagModel(
       defense: (json['defense'] as num?)?.toInt(),
       ruby: (json['ruby'] as num?)?.toInt(),
       coin: (json['coin'] as num?)?.toInt(),
+      quantity: (json['quantity'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$TagModelToJson(TagModel instance) => <String, dynamic>{
@@ -30,4 +31,5 @@ Map<String, dynamic> _$TagModelToJson(TagModel instance) => <String, dynamic>{
       'defense': instance.defense,
       'ruby': instance.ruby,
       'coin': instance.coin,
+      'quantity': instance.quantity,
     };

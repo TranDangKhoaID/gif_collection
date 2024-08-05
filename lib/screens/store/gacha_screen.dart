@@ -53,7 +53,14 @@ class _GachaScreenState extends State<GachaScreen> {
         ),
         body: TabBarView(
           children: [
-            tabStore(),
+            RefreshIndicator(
+              onRefresh: () async {
+                setState(() {
+                  _controller.getTagsDB();
+                });
+              },
+              child: tabStore(),
+            ),
             tabEvent(),
             tabBackground(),
           ],
@@ -106,7 +113,7 @@ class _GachaScreenState extends State<GachaScreen> {
 
   Widget tabStore() {
     return FutureBuilder<List<TagModel>>(
-      future: _controller.getTags(),
+      future: _controller.getTagsDB(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return GridView.builder(
@@ -125,8 +132,11 @@ class _GachaScreenState extends State<GachaScreen> {
                     onTap: () {
                       DialogHelper.showWidgetDialog(
                         context: context,
-                        onPressConfirm: () {
-                          _controller.buyTag(tag);
+                        onPressConfirm: () async {
+                          await _controller.buyTag(tag);
+                          setState(() {
+                            _controller.getTagsDB();
+                          });
                         },
                         confirmText: 'Mua',
                         body: Padding(
@@ -205,6 +215,9 @@ class _GachaScreenState extends State<GachaScreen> {
                 style: TextStyle(
                   color: Colors.grey,
                 ),
+              ),
+              Text(
+                'Số lượng thẻ: ${tag.quantity}',
               ),
               tag.ruby != null
                   ? Row(

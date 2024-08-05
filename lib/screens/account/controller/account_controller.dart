@@ -57,9 +57,10 @@ class AccountController extends GetxController {
     await appPrefs.saveCoin(coin: ShareObs.coin.value);
   }
 
-  //delete all my tags
+  //delete va create new table
   Future<void> table() async {
     final database = await DatabaseService().database;
+    await myTagDB.dropTable();
     await myTagDB.createTable(database);
   }
 

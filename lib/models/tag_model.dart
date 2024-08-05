@@ -14,6 +14,7 @@ class TagModel {
   int? defense;
   int? ruby;
   int? coin;
+  int? quantity;
 
   TagModel({
     this.id,
@@ -26,6 +27,7 @@ class TagModel {
     this.defense,
     this.ruby,
     this.coin,
+    this.quantity,
   });
 
   factory TagModel.fromJson(Map<String, dynamic> json) =>
