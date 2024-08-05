@@ -74,5 +74,7 @@ class SupabaseRepository {
     await supabase
         .from('tags')
         .update({'quantity': tag.quantity}).eq('id', tag.id!);
+    EasyLoading.dismiss();
+    EasyLoading.showSuccess('Thành công');
   }
 }

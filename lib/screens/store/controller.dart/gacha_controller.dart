@@ -69,8 +69,6 @@ class GachaController extends GetxController {
       supabaseRepository.buyTag(tag);
       //supabaseRepository.getTags();
       Get.back();
-      EasyLoading.dismiss();
-      EasyLoading.showSuccess('Thành công');
     } catch (e) {
       debugPrint('buy tag error ==> $e');
       EasyLoading.dismiss();

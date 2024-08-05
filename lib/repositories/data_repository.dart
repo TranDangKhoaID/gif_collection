@@ -2,8 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tikimon_collection/common/configs.dart';
-import 'package:tikimon_collection/common/configs.dart';
-import 'package:tikimon_collection/flavors.dart';
 import 'package:tikimon_collection/locator.dart';
 import 'package:tikimon_collection/models/tag_background_model.dart';
 import 'package:tikimon_collection/models/tag_model.dart';

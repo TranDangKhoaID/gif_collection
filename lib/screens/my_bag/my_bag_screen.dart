@@ -106,8 +106,8 @@ class _MyBagScreenState extends State<MyBagScreen> {
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: CachedNetworkImage(
-            height: 150,
-            width: 150,
+            //height: double.infinity,
+            width: 200,
             imageUrl: tag.gif ?? '',
             fit: BoxFit.cover,
             placeholder: (context, url) => const ShimmerImage(),

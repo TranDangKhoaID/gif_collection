@@ -11,6 +11,7 @@ import 'package:tikimon_collection/locator.dart';
 import 'package:tikimon_collection/models/my_tag_model.dart';
 import 'package:tikimon_collection/models/tag_model.dart';
 import 'package:tikimon_collection/models/user_model.dart';
+import 'package:tikimon_collection/repositories/firebase_repository.dart';
 import 'package:tikimon_collection/routes.dart';
 import 'package:tikimon_collection/service/database/database_service.dart';
 import 'package:tikimon_collection/service/database/my_tag_db.dart';
@@ -22,6 +23,7 @@ import 'package:get/get.dart';
 class AccountController extends GetxController {
   /// MARK: - Initials;
   final appPrefs = locator<AppPreference>();
+  final firebaseRepository = locator<FirebaseRepository>();
   //UserModel user = UserModel();
   final myTagDB = MyTagDB();
 
@@ -29,11 +31,9 @@ class AccountController extends GetxController {
   Future<void> logout() async {
     try {
       HudGlobalManager.showHud();
-      Get.back();
-      authLogout();
+      myTagDB.deleteAll();
+      await firebaseRepository.authLogout();
       ShareObs.logout();
-      await appPrefs.logOut();
-      await myTagDB.deleteAll();
       Get.offAllNamed(AppRoute.signInScreen);
     } catch (e) {
       debugPrint('Logout error: $e');
@@ -66,74 +66,19 @@ class AccountController extends GetxController {
 
   //
   Future<void> saveUserDetail() async {
-    String idUser = ShareObs.user.value!.id!;
-    List<MyTagModel> my_tags = await myTagDB.fetchAll();
     EasyLoading.show();
-    await FirebaseFirestore.instance.collection('users').doc(idUser).set({
-      'id': idUser,
-      'name': ShareObs.user.value!.name,
-      'email': ShareObs.user.value!.email,
-      'photoUrl': ShareObs.user.value?.photoUrl ?? '',
-      'ruby': ShareObs.ruby.value,
-      'coin': ShareObs.coin.value,
-      'moneyCoin': ShareObs.moneyCoin.value,
-      'avatar': ShareObs.avatarUser.value,
-      'updateAt': formattedDateTime(DateTime.now()),
-    }).catchError((e) {
+    try {
+      firebaseRepository.saveUserDetail();
+    } catch (e) {
       EasyLoading.dismiss();
-      EasyLoading.showError(e);
-    });
-    // Lưu các tag vào subcollection 'my_tags'
-    CollectionReference mtagsCollection = FirebaseFirestore.instance
-        .collection('users')
-        .doc(idUser)
-        .collection('my_tags');
-    for (MyTagModel tag in my_tags) {
-      mtagsCollection.doc(tag.id.toString()).set(tag.toJson());
+      EasyLoading.showError(e.toString());
     }
-    EasyLoading.showSuccess('Thành công');
-    EasyLoading.dismiss();
   }
 
   Future<void> getUserDetail() async {
+    EasyLoading.show();
     try {
-      String idUser = ShareObs.user.value!.id!;
-      DocumentSnapshot doc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(idUser)
-          .get();
-      if (!doc.exists) {
-        EasyLoading.dismiss();
-        EasyLoading.showError('Bạn chưa lưu tài khoản trước đó');
-        return;
-      }
-      final coin = doc['coin'];
-      final ruby = doc['ruby'];
-      final moneyCoin = doc['moneyCoin'];
-      final avatar = doc['avatar'];
-      await appPrefs.saveAvatarUser(avatar: avatar);
-      await appPrefs.saveCoin(coin: coin);
-      await appPrefs.saveRuby(ruby: ruby);
-      await appPrefs.saveMoneyCoin(mCoin: moneyCoin);
-      ShareObs.ruby.value = ruby;
-      ShareObs.coin.value = await coin;
-      ShareObs.moneyCoin.value = await moneyCoin;
-      ShareObs.avatarUser.value = await avatar;
-      //get my tags
-      await myTagDB.deleteAll();
-      QuerySnapshot mtagsSnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(idUser)
-          .collection('my_tags')
-          .get();
-      List<MyTagModel> my_tags = mtagsSnapshot.docs.map((doc) {
-        return MyTagModel.fromJson(doc.data() as Map<String, dynamic>);
-      }).toList();
-      for (var tag in my_tags) {
-        myTagDB.create(tag);
-      }
-      EasyLoading.dismiss();
-      EasyLoading.showSuccess('Thành công');
+      firebaseRepository.getUserDetail();
     } catch (e) {
       EasyLoading.dismiss();
       EasyLoading.showError(e.toString());

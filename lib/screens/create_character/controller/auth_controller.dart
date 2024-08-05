@@ -56,11 +56,13 @@ class AuthController extends GetxController {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      await FirebaseAuth.instance.signInWithCredential(credential);
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(
+        credential,
+      );
       //save local
       final userModel = UserModel(
         photoUrl: googleUser.photoUrl,
-        id: googleUser.id,
+        id: userCredential.user!.uid,
         name: googleUser.displayName,
         email: googleUser.email,
       );
