@@ -130,10 +130,10 @@ class _MyBagScreenState extends State<MyBagScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'ID: ${tag.id!}',
+                'Mã: ${tag.id!}',
               ),
               Text(
-                'Chủng tộc: ${tag.race?.capitalize}',
+                'Loại: ${tag.race?.capitalize}',
               ),
               Text(
                 'Tấn công: ${tag.attack ?? 0}',

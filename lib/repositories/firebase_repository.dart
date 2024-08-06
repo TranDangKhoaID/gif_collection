@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:gif_collection/common/share_obs.dart';
@@ -14,14 +15,15 @@ import 'package:gif_collection/storage/app_preference.dart';
 class FirebaseRepository {
   final _appPref = locator<AppPreference>();
   final myTagDB = MyTagDB();
-  String idUser = ShareObs.user.value!.id!;
 
   Future<void> authLogout() async {
     await FirebaseAuth.instance.signOut();
     await GoogleSignIn().signOut();
   }
 
-  Future<void> saveUserDetail() async {
+  Future<void> saveUserDetail({
+    required String idUser,
+  }) async {
     List<MyTagModel> myTags = await myTagDB.fetchAll();
     await FirebaseFirestore.instance.collection('users').doc(idUser).set({
       'id': idUser,
@@ -46,7 +48,9 @@ class FirebaseRepository {
     EasyLoading.showSuccess('Lưu thành công!');
   }
 
-  Future<void> getUserDetail() async {
+  Future<void> getUserDetail({
+    required idUser,
+  }) async {
     DocumentSnapshot doc =
         await FirebaseFirestore.instance.collection('users').doc(idUser).get();
     if (!doc.exists) {
@@ -81,5 +85,51 @@ class FirebaseRepository {
     }
     EasyLoading.dismiss();
     EasyLoading.showSuccess('Thành công');
+  }
+
+  Future<void> searchUserDetail({
+    required String idUserSearch,
+    required RxString sAvatar,
+    required RxInt sRuby,
+    required RxInt sCoin,
+    required RxString sName,
+    required Rx<List<MyTagModel>> listTags,
+    void Function()? clearValueSearch,
+  }) async {
+    DocumentSnapshot doc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(idUserSearch)
+        .get();
+    if (!doc.exists) {
+      clearValueSearch?.call();
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        'Không tìm thấy tài khoản này',
+        dismissOnTap: true,
+      );
+      return;
+    }
+    final id = doc['id'];
+    int coin = doc['coin'];
+    int ruby = doc['ruby'];
+    int moneyCoin = doc['moneyCoin'];
+    String avatar = doc['avatar'];
+    String name = doc['name'];
+    sCoin.value = coin;
+    sRuby.value = ruby;
+    sAvatar.value = avatar;
+    sName.value = name;
+    QuerySnapshot mtagsSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(idUserSearch)
+        .collection('my_tags')
+        .get();
+    List<MyTagModel> my_tags = mtagsSnapshot.docs.map((doc) {
+      return MyTagModel.fromJson(doc.data() as Map<String, dynamic>);
+    }).toList();
+    listTags.value = my_tags;
+    // for (var tag in my_tags) {
+    //   myTagDB.create(tag);
+    // }
   }
 }

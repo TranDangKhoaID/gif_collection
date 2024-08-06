@@ -28,6 +28,12 @@ class _GachaScreenState extends State<GachaScreen> {
   final _controller = Get.put(GachaController());
   //db
   final myTagDB = MyTagDB();
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -157,7 +163,9 @@ class _GachaScreenState extends State<GachaScreen> {
                     imageUrl: tag.gif ?? '',
                     fit: BoxFit.cover,
                     placeholder: (context, url) => const ShimmerImage(),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    errorWidget: (context, url, error) => Image.asset(
+                      'assets/images/error_photo.png',
+                    ),
                   ),
                 ),
               );
@@ -185,7 +193,9 @@ class _GachaScreenState extends State<GachaScreen> {
             imageUrl: tag.gif ?? '',
             fit: BoxFit.cover,
             placeholder: (context, url) => const ShimmerImage(),
-            errorWidget: (context, url, error) => Icon(Icons.error),
+            errorWidget: (context, url, error) => Image.asset(
+              'assets/images/error_photo.png',
+            ),
           ),
         ),
         SizedBox(height: 10),
@@ -202,7 +212,7 @@ class _GachaScreenState extends State<GachaScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Chủng tộc: ${tag.race?.capitalize}',
+                'Loại: ${tag.race?.capitalize}',
               ),
               Text(
                 'Tấn công: ??? (Sở hữu để xem)',

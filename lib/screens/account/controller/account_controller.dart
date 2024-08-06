@@ -1,16 +1,11 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:intl/intl.dart';
-import 'package:gif_collection/common/share_obs.dart';
-import 'package:gif_collection/extensions/string.dart';
-import 'package:gif_collection/locator.dart';
 import 'package:gif_collection/models/my_tag_model.dart';
-import 'package:gif_collection/models/tag_model.dart';
-import 'package:gif_collection/models/user_model.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:gif_collection/common/share_obs.dart';
+import 'package:gif_collection/locator.dart';
 import 'package:gif_collection/repositories/firebase_repository.dart';
 import 'package:gif_collection/routes.dart';
 import 'package:gif_collection/service/database/database_service.dart';
@@ -24,8 +19,14 @@ class AccountController extends GetxController {
   /// MARK: - Initials;
   final appPrefs = locator<AppPreference>();
   final firebaseRepository = locator<FirebaseRepository>();
-  //UserModel user = UserModel();
+
   final myTagDB = MyTagDB();
+  //search user data
+  RxString sAvatar = ''.obs;
+  RxString sName = ''.obs;
+  RxInt sCoin = 0.obs;
+  RxInt sRuby = 0.obs;
+  Rx<List<MyTagModel>> slistMyTags = Rx<List<MyTagModel>>([]);
 
   /// Logout
   Future<void> logout() async {
@@ -69,7 +70,7 @@ class AccountController extends GetxController {
   Future<void> saveUserDetail() async {
     EasyLoading.show();
     try {
-      firebaseRepository.saveUserDetail();
+      firebaseRepository.saveUserDetail(idUser: ShareObs.user.value!.id!);
     } catch (e) {
       EasyLoading.dismiss();
       EasyLoading.showError(e.toString());
@@ -79,10 +80,43 @@ class AccountController extends GetxController {
   Future<void> getUserDetail() async {
     EasyLoading.show();
     try {
-      firebaseRepository.getUserDetail();
+      firebaseRepository.getUserDetail(idUser: ShareObs.user.value!.id!);
     } catch (e) {
       EasyLoading.dismiss();
       EasyLoading.showError(e.toString());
     }
+  }
+
+  Future<void> getSearchUserDetail({
+    required String idUserSearch,
+  }) async {
+    if (idUserSearch.isEmpty) {
+      clearValueSearch();
+      return;
+    }
+    EasyLoading.show();
+    try {
+      firebaseRepository.searchUserDetail(
+        idUserSearch: idUserSearch,
+        sAvatar: sAvatar,
+        sCoin: sCoin,
+        sRuby: sRuby,
+        sName: sName,
+        clearValueSearch: clearValueSearch,
+        listTags: slistMyTags,
+      );
+      EasyLoading.dismiss();
+    } catch (e) {
+      EasyLoading.dismiss();
+      EasyLoading.showError(e.toString());
+    }
+  }
+
+  void clearValueSearch() {
+    sAvatar.value = '';
+    sName.value = '';
+    sCoin.value = 0;
+    sRuby.value = 0;
+    slistMyTags.value = [];
   }
 }

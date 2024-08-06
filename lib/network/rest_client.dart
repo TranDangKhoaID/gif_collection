@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:gif_collection/common/configs.dart';
 import 'package:gif_collection/models/tag_background_model.dart';
 import 'package:gif_collection/models/tag_model.dart';
 

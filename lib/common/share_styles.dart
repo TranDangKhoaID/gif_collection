@@ -35,7 +35,7 @@ class ShareStyles {
   static const OutlineInputBorder defaultOutlineBorder = OutlineInputBorder(
     borderSide: BorderSide(
       width: 0.5,
-      color: Colors.white,
+      color: Colors.black,
     ),
   );
   static OutlineInputBorder colorOutlineBorder = OutlineInputBorder(

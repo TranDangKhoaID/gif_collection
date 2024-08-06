@@ -1,5 +1,4 @@
 import 'package:gif_collection/common/share_colors.dart';
-import 'package:gif_collection/common/share_obs.dart';
 import 'package:gif_collection/common/share_styles.dart';
 import 'package:gif_collection/models/character_model.dart';
 import 'package:gif_collection/screens/create_character/controller/auth_controller.dart';

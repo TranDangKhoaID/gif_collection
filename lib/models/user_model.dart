@@ -11,8 +11,6 @@ class UserModel {
   String? name;
   String? photoUrl;
   DateTime? updateAt;
-  // int? cash;
-  //int? treeCashLevel;
 
   UserModel({
     this.id,
@@ -20,8 +18,6 @@ class UserModel {
     this.photoUrl,
     this.email,
     this.updateAt,
-    // this.cash,
-    //this.treeCashLevel,
   });
 
   factory UserModel.fromRawJson(String str) =>

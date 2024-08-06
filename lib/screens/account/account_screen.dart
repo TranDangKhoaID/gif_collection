@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:gif_collection/common/share_colors.dart';
+import 'package:gif_collection/routes.dart';
 import 'package:gif_collection/common/share_obs.dart';
 import 'package:gif_collection/screens/account/controller/account_controller.dart';
 import 'package:gif_collection/screens/account/widgets/item_value_account_widget.dart';
 import 'package:gif_collection/widgets/header_currency.dart';
-import 'package:gif_collection/widgets/money_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gif_collection/widgets/shimmer_image.dart';
@@ -21,6 +19,12 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   //controller
   final _controller = Get.put(AccountController());
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,6 +75,8 @@ class _AccountScreenState extends State<AccountScreen> {
                 ),
               ),
             ),
+            Text(ShareObs.user.value!.id.toString()),
+            SizedBox(height: 50),
           ],
         ),
       ),
@@ -82,25 +88,53 @@ class _AccountScreenState extends State<AccountScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ItemValueAccountWidget(
-          assets: 'assets/images/icons/ruby.png',
-          name: 'Ruby',
-          value: ShareObs.ruby.value,
-        ),
-        SizedBox(height: 20),
-        ItemValueAccountWidget(
-          assets: 'assets/images/icons/coin.png',
-          name: 'Vàng',
-          value: ShareObs.coin.value,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        ItemValueAccountWidget(
+        // ItemValueAccountWidget(
+        //   assets: 'assets/images/icons/ruby.png',
+        //   name: 'Ruby',
+        //   value: ShareObs.ruby.value,
+        // ),
+        // SizedBox(height: 20),
+        // ItemValueAccountWidget(
+        //   assets: 'assets/images/icons/coin.png',
+        //   name: 'Vàng',
+        //   value: ShareObs.coin.value,
+        // ),
+        // SizedBox(height: 20),
+        const ItemValueAccountWidget(
           assets: 'assets/images/icons/monster.png',
-          name: 'Quái sỡ hữu',
+          name: 'Thẻ sỡ hữu',
           value: 0,
         ),
+        SizedBox(height: 20),
+        GestureDetector(
+          onTap: () {
+            Get.toNamed(AppRoute.searchScreen);
+          },
+          child: Column(
+            children: [
+              Text('Tìm thông tin'),
+              Image.asset(
+                width: 50,
+                'assets/images/search.png',
+                fit: BoxFit.cover,
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 20),
+        GestureDetector(
+          onTap: () {},
+          child: Column(
+            children: [
+              Text('Bảng xếp hạng'),
+              Image.asset(
+                width: 50,
+                'assets/images/ranking.png',
+                fit: BoxFit.cover,
+              ),
+            ],
+          ),
+        )
       ],
     );
   }
