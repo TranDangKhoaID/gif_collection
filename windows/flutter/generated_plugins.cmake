@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   app_links
   cloud_firestore
+  connectivity_plus_windows
   firebase_auth
   firebase_core
   rive_common

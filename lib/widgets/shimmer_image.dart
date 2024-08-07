@@ -12,7 +12,9 @@ class ShimmerImage extends StatelessWidget {
       baseColor: Colors.grey[400]!,
       highlightColor: Colors.grey[100]!,
       child: Container(
-        color: Colors.grey,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+        ),
       ),
     );
   }
@@ -40,7 +42,7 @@ class ShimmerGridView extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Colors.grey,
+              color: Colors.grey[400]!,
             ),
           ),
         );

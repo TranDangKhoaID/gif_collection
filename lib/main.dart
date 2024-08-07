@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
+import 'package:gif_collection/network/network_controller.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:gif_collection/common/configs.dart';
 import 'package:gif_collection/locator.dart';
@@ -24,6 +26,8 @@ FutureOr<void> main() async {
     url: Configs.kBaseUrl(),
     anonKey: Configs.kAPIKey(),
   );
+  //connectivity
+  Get.put(NetworkController(), permanent: true);
 
   configureDependencies();
 

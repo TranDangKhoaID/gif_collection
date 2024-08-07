@@ -125,12 +125,12 @@ class _GachaScreenState extends State<GachaScreen> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/wood.jpg'),
-                fit: BoxFit.fill,
-              ),
-            ),
+            // decoration: const BoxDecoration(
+            //   image: DecorationImage(
+            //     image: AssetImage('assets/images/wood.jpg'),
+            //     fit: BoxFit.fill,
+            //   ),
+            // ),
             child: GridView.builder(
               padding: const EdgeInsets.all(15),
               itemCount: snapshot.data!.length,
