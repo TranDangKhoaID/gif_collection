@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:gif_collection/routes.dart';
 import 'package:gif_collection/common/share_obs.dart';
 import 'package:gif_collection/screens/account/controller/account_controller.dart';
@@ -75,7 +76,20 @@ class _AccountScreenState extends State<AccountScreen> {
                 ),
               ),
             ),
-            Text(ShareObs.user.value!.id.toString()),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('UID: ${ShareObs.user.value!.id}'),
+                InkWell(
+                  onTap: () {
+                    Clipboard.setData(
+                      ClipboardData(text: ShareObs.user.value!.id!),
+                    );
+                  },
+                  child: Icon(Icons.copy),
+                ),
+              ],
+            ),
             SizedBox(height: 50),
           ],
         ),
@@ -139,7 +153,7 @@ class _AccountScreenState extends State<AccountScreen> {
     );
   }
 
-  Drawer _buildDrawer() {
+  Widget _buildDrawer() {
     return Drawer(
       child: ListView(
         children: [
@@ -181,9 +195,19 @@ class _AccountScreenState extends State<AccountScreen> {
                 ),
                 Divider(),
                 ListTile(
-                  title: Text('Drop Table'),
+                  title: Text('Drop and Create Table'),
                   onTap: () {
                     _controller.table();
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.delete_forever,
+                    color: Colors.red,
+                  ),
+                  title: Text('Delete All My Bag'),
+                  onTap: () {
+                    _controller.deleteAllData();
                   },
                 ),
               ],

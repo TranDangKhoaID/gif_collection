@@ -71,16 +71,20 @@ class _MyBagScreenState extends State<MyBagScreen> {
                                 ),
                               );
                             },
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: CachedNetworkImage(
-                                imageUrl: tag.gif ?? '',
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) =>
-                                    const ShimmerImage(),
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: _controller.colorRarity(tag),
                               ),
+                              child: CachedNetworkImage(
+                                  imageUrl: tag.gif ?? '',
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) =>
+                                      const ShimmerImage(),
+                                  errorWidget: (context, url, error) =>
+                                      Image.asset(
+                                        'assets/images/error_photo.png',
+                                      )),
                             ),
                           ),
                         );
@@ -103,16 +107,22 @@ class _MyBagScreenState extends State<MyBagScreen> {
     return Column(
       //mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: CachedNetworkImage(
-            //height: double.infinity,
-            width: 200,
-            imageUrl: tag.gif ?? '',
-            fit: BoxFit.cover,
-            placeholder: (context, url) => const ShimmerImage(),
-            errorWidget: (context, url, error) => Icon(
-              Icons.error,
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: _controller.colorRarity(tag),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: CachedNetworkImage(
+              //height: double.infinity,
+              width: 200,
+              imageUrl: tag.gif ?? '',
+              fit: BoxFit.cover,
+              placeholder: (context, url) => const ShimmerImage(),
+              errorWidget: (context, url, error) => Image.asset(
+                'assets/images/error_photo.png',
+              ),
             ),
           ),
         ),

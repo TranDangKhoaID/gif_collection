@@ -95,7 +95,9 @@ class _GachaScreenState extends State<GachaScreen> {
                     imageUrl: tagBg.gif ?? '',
                     fit: BoxFit.cover,
                     placeholder: (context, url) => const ShimmerImage(),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    errorWidget: (context, url, error) => Image.asset(
+                      'assets/images/error_photo.png',
+                    ),
                   ),
                 ),
               );
@@ -122,27 +124,30 @@ class _GachaScreenState extends State<GachaScreen> {
       future: _controller.getTagsDB(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return GridView.builder(
-            padding: const EdgeInsets.all(15),
-            itemCount: snapshot.data!.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              crossAxisCount: 3,
+          return Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/wood.jpg'),
+                fit: BoxFit.fill,
+              ),
             ),
-            itemBuilder: (context, index) {
-              final tag = snapshot.data![index];
-              return GridTile(
-                footer: GridTileBar(
-                  leading: GestureDetector(
+            child: GridView.builder(
+              padding: const EdgeInsets.all(15),
+              itemCount: snapshot.data!.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                crossAxisCount: 3,
+              ),
+              itemBuilder: (context, index) {
+                final tag = snapshot.data![index];
+                return GridTile(
+                  child: GestureDetector(
                     onTap: () {
                       DialogHelper.showWidgetDialog(
                         context: context,
-                        onPressConfirm: () async {
-                          await _controller.buyTag(tag);
-                          setState(() {
-                            _controller.getTagsDB();
-                          });
+                        onPressConfirm: () {
+                          _controller.buyTag(tag);
                         },
                         confirmText: 'Mua',
                         body: Padding(
@@ -151,25 +156,21 @@ class _GachaScreenState extends State<GachaScreen> {
                         ),
                       );
                     },
-                    child: Icon(
-                      Icons.error,
-                      color: Colors.black,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: CachedNetworkImage(
+                        imageUrl: tag.gif ?? '',
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => const ShimmerImage(),
+                        errorWidget: (context, url, error) => Image.asset(
+                          'assets/images/error_photo.png',
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: CachedNetworkImage(
-                    imageUrl: tag.gif ?? '',
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => const ShimmerImage(),
-                    errorWidget: (context, url, error) => Image.asset(
-                      'assets/images/error_photo.png',
-                    ),
-                  ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           );
         } else if (snapshot.hasError) {
           return Center(

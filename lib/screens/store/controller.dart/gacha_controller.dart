@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:gif_collection/routes.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:gif_collection/common/configs.dart';
 import 'package:gif_collection/common/dialog_helper.dart';
@@ -30,11 +31,6 @@ class GachaController extends GetxController {
   //db
   final myTagDB = MyTagDB();
   //var uuid = const Uuid();
-
-  // @override
-  // void onReady() {
-  //   super.onReady();
-  // }
 
   Future<List<TagModel>> getTagsDB() async {
     try {
@@ -65,10 +61,19 @@ class GachaController extends GetxController {
 
   Future<void> buyTag(TagModel tag) async {
     EasyLoading.show();
+    if (tag.quantity! <= 0) {
+      EasyLoading.dismiss();
+      EasyLoading.showError('Số lượng đã hết');
+      return;
+    }
     try {
-      supabaseRepository.buyTag(tag);
-      //supabaseRepository.getTags();
+      await supabaseRepository.buyTag(
+        tag,
+        getRandomNumberRarity(),
+      );
+      await getTagsDB();
       Get.back();
+      //Get.offAllNamed(AppRoute.navigationMenu);
     } catch (e) {
       debugPrint('buy tag error ==> $e');
       EasyLoading.dismiss();
@@ -77,9 +82,27 @@ class GachaController extends GetxController {
   }
 
   // Hàm lấy đối tượng ngẫu nhiên từ danh sách
-  TagModel getRandomTag(List<TagModel> tags) {
-    final random = Random();
-    int index = random.nextInt(tags.length);
-    return tags[index];
+  // TagModel getRandomTag(List<TagModel> tags) {
+  //   final random = Random();
+  //   int index = random.nextInt(tags.length);
+  //   return tags[index];
+  // }
+
+  //trả về độ hiếm
+  int getRandomNumberRarity() {
+    // Tỷ lệ độ hiếm cho các số từ 0 đến 5
+    List<int> rarityWeights = [50, 20, 15, 10, 4, 1];
+    int totalWeight = rarityWeights.reduce((a, b) => a + b);
+    Random random = Random();
+    int randomNumber = random.nextInt(totalWeight);
+    int cumulativeWeight = 0;
+    for (int i = 0; i < rarityWeights.length; i++) {
+      cumulativeWeight += rarityWeights[i];
+      if (randomNumber < cumulativeWeight) {
+        return i;
+      }
+    }
+    // Trong trường hợp không khớp (không xảy ra trong thực tế)
+    return 0;
   }
 }

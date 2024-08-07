@@ -16,6 +16,33 @@ class HomeController extends GetxController {
   RxInt coin = ShareObs.coin;
   RxInt ruby = ShareObs.ruby;
   RxInt moneyCoin = ShareObs.moneyCoin;
+  //timer
+  var isCountingDown = false.obs;
+  var countdown = 30.obs;
+  Timer? _timer;
+
+  void startCountdown() async {
+    if (!isCountingDown.value) {
+      isCountingDown.value = true;
+      countdown.value = 30;
+      await upgradeMoneyCoin();
+      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+        if (countdown.value > 0) {
+          countdown.value--;
+        } else {
+          _timer?.cancel();
+          isCountingDown.value = false;
+          moneyCoin.value = 2610;
+        }
+      });
+    }
+  }
+
+  @override
+  void onClose() {
+    _timer?.cancel();
+    super.onClose();
+  }
 
   Future<void> addCoin() async {
     coin.value += moneyCoin.value;
@@ -27,9 +54,8 @@ class HomeController extends GetxController {
       print('Ko du ruby');
       return;
     }
-    moneyCoin.value += 2610;
+    moneyCoin.value = 95167;
     ruby.value = ruby.value - 3;
     await appPrefs.saveRuby(ruby: ruby.value);
-    await appPrefs.saveMoneyCoin(mCoin: moneyCoin.value);
   }
 }

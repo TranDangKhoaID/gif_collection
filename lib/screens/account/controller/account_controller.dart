@@ -66,6 +66,10 @@ class AccountController extends GetxController {
     await myTagDB.createTable(database);
   }
 
+  Future<void> deleteAllData() async {
+    await myTagDB.deleteAll();
+  }
+
   //
   Future<void> saveUserDetail() async {
     EasyLoading.show();

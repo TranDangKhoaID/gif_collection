@@ -20,7 +20,7 @@ class SplashController extends GetxController {
       final user = await prefs.getUser();
       ShareObs.ruby.value = await prefs.getRuby();
       ShareObs.coin.value = await prefs.getCoin();
-      ShareObs.moneyCoin.value = await prefs.getMoneyCoin();
+      //ShareObs.moneyCoin.value = await prefs.getMoneyCoin();
       ShareObs.avatarUser.value = await prefs.getAvatarUser();
       ShareObs.user.value = user;
       Get.offAllNamed(AppRoute.navigationMenu);

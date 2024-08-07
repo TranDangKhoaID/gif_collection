@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:gif_collection/common/share_colors.dart';
 import 'package:gif_collection/common/share_obs.dart';
 import 'package:gif_collection/extensions/string.dart';
@@ -97,28 +99,36 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            _controller.upgradeMoneyCoin();
+                            _controller.startCountdown();
                           },
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: ShareColors.kPrimaryColor,
-                            ),
-                            child: Column(
-                              children: [
-                                Text('Nâng cấp'),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.diamond,
-                                      color: Colors.red,
+                          child: Obx(
+                            () => _controller.isCountingDown.value
+                                ? Center(
+                                    child: Text(
+                                      '${_controller.countdown.value}',
                                     ),
-                                    Text('3'),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                  )
+                                : Container(
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: ShareColors.kPrimaryColor,
+                                    ),
+                                    child: const Column(
+                                      children: [
+                                        Text('Nâng cấp'),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.diamond,
+                                              color: Colors.red,
+                                            ),
+                                            Text('3'),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                           ),
                         ),
                         const SizedBox(width: 20),

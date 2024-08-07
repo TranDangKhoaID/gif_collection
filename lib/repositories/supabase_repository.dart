@@ -32,7 +32,7 @@ class SupabaseRepository {
         .toList();
   }
 
-  Future<void> buyTag(TagModel tag) async {
+  Future<void> buyTag(TagModel tag, int rarity) async {
     if (tag.ruby != null && tag.coin == null) {
       if (mRuby < tag.ruby!) {
         EasyLoading.dismiss();
@@ -65,6 +65,7 @@ class SupabaseRepository {
       avatar: tag.avatar,
       race: tag.race,
       description: tag.description,
+      rarity: rarity,
       attack: tag.attack,
       defense: tag.defense,
     );

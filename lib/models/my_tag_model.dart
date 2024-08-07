@@ -10,6 +10,7 @@ class MyTagModel {
   String? avatar;
   String? race;
   String? description;
+  int? rarity;
   int? attack;
   int? defense;
 
@@ -20,6 +21,7 @@ class MyTagModel {
     this.avatar,
     this.race,
     this.description,
+    this.rarity,
     this.attack,
     this.defense,
   });

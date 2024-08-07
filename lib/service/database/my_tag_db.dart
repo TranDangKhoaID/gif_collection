@@ -24,6 +24,7 @@ class MyTagDB {
       "avatar" TEXT,
       "race" TEXT,
       "description" TEXT,
+      "rarity" INTEGER,
       "attack" INTEGER,
       "defense" INTEGER,
       PRIMARY KEY("id")
@@ -36,8 +37,8 @@ class MyTagDB {
     final database = await DatabaseService().database;
     return await database.rawInsert(
       '''
-    INSERT INTO $tableName(id,name,gif,avatar,race,description,attack,defense) 
-    VALUES (?,?,?,?,?,?,?,?)
+    INSERT INTO $tableName(id,name,gif,avatar,race,description,rarity,attack,defense) 
+    VALUES (?,?,?,?,?,?,?,?,?)
       ''',
       [
         myTagModel.id,
@@ -46,6 +47,7 @@ class MyTagDB {
         myTagModel.avatar,
         myTagModel.race,
         myTagModel.description,
+        myTagModel.rarity,
         myTagModel.attack,
         myTagModel.defense,
       ],

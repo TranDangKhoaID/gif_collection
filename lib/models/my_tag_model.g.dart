@@ -13,6 +13,7 @@ MyTagModel _$MyTagModelFromJson(Map<String, dynamic> json) => MyTagModel(
       avatar: json['avatar'] as String?,
       race: json['race'] as String?,
       description: json['description'] as String?,
+      rarity: (json['rarity'] as num?)?.toInt(),
       attack: (json['attack'] as num?)?.toInt(),
       defense: (json['defense'] as num?)?.toInt(),
     );
@@ -25,6 +26,7 @@ Map<String, dynamic> _$MyTagModelToJson(MyTagModel instance) =>
       'avatar': instance.avatar,
       'race': instance.race,
       'description': instance.description,
+      'rarity': instance.rarity,
       'attack': instance.attack,
       'defense': instance.defense,
     };

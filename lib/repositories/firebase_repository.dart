@@ -25,25 +25,45 @@ class FirebaseRepository {
     required String idUser,
   }) async {
     List<MyTagModel> myTags = await myTagDB.fetchAll();
-    await FirebaseFirestore.instance.collection('users').doc(idUser).set({
+
+    // Sử dụng batch để thực hiện các thao tác ghi cùng một lúc
+    WriteBatch batch = FirebaseFirestore.instance.batch();
+
+    // Thêm thao tác lưu user detail vào batch
+    DocumentReference userRef =
+        FirebaseFirestore.instance.collection('users').doc(idUser);
+    batch.set(userRef, {
       'id': idUser,
       'name': ShareObs.user.value!.name,
       'email': ShareObs.user.value!.email,
       'photoUrl': ShareObs.user.value?.photoUrl ?? '',
       'ruby': ShareObs.ruby.value,
       'coin': ShareObs.coin.value,
-      'moneyCoin': ShareObs.moneyCoin.value,
+      //'moneyCoin': ShareObs.moneyCoin.value,
       'avatar': ShareObs.avatarUser.value,
       'updateAt': formattedDateTime(DateTime.now()),
     });
-    // Lưu các tag vào subcollection 'my_tags'
-    CollectionReference mtagsCollection = FirebaseFirestore.instance
-        .collection('users')
-        .doc(idUser)
-        .collection('my_tags');
-    for (MyTagModel tag in myTags) {
-      mtagsCollection.doc(tag.id.toString()).set(tag.toJson());
+
+    // Lấy reference tới collection 'my_tags'
+    CollectionReference mtagsCollection = userRef.collection('my_tags');
+
+    // Lấy tất cả các document trong collection 'my_tags'
+    QuerySnapshot mtagsSnapshot = await mtagsCollection.get();
+
+    // Xóa từng document trong collection 'my_tags' bằng batch
+    for (QueryDocumentSnapshot doc in mtagsSnapshot.docs) {
+      batch.delete(doc.reference);
     }
+
+    // Lưu các tag mới vào batch
+    for (MyTagModel tag in myTags) {
+      batch.set(mtagsCollection.doc(tag.id.toString()), tag.toJson());
+    }
+
+    // Thực thi batch để xóa và lưu tất cả document
+    await batch.commit();
+
+    // Hoàn tất
     EasyLoading.dismiss();
     EasyLoading.showSuccess('Lưu thành công!');
   }
@@ -60,15 +80,15 @@ class FirebaseRepository {
     }
     final coin = doc['coin'];
     final ruby = doc['ruby'];
-    final moneyCoin = doc['moneyCoin'];
+    //final moneyCoin = doc['moneyCoin'];
     final avatar = doc['avatar'];
     await _appPref.saveAvatarUser(avatar: avatar);
     await _appPref.saveCoin(coin: coin);
     await _appPref.saveRuby(ruby: ruby);
-    await _appPref.saveMoneyCoin(mCoin: moneyCoin);
+    //await _appPref.saveMoneyCoin(mCoin: moneyCoin);
     ShareObs.ruby.value = ruby;
     ShareObs.coin.value = await coin;
-    ShareObs.moneyCoin.value = await moneyCoin;
+    //ShareObs.moneyCoin.value = await moneyCoin;
     ShareObs.avatarUser.value = await avatar;
     //get my tags
     await myTagDB.deleteAll();
@@ -112,7 +132,7 @@ class FirebaseRepository {
     final id = doc['id'];
     int coin = doc['coin'];
     int ruby = doc['ruby'];
-    int moneyCoin = doc['moneyCoin'];
+    //int moneyCoin = doc['moneyCoin'];
     String avatar = doc['avatar'];
     String name = doc['name'];
     sCoin.value = coin;
