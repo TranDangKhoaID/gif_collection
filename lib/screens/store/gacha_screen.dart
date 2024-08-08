@@ -43,16 +43,16 @@ class _GachaScreenState extends State<GachaScreen> {
         appBar: AppBar(
           centerTitle: true,
           title: const HeaderCurrency(),
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: [
               Tab(
-                child: Text('Nhân vật'),
+                child: Text('character'.tr),
               ),
               Tab(
-                child: Text('Sự kiện'),
+                child: Text('event'.tr),
               ),
               Tab(
-                child: Text('Hình nền'),
+                child: Text('background'.tr),
               ),
             ],
           ),
@@ -114,7 +114,7 @@ class _GachaScreenState extends State<GachaScreen> {
   }
 
   Center tabEvent() {
-    return Center(
+    return const Center(
       child: Text('Sự kiện'),
     );
   }
@@ -124,53 +124,45 @@ class _GachaScreenState extends State<GachaScreen> {
       future: _controller.getTagsDB(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Container(
-            // decoration: const BoxDecoration(
-            //   image: DecorationImage(
-            //     image: AssetImage('assets/images/wood.jpg'),
-            //     fit: BoxFit.fill,
-            //   ),
-            // ),
-            child: GridView.builder(
-              padding: const EdgeInsets.all(15),
-              itemCount: snapshot.data!.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                crossAxisCount: 3,
-              ),
-              itemBuilder: (context, index) {
-                final tag = snapshot.data![index];
-                return GridTile(
-                  child: GestureDetector(
-                    onTap: () {
-                      DialogHelper.showWidgetDialog(
-                        context: context,
-                        onPressConfirm: () {
-                          _controller.buyTag(tag);
-                        },
-                        confirmText: 'Mua',
-                        body: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: _builDetailTagDialog(tag),
-                        ),
-                      );
-                    },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: CachedNetworkImage(
-                        imageUrl: tag.gif ?? '',
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => const ShimmerImage(),
-                        errorWidget: (context, url, error) => Image.asset(
-                          'assets/images/error_photo.png',
-                        ),
+          return GridView.builder(
+            padding: const EdgeInsets.all(15),
+            itemCount: snapshot.data!.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              crossAxisCount: 3,
+            ),
+            itemBuilder: (context, index) {
+              final tag = snapshot.data![index];
+              return GridTile(
+                child: GestureDetector(
+                  onTap: () {
+                    DialogHelper.showWidgetDialog(
+                      context: context,
+                      onPressConfirm: () {
+                        _controller.buyTag(tag);
+                      },
+                      confirmText: 'buy'.tr,
+                      body: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: _builDetailTagDialog(tag),
+                      ),
+                    );
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: CachedNetworkImage(
+                      imageUrl: tag.gif ?? '',
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => const ShimmerImage(),
+                      errorWidget: (context, url, error) => Image.asset(
+                        'assets/images/error_photo.png',
                       ),
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           );
         } else if (snapshot.hasError) {
           return Center(
@@ -199,10 +191,10 @@ class _GachaScreenState extends State<GachaScreen> {
             ),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
           tag.name?.capitalize ?? '',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -213,28 +205,28 @@ class _GachaScreenState extends State<GachaScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Loại: ${tag.race?.capitalize}',
+                '${'race'.tr}: ${tag.race?.capitalize}',
               ),
               Text(
-                'Tấn công: ??? (Sở hữu để xem)',
+                '${'attack'.tr}: ??? (${'own_to_see'.tr})',
               ),
               Text(
-                'Phòng thủ: ??? (Sở hữu để xem)',
+                '${'defense'.tr}: ??? (${'own_to_see'.tr})',
               ),
               Text(
-                tag.description ?? 'Không có mô tả',
-                style: TextStyle(
+                tag.description ?? 'no_description_available'.tr,
+                style: const TextStyle(
                   color: Colors.grey,
                 ),
               ),
               Text(
-                'Số lượng thẻ: ${tag.quantity}',
+                'quantity: ${tag.quantity}',
               ),
               tag.ruby != null
                   ? Row(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(right: 7),
+                          margin: const EdgeInsets.only(right: 7),
                           width: 25,
                           child: Image.asset(
                             'assets/images/icons/ruby.png',
@@ -252,7 +244,7 @@ class _GachaScreenState extends State<GachaScreen> {
                   : Row(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(right: 7),
+                          margin: const EdgeInsets.only(right: 7),
                           width: 25,
                           child: Image.asset(
                             'assets/images/icons/coin.png',

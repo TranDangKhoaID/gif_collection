@@ -86,7 +86,7 @@ class HeaderCurrency extends StatelessWidget {
                             onPressed: () {
                               Get.back();
                             },
-                            child: Text("Đóng"),
+                            child: Text('close'.tr),
                           )
                         ],
                       ),

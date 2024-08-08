@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:gif_collection/common/share_colors.dart';
 import 'package:gif_collection/common/share_obs.dart';
 import 'package:gif_collection/extensions/string.dart';
@@ -36,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 fit: BoxFit.cover,
               ),
             ),
-            Positioned(
+            const Positioned(
               top: 0,
               left: 0,
               right: 0,
@@ -44,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Center(
               child: Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Colors.grey.shade100,
@@ -69,14 +67,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Vàng'),
-                    SizedBox(
-                      height: 5,
-                    ),
+                    Text('coin'.tr),
+                    const SizedBox(height: 5),
                     Obx(
                       () => Text(
                         formattedNumber(ShareObs.coin.value),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -109,15 +105,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   )
                                 : Container(
-                                    padding: EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       color: ShareColors.kPrimaryColor,
                                     ),
-                                    child: const Column(
+                                    child: Column(
                                       children: [
-                                        Text('Nâng cấp'),
-                                        Row(
+                                        Text('upgrade'.tr),
+                                        const Row(
                                           children: [
                                             Icon(
                                               Icons.diamond,
@@ -134,12 +130,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(width: 20),
                         Column(
                           children: [
-                            Text('Chạm vào cây để hái vàng'),
-                            Text('Giá trị mỗi lần hái'),
+                            Text('tap_the_tree_to_pick_gold'.tr),
+                            Text('value_per_pick'.tr),
                             Obx(
                               () => Text(
-                                ShareObs.moneyCoin.value.toString(),
-                                style: TextStyle(
+                                formattedNumber(ShareObs.moneyCoin.value),
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

@@ -45,13 +45,13 @@ class _AccountScreenState extends State<AccountScreen> {
                       Scaffold.of(context).openEndDrawer();
                     },
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.amber,
                         shape: BoxShape.circle,
                       ),
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.only(right: 15),
-                      child: Icon(Icons.settings),
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.only(right: 15),
+                      child: const Icon(Icons.settings),
                     ),
                   ),
                 ),
@@ -69,7 +69,8 @@ class _AccountScreenState extends State<AccountScreen> {
                         fit: BoxFit.cover,
                         imageUrl: ShareObs.avatarUser.value,
                         placeholder: (context, url) => const ShimmerImage(),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                       ),
                     ),
                   ],
@@ -86,11 +87,11 @@ class _AccountScreenState extends State<AccountScreen> {
                       ClipboardData(text: ShareObs.user.value!.id!),
                     );
                   },
-                  child: Icon(Icons.copy),
+                  child: const Icon(Icons.copy),
                 ),
               ],
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
           ],
         ),
       ),
@@ -106,7 +107,7 @@ class _AccountScreenState extends State<AccountScreen> {
           onTap: () {},
           child: Column(
             children: [
-              Text('Tặng quà'),
+              Text('gift'.tr),
               Image.asset(
                 width: 50,
                 'assets/images/giftbox.png',
@@ -115,14 +116,14 @@ class _AccountScreenState extends State<AccountScreen> {
             ],
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         GestureDetector(
           onTap: () {
             Get.toNamed(AppRoute.searchScreen);
           },
           child: Column(
             children: [
-              Text('Tìm thông tin'),
+              Text('find_information'.tr),
               Image.asset(
                 width: 50,
                 'assets/images/search.png',
@@ -131,12 +132,12 @@ class _AccountScreenState extends State<AccountScreen> {
             ],
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         GestureDetector(
           onTap: () {},
           child: Column(
             children: [
-              Text('Bảng xếp hạng'),
+              Text('ranking'.tr),
               Image.asset(
                 width: 50,
                 'assets/images/ranking.png',
@@ -159,7 +160,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 fit: BoxFit.cover,
                 imageUrl: ShareObs.user.value!.photoUrl ?? '',
                 placeholder: (context, url) => const ShimmerImage(),
-                errorWidget: (context, url, error) => Icon(Icons.error),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
             title: Text(ShareObs.user.value!.name ?? ""),
@@ -173,25 +174,25 @@ class _AccountScreenState extends State<AccountScreen> {
                     Icons.diamond,
                     color: Colors.red,
                   ),
-                  title: Text('Làm tí ruby'),
+                  title: const Text('Làm tí ruby'),
                   onTap: () {
                     _controller.addRuby();
                   },
                 ),
-                Divider(),
+                const Divider(),
                 ListTile(
                   leading: const Icon(
                     Icons.monetization_on,
                     color: Colors.yellow,
                   ),
-                  title: Text('Làm tí vàng'),
+                  title: const Text('Làm tí vàng'),
                   onTap: () {
                     _controller.addCoin();
                   },
                 ),
-                Divider(),
+                const Divider(),
                 ListTile(
-                  title: Text('Drop and Create Table'),
+                  title: const Text('Drop and Create Table'),
                   onTap: () {
                     _controller.table();
                   },
@@ -201,7 +202,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     Icons.delete_forever,
                     color: Colors.red,
                   ),
-                  title: Text('Delete All My Bag'),
+                  title: const Text('Delete All My Bag'),
                   onTap: () {
                     _controller.deleteAllData();
                   },
@@ -209,29 +210,29 @@ class _AccountScreenState extends State<AccountScreen> {
               ],
             ),
           ],
-          Divider(),
+          const Divider(),
           ListTile(
-            title: Text('Lưu dữ liệu lên đám mây'),
+            title: Text('save_data'.tr),
             onTap: () {
               _controller.saveUserDetail();
             },
             //subtitle: Text(ShareObs.user.value?.updateAt.toString() ?? ''),
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            title: Text('Lấy dữ liệu đã lưu về'),
+            title: Text('get_data'.tr),
             onTap: () {
               _controller.getUserDetail();
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            title: Text('Đăng xuất'),
+            title: Text('sign_out'.tr),
             onTap: () {
               _controller.logout();
             },
           ),
-          Divider(),
+          const Divider(),
         ],
       ),
     );

@@ -53,10 +53,10 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Center(
+                  Center(
                     child: Text(
-                      'Vui lòng tạo nhân vật của bạn',
-                      style: TextStyle(
+                      'create_your_character'.tr,
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -91,7 +91,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     padding: const EdgeInsets.all(16),
                     child: SignInButton(
                       Buttons.google,
-                      text: "Đăng nhập với Google",
+                      text: 'sign_in_with_google'.tr,
                       onPressed: () => _authController.signInWithGoogle(url),
                     ),
                   ),

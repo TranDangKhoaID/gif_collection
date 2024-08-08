@@ -30,7 +30,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tìm thông tin'),
+        title: Text('find_information'.tr),
         elevation: 0,
       ),
       body: Column(
@@ -43,7 +43,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 focusedBorder: ShareStyles.defaultOutlineBorder,
                 border: ShareStyles.defaultOutlineBorder,
                 prefixIcon: const Icon(Icons.abc_outlined),
-                hintText: 'Nhập id tài khoản cần tìm',
+                hintText: 'enter_id_you_want_to_find'.tr,
                 hintStyle: ShareStyles.boldStyle.copyWith(
                   color: Colors.black,
                 ),
@@ -62,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Obx(
               () => Column(
                 children: [
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -83,7 +83,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Text(_controller.sName.value)
                         ],
                       ),
@@ -91,7 +91,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   Expanded(
                     child: GridView.builder(
-                      padding: EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
                       itemCount: _controller.slistMyTags.value.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
@@ -130,23 +130,23 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget _buildBodyValues() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         ItemValueAccountWidget(
           assets: 'assets/images/icons/ruby.png',
-          name: 'Ruby',
+          name: 'ruby'.tr,
           value: _controller.sRuby.value,
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         ItemValueAccountWidget(
           assets: 'assets/images/icons/coin.png',
-          name: 'Vàng',
+          name: 'coin'.tr,
           value: _controller.sCoin.value,
         ),
-        SizedBox(height: 20),
-        const ItemValueAccountWidget(
+        const SizedBox(height: 20),
+        ItemValueAccountWidget(
           assets: 'assets/images/icons/monster.png',
-          name: 'Thẻ sỡ hữu',
+          name: 'tags'.tr,
           value: 0,
         ),
       ],

@@ -31,18 +31,27 @@ class NavigationMenu extends StatelessWidget {
           selectedIndex: controller.selectedIndex.value,
           onDestinationSelected: (value) =>
               controller.selectedIndex.value = value,
-          destinations: const [
+          destinations: [
             NavigationDestination(
-              icon: Icon(Icons.balance),
-              label: 'Giao dịch',
+              icon: const Icon(Icons.balance),
+              label: 'trade'.tr,
             ),
-            NavigationDestination(icon: Icon(Icons.store), label: 'Cửa hàng'),
-            NavigationDestination(icon: Icon(Icons.home), label: 'Trang chủ'),
             NavigationDestination(
-              icon: Icon(Icons.shopping_bag),
-              label: 'Túi đồ',
+              icon: const Icon(Icons.store),
+              label: 'shop'.tr,
             ),
-            NavigationDestination(icon: Icon(Icons.person), label: 'Hồ sơ'),
+            NavigationDestination(
+              icon: const Icon(Icons.home),
+              label: 'earnings'.tr,
+            ),
+            NavigationDestination(
+              icon: const Icon(Icons.shopping_bag),
+              label: 'bag'.tr,
+            ),
+            NavigationDestination(
+              icon: const Icon(Icons.person),
+              label: 'profile'.tr,
+            ),
           ],
         ),
       ),

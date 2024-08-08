@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gif_collection/common/share_colors.dart';
 
 class DialogHelper {
@@ -73,8 +74,8 @@ class DialogHelper {
       dialogType: DialogType.noHeader,
       animType: AnimType.scale,
 
-      btnOkText: confirmText ?? "Xác nhận",
-      btnCancelText: cancelText ?? "Hủy bỏ",
+      btnOkText: confirmText ?? 'confirm'.tr,
+      btnCancelText: cancelText ?? 'close'.tr,
       btnOkColor: ShareColors.kPrimaryColor,
       btnCancelOnPress: () {
         onPressCancel?.call();
@@ -110,8 +111,8 @@ class DialogHelper {
       titleTextStyle: Theme.of(context).textTheme.headlineMedium,
       descTextStyle: Theme.of(context).textTheme.bodyMedium,
       desc: message,
-      btnOkText: confirmText ?? "Xác nhận",
-      btnCancelText: cancelText ?? "Hủy bỏ",
+      btnOkText: confirmText ?? 'confirm'.tr,
+      btnCancelText: cancelText ?? 'close'.tr,
       btnOkColor: ShareColors.kPrimaryColor,
       btnCancelOnPress: () {
         onPressCancel?.call();

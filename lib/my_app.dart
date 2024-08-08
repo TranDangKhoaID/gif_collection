@@ -1,7 +1,9 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:gif_collection/generated/locales.g.dart';
 import 'package:gif_collection/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -10,6 +12,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       onGenerateRoute: AppRoute.generateRoute,
+      locale: const Locale('en', 'EN'),
+      translationsKeys: AppTranslation.translations,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       navigatorKey: Get.key,
       theme: _buildThemeData(context),
       initialRoute: AppRoute.splashScreen,
