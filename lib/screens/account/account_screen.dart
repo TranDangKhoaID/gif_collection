@@ -100,24 +100,20 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget _buildBodyValues() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // ItemValueAccountWidget(
-        //   assets: 'assets/images/icons/ruby.png',
-        //   name: 'Ruby',
-        //   value: ShareObs.ruby.value,
-        // ),
-        // SizedBox(height: 20),
-        // ItemValueAccountWidget(
-        //   assets: 'assets/images/icons/coin.png',
-        //   name: 'Vàng',
-        //   value: ShareObs.coin.value,
-        // ),
-        // SizedBox(height: 20),
-        const ItemValueAccountWidget(
-          assets: 'assets/images/icons/monster.png',
-          name: 'Thẻ sỡ hữu',
-          value: 0,
+        GestureDetector(
+          onTap: () {},
+          child: Column(
+            children: [
+              Text('Tặng quà'),
+              Image.asset(
+                width: 50,
+                'assets/images/giftbox.png',
+                fit: BoxFit.cover,
+              ),
+            ],
+          ),
         ),
         SizedBox(height: 20),
         GestureDetector(

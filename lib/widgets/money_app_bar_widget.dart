@@ -6,12 +6,14 @@ class MoneyAppBarWidget extends StatelessWidget {
   final Color color;
   final IconData icon;
   final int money;
+  final void Function() onTap;
 
   const MoneyAppBarWidget({
     super.key,
     required this.color,
     required this.icon,
     required this.money,
+    required this.onTap,
   });
 
   @override
@@ -56,10 +58,13 @@ class MoneyAppBarWidget extends StatelessWidget {
               color: color,
               shape: BoxShape.circle,
             ),
-            child: const Text(
-              '+',
-              style: TextStyle(
-                color: Colors.white,
+            child: GestureDetector(
+              onTap: onTap,
+              child: Text(
+                '+',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
           ),

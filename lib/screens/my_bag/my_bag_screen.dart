@@ -63,7 +63,7 @@ class _MyBagScreenState extends State<MyBagScreen> {
                                   EasyLoading.showSuccess('ngon');
                                   Get.back();
                                 },
-                                confirmText: 'Bán',
+                                confirmText: 'Bỏ',
                                 cancelText: 'Thoát',
                                 body: Padding(
                                   padding: const EdgeInsets.all(10.0),
