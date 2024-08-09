@@ -75,6 +75,7 @@ class AccountController extends GetxController {
     EasyLoading.show();
     try {
       firebaseRepository.saveUserDetail(idUser: ShareObs.user.value!.id!);
+      EasyLoading.dismiss();
     } catch (e) {
       EasyLoading.dismiss();
       EasyLoading.showError(e.toString());
@@ -85,6 +86,7 @@ class AccountController extends GetxController {
     EasyLoading.show();
     try {
       firebaseRepository.getUserDetail(idUser: ShareObs.user.value!.id!);
+      EasyLoading.dismiss();
     } catch (e) {
       EasyLoading.dismiss();
       EasyLoading.showError(e.toString());

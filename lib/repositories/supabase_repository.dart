@@ -21,7 +21,7 @@ class SupabaseRepository {
   final myTagDB = MyTagDB();
 
   Future<List<TagModel>> getTags(TagModel tag) async {
-    final response = await supabase.from('tags').select('*');
+    final response = await supabase.from('tags_event').select('*');
     return (response as List<dynamic>).map((json) {
       tag = TagModel.fromJson(json);
       return tag;
@@ -45,11 +45,6 @@ class SupabaseRepository {
   Future<void> dropTag(MyTagModel tag) async {
     await myTagDB.deleteByID(tag.id!);
     await supabase.from('tags').insert(tag.toJson());
-    EasyLoading.dismiss();
-    EasyLoading.showSuccess(
-      'Thành công',
-      dismissOnTap: true,
-    );
   }
 
   Future<void> buyTag(TagModel tag, int rarity) async {
@@ -93,9 +88,7 @@ class SupabaseRepository {
     //update quantity
     tag.quantity = (tag.quantity ?? 1) - 1;
     await supabase
-        .from('tags')
+        .from('tags_event')
         .update({'quantity': tag.quantity}).eq('id', tag.id!);
-    EasyLoading.dismiss();
-    EasyLoading.showSuccess('Thành công');
   }
 }

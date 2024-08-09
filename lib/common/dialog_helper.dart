@@ -73,7 +73,7 @@ class DialogHelper {
       context: context,
       dialogType: DialogType.noHeader,
       animType: AnimType.scale,
-
+      title: 'Thông báo',
       btnOkText: confirmText ?? 'confirm'.tr,
       btnCancelText: cancelText ?? 'close'.tr,
       btnOkColor: ShareColors.kPrimaryColor,

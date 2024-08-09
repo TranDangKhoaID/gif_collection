@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:gif_collection/common/get_dialog_helper.dart';
 import 'package:gif_collection/routes.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:gif_collection/common/configs.dart';
@@ -68,6 +69,12 @@ class GachaController extends GetxController {
     });
   }
 
+  Stream getRealtimeTagsEventDB() {
+    return Supabase.instance.client
+        .from('tags_event')
+        .stream(primaryKey: ['id']);
+  }
+
   // Future<List<TagModel>> getTags() async {
   //   try {
   //     return await dataRepository.getTags();
@@ -99,27 +106,29 @@ class GachaController extends GetxController {
     }
   }
 
-  // Future<void> buyTag(TagModel tag) async {
-  //   EasyLoading.show();
-  //   if (tag.quantity! <= 0) {
-  //     EasyLoading.dismiss();
-  //     EasyLoading.showError('Số lượng đã hết');
-  //     return;
-  //   }
-  //   try {
-  //     await getTagsDB(tag);
-  //     await supabaseRepository.buyTag(
-  //       tag,
-  //       getRandomNumberRarity(),
-  //     );
-  //     Get.back();
-  //     //Get.offAllNamed(AppRoute.navigationMenu);
-  //   } catch (e) {
-  //     debugPrint('buy tag error ==> $e');
-  //     EasyLoading.dismiss();
-  //     EasyLoading.showError(e.toString());
-  //   }
-  // }
+  Future<void> buyTag(TagModel tag) async {
+    GetDialogHelper.showLoading();
+    if (tag.quantity! <= 0) {
+      EasyLoading.dismiss();
+      EasyLoading.showError('Số lượng đã hết');
+      return;
+    }
+    try {
+      await supabaseRepository.buyTag(
+        tag,
+        getRandomNumberRarity(),
+      );
+      //GetDialogHelper.close;
+      //Get.offAllNamed(AppRoute.navigationMenu);
+    } catch (e) {
+      GetDialogHelper.close();
+      debugPrint('buy tag error ==> $e');
+      EasyLoading.showError(e.toString());
+    } finally {
+      GetDialogHelper.close();
+      EasyLoading.showSuccess('Thành công');
+    }
+  }
 
   // Hàm lấy đối tượng ngẫu nhiên từ danh sách
   // TagModel getRandomTag(List<TagModel> tags) {

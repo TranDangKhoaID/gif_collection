@@ -108,9 +108,80 @@ class _GachaScreenState extends State<GachaScreen> {
     );
   }
 
-  Center tabEvent() {
-    return const Center(
-      child: Text('Sự kiện'),
+  Widget tabEvent() {
+    return StreamBuilder(
+      stream: _controller.getRealtimeTagsEventDB(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return GridView.builder(
+            padding: const EdgeInsets.all(15),
+            itemCount: snapshot.data!.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              crossAxisCount: 3,
+            ),
+            itemBuilder: (context, index) {
+              final tag = TagModel.fromJson(snapshot.data![index]);
+              return GridTile(
+                child: GestureDetector(
+                  onTap: () {
+                    // _controller.pickTag(tag);
+                    DialogHelper.showWidgetDialog(
+                      context: context,
+                      onPressConfirm: () => _controller.buyTag(tag),
+                      body: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(right: 7),
+                            width: 25,
+                            child: Image.asset(
+                              'assets/images/icons/ruby.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Text(
+                            tag.ruby.toString(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: CachedNetworkImage(
+                      imageUrl: tag.gif ?? '',
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => const ShimmerImage(),
+                      errorWidget: (context, url, error) => Image.asset(
+                        'assets/images/error_photo.png',
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        } else if (snapshot.hasError) {
+          print('Hello ${snapshot.error}');
+          return Center(
+            child: Text(snapshot.error.toString()),
+          );
+        }
+        return Center(
+          child: Text(
+            'loading'.tr,
+            style: const TextStyle(
+              fontStyle: FontStyle.italic,
+              color: Colors.grey,
+            ),
+          ),
+        );
+      },
     );
   }
 

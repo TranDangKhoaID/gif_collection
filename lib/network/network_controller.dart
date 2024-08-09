@@ -13,6 +13,12 @@ class NetworkController extends GetxController {
 
   void _updateConnectStatus(ConnectivityResult connectivityResult) {
     if (connectivityResult == ConnectivityResult.none) {
+      Get.dialog(
+        barrierDismissible: false,
+        const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
       Get.rawSnackbar(
         messageText: const Text(
           'PLEASE CONNECT TO THE INTERNET',
@@ -33,9 +39,13 @@ class NetworkController extends GetxController {
         snackStyle: SnackStyle.GROUNDED,
       );
     } else {
+      if (Get.isDialogOpen == true) {
+        Get.close(1);
+      }
       if (Get.isSnackbarOpen) {
         Get.closeCurrentSnackbar();
       }
+      //Get.back();
     }
   }
 }

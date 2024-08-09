@@ -62,10 +62,6 @@ class FirebaseRepository {
 
     // Thực thi batch để xóa và lưu tất cả document
     await batch.commit();
-
-    // Hoàn tất
-    EasyLoading.dismiss();
-    EasyLoading.showSuccess('Lưu thành công!');
   }
 
   Future<void> getUserDetail({
@@ -103,8 +99,6 @@ class FirebaseRepository {
     for (var tag in my_tags) {
       myTagDB.create(tag);
     }
-    EasyLoading.dismiss();
-    EasyLoading.showSuccess('Thành công');
   }
 
   Future<void> removeMyTagByID({

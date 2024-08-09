@@ -72,14 +72,17 @@ class _MyBagScreenState extends State<MyBagScreen> {
                                 borderRadius: BorderRadius.circular(15),
                                 color: _controller.colorRarity(tag),
                               ),
-                              child: CachedNetworkImage(
-                                imageUrl: tag.gif ?? '',
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) =>
-                                    const ShimmerImage(),
-                                errorWidget: (context, url, error) =>
-                                    Image.asset(
-                                  'assets/images/error_photo.png',
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: CachedNetworkImage(
+                                  imageUrl: tag.gif ?? '',
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) =>
+                                      const ShimmerImage(),
+                                  errorWidget: (context, url, error) =>
+                                      Image.asset(
+                                    'assets/images/error_photo.png',
+                                  ),
                                 ),
                               ),
                             ),

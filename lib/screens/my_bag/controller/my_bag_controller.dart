@@ -28,18 +28,23 @@ class MyBagController extends GetxController {
   }
 
   Future<void> dropTag(MyTagModel tag) async {
-    EasyLoading.show();
+    Get.dialog(
+      Center(
+        child: Text('loading'.tr),
+      ),
+    );
+
     try {
       await supabaseRepository.dropTag(tag);
-      await firebaseRepository.removeMyTagByID(
-        tag: tag,
+      await firebaseRepository.saveUserDetail(
         idUser: ShareObs.user.value!.id!,
       );
-      Get.back();
+      EasyLoading.showSuccess('Lưu thành công!', dismissOnTap: true);
     } catch (e) {
-      EasyLoading.dismiss();
-      EasyLoading.showError(e.toString());
+      EasyLoading.showError('Lỗi thả thẻ');
       print('Lỗi thả thẻ $e');
+    } finally {
+      Get.back();
     }
   }
 
