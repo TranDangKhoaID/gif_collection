@@ -20,16 +20,36 @@ class SupabaseRepository {
   //
   final myTagDB = MyTagDB();
 
-  Future<List<TagModel>> getTags() async {
+  Future<List<TagModel>> getTags(TagModel tag) async {
     final response = await supabase.from('tags').select('*');
-    return (response as List<dynamic>)
-        .map((json) {
-          final tag = TagModel.fromJson(json);
-          return tag.quantity != 0 ? tag : null;
-        })
-        .where((tag) => tag != null)
-        .cast<TagModel>()
-        .toList();
+    return (response as List<dynamic>).map((json) {
+      tag = TagModel.fromJson(json);
+      return tag;
+    }).toList();
+  }
+
+  Future<void> pickTag(MyTagModel tag) async {
+    if (mRuby.value < 10) {
+      EasyLoading.dismiss();
+      EasyLoading.showError('Bạn không đủ ruby, bạn cần 10 ruby!!');
+      return;
+    } else {
+      mRuby.value -= 10;
+      await _appPref.saveRuby(ruby: mRuby.value);
+    }
+    await myTagDB.create(tag);
+    //update tag
+    await supabase.from('tags').delete().eq('id', tag.id!);
+  }
+
+  Future<void> dropTag(MyTagModel tag) async {
+    await myTagDB.deleteByID(tag.id!);
+    await supabase.from('tags').insert(tag.toJson());
+    EasyLoading.dismiss();
+    EasyLoading.showSuccess(
+      'Thành công',
+      dismissOnTap: true,
+    );
   }
 
   Future<void> buyTag(TagModel tag, int rarity) async {

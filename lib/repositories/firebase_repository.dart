@@ -107,6 +107,18 @@ class FirebaseRepository {
     EasyLoading.showSuccess('Thành công');
   }
 
+  Future<void> removeMyTagByID({
+    required MyTagModel tag,
+    required idUser,
+  }) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(idUser)
+        .collection('my_tags')
+        .doc(tag.id)
+        .delete();
+  }
+
   Future<void> searchUserDetail({
     required String idUserSearch,
     required RxString sAvatar,

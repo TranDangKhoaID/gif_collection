@@ -44,6 +44,7 @@ class LocaleKeys {
   static const no_description_available = 'no_description_available';
   static const own_to_see = 'own_to_see';
   static const confirm = 'confirm';
+  static const loading = 'loading';
 }
 
 class Locales {
@@ -81,6 +82,7 @@ class Locales {
     'no_description_available': 'No description available',
     'own_to_see': 'Own to see',
     'confirm': 'Confirm',
+    'loading': 'Loading...',
   };
   static const vi = {
     'create_your_character': 'Vui lòng tạo nhân vật của bạn',
@@ -116,5 +118,6 @@ class Locales {
     'no_description_available': 'Không có mô tả',
     'own_to_see': 'Sỡ hữu để xem',
     'confirm': 'Xác nhận',
+    'loading': 'Đang tải...',
   };
 }

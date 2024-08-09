@@ -54,14 +54,10 @@ class _MyBagScreenState extends State<MyBagScreen> {
                               DialogHelper.showWidgetDialog(
                                 context: context,
                                 onPressConfirm: () async {
-                                  EasyLoading.show();
-                                  await _controller.myTagDB.deleteByID(tag.id!);
+                                  _controller.dropTag(tag);
                                   setState(() {
                                     _controller.myTagDB.fetchAll();
                                   });
-                                  EasyLoading.dismiss();
-                                  EasyLoading.showSuccess('ngon');
-                                  Get.back();
                                 },
                                 confirmText: 'Bỏ',
                                 cancelText: 'Thoát',
@@ -77,14 +73,15 @@ class _MyBagScreenState extends State<MyBagScreen> {
                                 color: _controller.colorRarity(tag),
                               ),
                               child: CachedNetworkImage(
-                                  imageUrl: tag.gif ?? '',
-                                  fit: BoxFit.cover,
-                                  placeholder: (context, url) =>
-                                      const ShimmerImage(),
-                                  errorWidget: (context, url, error) =>
-                                      Image.asset(
-                                        'assets/images/error_photo.png',
-                                      )),
+                                imageUrl: tag.gif ?? '',
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) =>
+                                    const ShimmerImage(),
+                                errorWidget: (context, url, error) =>
+                                    Image.asset(
+                                  'assets/images/error_photo.png',
+                                ),
+                              ),
                             ),
                           ),
                         );

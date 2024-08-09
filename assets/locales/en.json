@@ -31,5 +31,6 @@
     "quantity": "Quantity",
     "no_description_available": "No description available",
     "own_to_see": "Own to see",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "loading": "Loading..."
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -59,14 +61,7 @@ class _GachaScreenState extends State<GachaScreen> {
         ),
         body: TabBarView(
           children: [
-            RefreshIndicator(
-              onRefresh: () async {
-                setState(() {
-                  _controller.getTagsDB();
-                });
-              },
-              child: tabStore(),
-            ),
+            tabStore(),
             tabEvent(),
             tabBackground(),
           ],
@@ -120,8 +115,8 @@ class _GachaScreenState extends State<GachaScreen> {
   }
 
   Widget tabStore() {
-    return FutureBuilder<List<TagModel>>(
-      future: _controller.getTagsDB(),
+    return StreamBuilder(
+      stream: _controller.getRealtimeTagsDB(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return GridView.builder(
@@ -133,20 +128,14 @@ class _GachaScreenState extends State<GachaScreen> {
               crossAxisCount: 3,
             ),
             itemBuilder: (context, index) {
-              final tag = snapshot.data![index];
+              final tag = MyTagModel.fromJson(snapshot.data![index]);
               return GridTile(
                 child: GestureDetector(
                   onTap: () {
-                    DialogHelper.showWidgetDialog(
+                    _controller.pickTag(tag);
+                    DialogHelper.showWidgetOkDialog(
+                      body: _builDetailTagDialog(tag),
                       context: context,
-                      onPressConfirm: () {
-                        _controller.buyTag(tag);
-                      },
-                      confirmText: 'buy'.tr,
-                      body: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: _builDetailTagDialog(tag),
-                      ),
                     );
                   },
                   child: ClipRRect(
@@ -165,16 +154,25 @@ class _GachaScreenState extends State<GachaScreen> {
             },
           );
         } else if (snapshot.hasError) {
+          print('Hello ${snapshot.error}');
           return Center(
             child: Text(snapshot.error.toString()),
           );
         }
-        return const ShimmerGridView();
+        return Center(
+          child: Text(
+            'loading'.tr,
+            style: const TextStyle(
+              fontStyle: FontStyle.italic,
+              color: Colors.grey,
+            ),
+          ),
+        );
       },
     );
   }
 
-  Widget _builDetailTagDialog(TagModel tag) {
+  Widget _builDetailTagDialog(MyTagModel tag) {
     return Column(
       //mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -204,61 +202,21 @@ class _GachaScreenState extends State<GachaScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                '${'race'.tr}: ${tag.race?.capitalize}',
-              ),
-              Text(
-                '${'attack'.tr}: ??? (${'own_to_see'.tr})',
-              ),
-              Text(
-                '${'defense'.tr}: ??? (${'own_to_see'.tr})',
-              ),
+              // Text(
+              //   '${'race'.tr}: ${tag.race?.capitalize}',
+              // ),
+              // Text(
+              //   '${'attack'.tr}: ??? (${'own_to_see'.tr})',
+              // ),
+              // Text(
+              //   '${'defense'.tr}: ??? (${'own_to_see'.tr})',
+              // ),
               Text(
                 tag.description ?? 'no_description_available'.tr,
                 style: const TextStyle(
                   color: Colors.grey,
                 ),
               ),
-              Text(
-                'quantity: ${tag.quantity}',
-              ),
-              tag.ruby != null
-                  ? Row(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(right: 7),
-                          width: 25,
-                          child: Image.asset(
-                            'assets/images/icons/ruby.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Text(
-                          formattedNumber(tag.ruby ?? 999999999),
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    )
-                  : Row(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(right: 7),
-                          width: 25,
-                          child: Image.asset(
-                            'assets/images/icons/coin.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Text(
-                          formattedNumber(tag.coin ?? 999999999),
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
             ],
           ),
         )

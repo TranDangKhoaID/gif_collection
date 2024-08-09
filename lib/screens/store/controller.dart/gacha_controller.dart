@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -21,6 +20,10 @@ import 'package:gif_collection/service/database/my_tag_db.dart';
 import 'package:gif_collection/storage/app_preference.dart';
 
 class GachaController extends GetxController {
+  //stream
+  final StreamController _stream = StreamController.broadcast();
+  Timer? _timer;
+  //
   final _appPref = locator<AppPreference>();
   //
   final dataRepository = locator<DataRepository>();
@@ -32,13 +35,37 @@ class GachaController extends GetxController {
   final myTagDB = MyTagDB();
   //var uuid = const Uuid();
 
-  Future<List<TagModel>> getTagsDB() async {
+  // Future<List<TagModel>> getTagsDB(TagModel tag) async {
+  //   try {
+  //     return await supabaseRepository.getTags(tag);
+  //   } catch (e) {
+  //     debugPrint('Get tags error: $e');
+  //     throw Exception(e.toString());
+  //   }
+  // }
+
+  Future<List<TagModel>> getMyTagsDB(TagModel tag) async {
     try {
-      return await supabaseRepository.getTags();
+      return await supabaseRepository.getTags(tag);
     } catch (e) {
       debugPrint('Get tags error: $e');
       throw Exception(e.toString());
     }
+  }
+
+  Stream getRealtimeTagsDB() {
+    return Supabase.instance.client
+        .from('tags')
+        .stream(primaryKey: ['id']).asyncMap((data) {
+      if (data.isNotEmpty) {
+        // Shuffle the data to randomize the order
+        data.shuffle(Random());
+
+        // Get the first 3 items
+        return data.take(9).toList();
+      }
+      return [];
+    });
   }
 
   // Future<List<TagModel>> getTags() async {
@@ -59,27 +86,40 @@ class GachaController extends GetxController {
     }
   }
 
-  Future<void> buyTag(TagModel tag) async {
+  Future<void> pickTag(MyTagModel tag) async {
     EasyLoading.show();
-    if (tag.quantity! <= 0) {
-      EasyLoading.dismiss();
-      EasyLoading.showError('Số lượng đã hết');
-      return;
-    }
     try {
-      await supabaseRepository.buyTag(
-        tag,
-        getRandomNumberRarity(),
-      );
-      await getTagsDB();
-      Get.back();
-      //Get.offAllNamed(AppRoute.navigationMenu);
+      // await getTagsDB(tag);
+      await supabaseRepository.pickTag(tag);
+      EasyLoading.dismiss();
     } catch (e) {
       debugPrint('buy tag error ==> $e');
       EasyLoading.dismiss();
       EasyLoading.showError(e.toString());
     }
   }
+
+  // Future<void> buyTag(TagModel tag) async {
+  //   EasyLoading.show();
+  //   if (tag.quantity! <= 0) {
+  //     EasyLoading.dismiss();
+  //     EasyLoading.showError('Số lượng đã hết');
+  //     return;
+  //   }
+  //   try {
+  //     await getTagsDB(tag);
+  //     await supabaseRepository.buyTag(
+  //       tag,
+  //       getRandomNumberRarity(),
+  //     );
+  //     Get.back();
+  //     //Get.offAllNamed(AppRoute.navigationMenu);
+  //   } catch (e) {
+  //     debugPrint('buy tag error ==> $e');
+  //     EasyLoading.dismiss();
+  //     EasyLoading.showError(e.toString());
+  //   }
+  // }
 
   // Hàm lấy đối tượng ngẫu nhiên từ danh sách
   // TagModel getRandomTag(List<TagModel> tags) {
