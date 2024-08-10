@@ -1,15 +1,12 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:gif_collection/common/get_dialog_helper.dart';
-import 'package:gif_collection/routes.dart';
+import 'package:gif_collection/repositories/firebase_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:gif_collection/common/configs.dart';
-import 'package:gif_collection/common/dialog_helper.dart';
 import 'package:gif_collection/common/share_obs.dart';
 import 'package:gif_collection/locator.dart';
 import 'package:gif_collection/models/my_tag_model.dart';
@@ -21,14 +18,12 @@ import 'package:gif_collection/service/database/my_tag_db.dart';
 import 'package:gif_collection/storage/app_preference.dart';
 
 class GachaController extends GetxController {
-  //stream
-  final StreamController _stream = StreamController.broadcast();
-  Timer? _timer;
   //
   final _appPref = locator<AppPreference>();
   //
   final dataRepository = locator<DataRepository>();
   final supabaseRepository = locator<SupabaseRepository>();
+  final firebaseRepository = locator<FirebaseRepository>();
   //
   final supabase = Supabase.instance.client;
   //List<TagModel> tags = [];
@@ -58,14 +53,8 @@ class GachaController extends GetxController {
     return Supabase.instance.client
         .from('tags')
         .stream(primaryKey: ['id']).asyncMap((data) {
-      if (data.isNotEmpty) {
-        // Shuffle the data to randomize the order
-        data.shuffle(Random());
-
-        // Get the first 3 items
-        return data.take(9).toList();
-      }
-      return [];
+      data.shuffle(Random());
+      return data.take(9).toList();
     });
   }
 
@@ -94,7 +83,7 @@ class GachaController extends GetxController {
   }
 
   Future<void> pickTag(MyTagModel tag) async {
-    EasyLoading.show();
+    //EasyLoading.show();
     try {
       // await getTagsDB(tag);
       await supabaseRepository.pickTag(tag);
@@ -109,14 +98,21 @@ class GachaController extends GetxController {
   Future<void> buyTag(TagModel tag) async {
     GetDialogHelper.showLoading();
     if (tag.quantity! <= 0) {
+      GetDialogHelper.close();
       EasyLoading.dismiss();
-      EasyLoading.showError('Số lượng đã hết');
+      EasyLoading.showError(
+        'Số lượng đã hết',
+        dismissOnTap: true,
+      );
       return;
     }
     try {
       await supabaseRepository.buyTag(
         tag,
         getRandomNumberRarity(),
+      );
+      await firebaseRepository.saveUserDetail(
+        idUser: ShareObs.user.value!.id!,
       );
       //GetDialogHelper.close;
       //Get.offAllNamed(AppRoute.navigationMenu);

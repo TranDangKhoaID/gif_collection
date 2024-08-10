@@ -32,7 +32,7 @@ class HeaderCurrency extends StatelessWidget {
                       width: size.height * 0.35,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           image: AssetImage('assets/images/wood.jpg'),
                           fit: BoxFit.cover,
                         ),
@@ -74,7 +74,7 @@ class HeaderCurrency extends StatelessWidget {
                           ),
                           TextButton(
                             style: TextButton.styleFrom(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               backgroundColor: ShareColors.kPrimaryColor,
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
@@ -102,17 +102,7 @@ class HeaderCurrency extends StatelessWidget {
                 icon: Icons.monetization_on,
                 money: ShareObs.coin.value,
                 color: ShareColors.kColorCoin,
-                onTap: () {
-                  showDialog(
-                    //barrierDismissible: false,
-                    context: context,
-                    builder: (context) {
-                      return Column(
-                        children: [],
-                      );
-                    },
-                  );
-                },
+                onTap: () {},
               ),
             ),
           ],
@@ -127,11 +117,11 @@ class HeaderCurrency extends StatelessWidget {
       required int btnValue,
       required void Function() onPressed}) {
     return Container(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 20,
         vertical: 5,
       ),
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Colors.white,
@@ -144,7 +134,7 @@ class HeaderCurrency extends StatelessWidget {
             assets,
             fit: BoxFit.cover,
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Text(
             value.toString(),
             style: TextStyle(
@@ -153,10 +143,10 @@ class HeaderCurrency extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           TextButton(
             style: TextButton.styleFrom(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               backgroundColor: ShareColors.kPrimaryColor,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
@@ -164,9 +154,7 @@ class HeaderCurrency extends StatelessWidget {
               ),
             ),
             onPressed: onPressed,
-            child: Text(
-              "${formattedNumber(btnValue)} đ",
-            ),
+            child: Text(formattedNumberCurrency(btnValue)),
           )
         ],
       ),
@@ -175,11 +163,11 @@ class HeaderCurrency extends StatelessWidget {
 
   Widget _buildRewardVideo() {
     return Container(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 20,
         vertical: 5,
       ),
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Colors.white,
@@ -192,7 +180,7 @@ class HeaderCurrency extends StatelessWidget {
             'assets/images/icons/ruby.png',
             fit: BoxFit.cover,
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Text(
             'x10',
             style: TextStyle(
@@ -201,11 +189,11 @@ class HeaderCurrency extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           TextButton.icon(
-            icon: Icon(Icons.play_circle_filled),
+            icon: const Icon(Icons.play_circle_filled),
             style: TextButton.styleFrom(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               backgroundColor: Colors.green,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
@@ -213,7 +201,7 @@ class HeaderCurrency extends StatelessWidget {
               ),
             ),
             onPressed: () {},
-            label: Text("Nhận ngay"),
+            label: const Text("Nhận ngay"),
           )
         ],
       ),

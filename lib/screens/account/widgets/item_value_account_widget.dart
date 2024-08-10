@@ -1,4 +1,3 @@
-import 'package:gif_collection/common/share_obs.dart';
 import 'package:flutter/material.dart';
 import 'package:gif_collection/extensions/string.dart';
 
@@ -20,7 +19,7 @@ class ItemValueAccountWidget extends StatelessWidget {
         Row(
           children: [
             Container(
-              margin: EdgeInsets.only(right: 7),
+              margin: const EdgeInsets.only(right: 7),
               width: 25,
               child: Image.asset(
                 assets,

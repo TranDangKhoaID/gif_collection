@@ -1,11 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:gif_collection/common/dialog_helper.dart';
 import 'package:gif_collection/models/my_tag_model.dart';
 import 'package:gif_collection/screens/my_bag/controller/my_bag_controller.dart';
-import 'package:gif_collection/service/database/my_tag_db.dart';
 import 'package:gif_collection/widgets/header_currency.dart';
 import 'package:gif_collection/widgets/shimmer_image.dart';
 
@@ -38,7 +36,7 @@ class _MyBagScreenState extends State<MyBagScreen> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return GridView.builder(
-                      padding: EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
                       itemCount: snapshot.data!.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
@@ -61,10 +59,7 @@ class _MyBagScreenState extends State<MyBagScreen> {
                                 },
                                 confirmText: 'Bỏ',
                                 cancelText: 'Thoát',
-                                body: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: _builDetailTagDialog(tag),
-                                ),
+                                body: _builDetailTagDialog(tag),
                               );
                             },
                             child: Container(
@@ -91,7 +86,7 @@ class _MyBagScreenState extends State<MyBagScreen> {
                       },
                     );
                   }
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 },
@@ -126,10 +121,10 @@ class _MyBagScreenState extends State<MyBagScreen> {
             ),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
           tag.name?.capitalize ?? '',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -142,6 +137,20 @@ class _MyBagScreenState extends State<MyBagScreen> {
               Text(
                 'Mã: ${tag.id!}',
               ),
+              Row(
+                children: [
+                  Text(
+                    '${'race'.tr}: ',
+                  ),
+                  Text(
+                    _controller.stringRarity(tag).capitalize!,
+                    style: TextStyle(
+                      color: _controller.colorRarity(tag),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
               Text(
                 'Loại: ${tag.race?.capitalize}',
               ),
@@ -153,7 +162,7 @@ class _MyBagScreenState extends State<MyBagScreen> {
               ),
               Text(
                 tag.description ?? 'Không có mô tả',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.grey,
                 ),
               ),

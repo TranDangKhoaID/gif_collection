@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       onGenerateRoute: AppRoute.generateRoute,
-      locale: const Locale('en', 'EN'),
+      locale: const Locale('vi', 'VI'),
       translationsKeys: AppTranslation.translations,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

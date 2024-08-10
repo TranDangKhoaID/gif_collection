@@ -47,7 +47,7 @@ class _CreateCharacterScreenState extends State<CreateCharacterScreen> {
           height: double.infinity,
           width: double.infinity,
           child: Padding(
-            padding: EdgeInsets.only(top: 80),
+            padding: const EdgeInsets.only(top: 80),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

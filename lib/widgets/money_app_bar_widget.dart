@@ -1,4 +1,3 @@
-import 'package:gif_collection/common/share_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:gif_collection/extensions/string.dart';
 
@@ -60,7 +59,7 @@ class MoneyAppBarWidget extends StatelessWidget {
             ),
             child: GestureDetector(
               onTap: onTap,
-              child: Text(
+              child: const Text(
                 '+',
                 style: TextStyle(
                   color: Colors.white,

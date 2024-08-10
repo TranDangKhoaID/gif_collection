@@ -1,21 +1,15 @@
-import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:gif_collection/common/dialog_helper.dart';
-import 'package:gif_collection/common/share_colors.dart';
 import 'package:gif_collection/common/share_obs.dart';
-import 'package:gif_collection/extensions/string.dart';
 import 'package:gif_collection/models/my_tag_model.dart';
 import 'package:gif_collection/models/tag_background_model.dart';
 import 'package:gif_collection/models/tag_model.dart';
 import 'package:gif_collection/screens/store/controller.dart/gacha_controller.dart';
 import 'package:gif_collection/service/database/my_tag_db.dart';
 import 'package:gif_collection/widgets/header_currency.dart';
-import 'package:gif_collection/widgets/money_app_bar_widget.dart';
 import 'package:gif_collection/widgets/shimmer_image.dart';
 
 class GachaScreen extends StatefulWidget {
@@ -134,7 +128,7 @@ class _GachaScreenState extends State<GachaScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(right: 7),
+                            margin: const EdgeInsets.only(right: 7),
                             width: 25,
                             child: Image.asset(
                               'assets/images/icons/ruby.png',
@@ -143,7 +137,7 @@ class _GachaScreenState extends State<GachaScreen> {
                           ),
                           Text(
                             tag.ruby.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           )
@@ -204,10 +198,15 @@ class _GachaScreenState extends State<GachaScreen> {
                 child: GestureDetector(
                   onTap: () {
                     _controller.pickTag(tag);
-                    DialogHelper.showWidgetOkDialog(
-                      body: _builDetailTagDialog(tag),
-                      context: context,
-                    );
+                    if (ShareObs.ruby.value > 10) {
+                      DialogHelper.showWidgetOkDialog(
+                        body: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: _builDetailTagDialog(tag),
+                        ),
+                        context: context,
+                      );
+                    }
                   },
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
@@ -273,15 +272,6 @@ class _GachaScreenState extends State<GachaScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Text(
-              //   '${'race'.tr}: ${tag.race?.capitalize}',
-              // ),
-              // Text(
-              //   '${'attack'.tr}: ??? (${'own_to_see'.tr})',
-              // ),
-              // Text(
-              //   '${'defense'.tr}: ??? (${'own_to_see'.tr})',
-              // ),
               Text(
                 tag.description ?? 'no_description_available'.tr,
                 style: const TextStyle(

@@ -17,12 +17,6 @@ class MyBagController extends GetxController {
   final supabaseRepository = locator<SupabaseRepository>();
   final firebaseRepository = locator<FirebaseRepository>();
 
-  @override
-  void onReady() {
-    super.onReady();
-    //fetchTags();
-  }
-
   void fetchTags() async {
     list = await myTagDB.fetchAll();
   }
@@ -51,7 +45,7 @@ class MyBagController extends GetxController {
   Color colorRarity(MyTagModel tag) {
     switch (tag.rarity) {
       case 0:
-        return Colors.grey[300]!;
+        return Colors.grey[400]!;
       case 1:
         return Colors.lightBlueAccent;
       case 2:
@@ -61,9 +55,28 @@ class MyBagController extends GetxController {
       case 4:
         return Colors.redAccent;
       case 5:
-        return Color(0xFF00FFFF);
+        return const Color(0xFF00FFFF);
       default:
-        return Colors.grey[300]!;
+        return Colors.grey[400]!;
+    }
+  }
+
+  String stringRarity(MyTagModel tag) {
+    switch (tag.rarity) {
+      case 0:
+        return 'thường';
+      case 1:
+        return 'hiếm';
+      case 2:
+        return 'sử thi';
+      case 3:
+        return 'huyền thoại';
+      case 4:
+        return 'thần thoại';
+      case 5:
+        return 'vvip';
+      default:
+        return 'thường';
     }
   }
 }

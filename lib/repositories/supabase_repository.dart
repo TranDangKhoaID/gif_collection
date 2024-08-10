@@ -30,8 +30,6 @@ class SupabaseRepository {
 
   Future<void> pickTag(MyTagModel tag) async {
     if (mRuby.value < 10) {
-      EasyLoading.dismiss();
-      EasyLoading.showError('Bạn không đủ ruby, bạn cần 10 ruby!!');
       return;
     } else {
       mRuby.value -= 10;

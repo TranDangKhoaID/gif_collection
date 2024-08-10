@@ -15,7 +15,7 @@ class CharacterWidget extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Container(
@@ -30,7 +30,7 @@ class CharacterWidget extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
         ),

@@ -11,9 +11,9 @@ class F {
   static String get title {
     switch (appFlavor) {
       case Flavor.gif_collection:
-        return 'Gif Pixel Collection';
+        return 'Gif Collection';
       case Flavor.gif_collection_18:
-        return 'Gif Pixel Collection 18';
+        return 'Gif Collection 18';
       default:
         return 'title';
     }
