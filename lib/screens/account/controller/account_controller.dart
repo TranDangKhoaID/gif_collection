@@ -33,10 +33,9 @@ class AccountController extends GetxController {
     try {
       HudGlobalManager.showHud();
       myTagDB.deleteAll();
-      await firebaseRepository.authLogout();
       appPrefs.logOut();
       ShareObs.logout();
-      Get.offAllNamed(AppRoute.signInScreen);
+      Get.offAllNamed(AppRoute.createCharacterScreen);
     } catch (e) {
       debugPrint('Logout error: $e');
     } finally {
@@ -45,6 +44,7 @@ class AccountController extends GetxController {
   }
 
   Future<void> authLogout() async {
+    await firebaseRepository.authLogout();
     await FirebaseAuth.instance.signOut();
     await GoogleSignIn().signOut();
   }

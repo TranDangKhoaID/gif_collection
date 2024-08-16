@@ -32,7 +32,7 @@ class AppPreference {
 
   Future<int> getRuby() async {
     final pref = await SharedPreferences.getInstance();
-    return pref.getInt(AppPreferenceKey.kRuby) ?? 0;
+    return pref.getInt(AppPreferenceKey.kRuby) ?? 100;
   }
 
   Future<void> saveCoin({
@@ -44,7 +44,7 @@ class AppPreference {
 
   Future<int> getCoin() async {
     final pref = await SharedPreferences.getInstance();
-    return pref.getInt(AppPreferenceKey.kCoin) ?? 0;
+    return pref.getInt(AppPreferenceKey.kCoin) ?? 1000000;
   }
 
   //money three
@@ -57,7 +57,7 @@ class AppPreference {
 
   Future<int> getMoneyCoin() async {
     final pref = await SharedPreferences.getInstance();
-    return pref.getInt(AppPreferenceKey.kMoneyCoin) ?? 0;
+    return pref.getInt(AppPreferenceKey.kMoneyCoin) ?? 2610;
   }
 
   //avatar user

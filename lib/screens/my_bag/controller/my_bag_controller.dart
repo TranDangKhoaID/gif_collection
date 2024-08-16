@@ -15,7 +15,7 @@ class MyBagController extends GetxController {
   final myTagDB = MyTagDB();
 
   final supabaseRepository = locator<SupabaseRepository>();
-  final firebaseRepository = locator<FirebaseRepository>();
+  //final firebaseRepository = locator<FirebaseRepository>();
 
   void fetchTags() async {
     list = await myTagDB.fetchAll();
@@ -30,9 +30,9 @@ class MyBagController extends GetxController {
 
     try {
       await supabaseRepository.dropTag(tag);
-      await firebaseRepository.saveUserDetail(
-        idUser: ShareObs.user.value!.id!,
-      );
+      // await firebaseRepository.saveUserDetail(
+      //   idUser: ShareObs.user.value!.id!,
+      // );
       EasyLoading.showSuccess('Lưu thành công!', dismissOnTap: true);
     } catch (e) {
       EasyLoading.showError('Lỗi thả thẻ');

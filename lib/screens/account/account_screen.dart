@@ -66,10 +66,11 @@ class _AccountScreenState extends State<AccountScreen> {
                       height: 200,
                       child: CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl: ShareObs.avatarUser.value,
+                        imageUrl: ShareObs.user.value!.photoUrl ?? '',
                         placeholder: (context, url) => const ShimmerImage(),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.error,
+                        ),
                       ),
                     ),
                   ],
@@ -206,25 +207,25 @@ class _AccountScreenState extends State<AccountScreen> {
                     _controller.deleteAllData();
                   },
                 ),
+                const Divider(),
+                ListTile(
+                  title: Text('save_data'.tr),
+                  onTap: () {
+                    _controller.saveUserDetail();
+                  },
+                  //subtitle: Text(ShareObs.user.value?.updateAt.toString() ?? ''),
+                ),
+                const Divider(),
+                ListTile(
+                  title: Text('get_data'.tr),
+                  onTap: () {
+                    _controller.getUserDetail();
+                  },
+                ),
+                const Divider(),
               ],
             ),
           ],
-          const Divider(),
-          ListTile(
-            title: Text('save_data'.tr),
-            onTap: () {
-              _controller.saveUserDetail();
-            },
-            //subtitle: Text(ShareObs.user.value?.updateAt.toString() ?? ''),
-          ),
-          const Divider(),
-          ListTile(
-            title: Text('get_data'.tr),
-            onTap: () {
-              _controller.getUserDetail();
-            },
-          ),
-          const Divider(),
           ListTile(
             title: Text('sign_out'.tr),
             onTap: () {

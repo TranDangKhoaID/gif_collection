@@ -23,7 +23,7 @@ class GachaController extends GetxController {
   //
   final dataRepository = locator<DataRepository>();
   final supabaseRepository = locator<SupabaseRepository>();
-  final firebaseRepository = locator<FirebaseRepository>();
+  //final firebaseRepository = locator<FirebaseRepository>();
   //
   final supabase = Supabase.instance.client;
   //List<TagModel> tags = [];
@@ -111,9 +111,9 @@ class GachaController extends GetxController {
         tag,
         getRandomNumberRarity(),
       );
-      await firebaseRepository.saveUserDetail(
-        idUser: ShareObs.user.value!.id!,
-      );
+      // await firebaseRepository.saveUserDetail(
+      //   idUser: ShareObs.user.value!.id!,
+      // );
       //GetDialogHelper.close;
       //Get.offAllNamed(AppRoute.navigationMenu);
     } catch (e) {

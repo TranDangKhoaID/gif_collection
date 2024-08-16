@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class ShareObs {
   static final RxString avatarUser = ''.obs;
   static final RxInt ruby = 100.obs;
-  static final RxInt coin = 10000.obs;
+  static final RxInt coin = 1000000.obs;
   static final RxInt moneyCoin = 2610.obs;
   static final RxBool isLoggedIn = false.obs;
   static RxBool isShowHUDGlobal = false.obs;
@@ -17,7 +17,7 @@ class ShareObs {
     ShareObs.user.value = null;
     ShareObs.ruby.value = 100;
     ShareObs.avatarUser.value = '';
-    ShareObs.coin.value = 10000;
+    ShareObs.coin.value = 1000000;
     ShareObs.moneyCoin.value = 2610;
   }
 }
